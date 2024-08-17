@@ -32,3 +32,6 @@ pros::Controller controller1(pros::E_CONTROLLER_MASTER);
 pros::adi::DigitalOut clamp('A', false);
 pros::adi::DigitalOut tilt('B', false);
 
+//Inertial
+pros::IMU imu(10);
+

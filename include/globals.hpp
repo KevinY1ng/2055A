@@ -19,3 +19,6 @@ extern pros::Controller controller1;
 //Pneumatics
 extern pros::adi::DigitalOut clamp;
 extern pros::adi::DigitalOut tilt;
+
+//Inertial
+extern pros::IMU imu;
