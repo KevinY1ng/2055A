@@ -12,5 +12,8 @@
 
 void PID_Test() {
     chassis.setPose(0,0,0);
-    chassis.moveToPose(0,24,0,5000);
+    setDrive(8000, 8000);
+    pros::delay(2000);
+    setDrive(0, 0);
+    // chassis.moveToPose(0,24,0,10000);
 }

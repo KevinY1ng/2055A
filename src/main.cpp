@@ -29,7 +29,17 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
-	// chassis.calibrate();
+	chassis.calibrate();
+	pros::Task screen_task([&]() {
+        while (true) {
+            // print robot location to the brain screen
+            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            // delay to save resources
+            pros::delay(20);
+        }
+    });
 }
 
 /**
@@ -79,7 +89,19 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	while (true) {
+	// pros::Task pos_track(screen);
+	while (true) 
+	{
 		setDriveMotors();
 	}
+	pros::Task screen_task([&]() {
+        while (true) {
+            // print robot location to the brain screen
+            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
+            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
+            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+            // delay to save resources
+            pros::delay(20);
+        }
+	});
 }

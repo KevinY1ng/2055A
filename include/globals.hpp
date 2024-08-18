@@ -31,5 +31,9 @@ extern lemlib::ControllerSettings angularController;
 extern lemlib::OdomSensors sensors;
 extern lemlib::Chassis chassis;
 
+extern pros::Rotation vert_encoder;
+extern pros::Rotation hort_encoder;
+
+extern pros::IMU imu;
 
 

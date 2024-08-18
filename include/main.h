@@ -35,6 +35,7 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "lemlib/api.hpp"
 
 /**
  * You should add more #includes here
@@ -75,6 +76,7 @@ void opcontrol(void);
 #include "drive.hpp"
 #include "auton.hpp"
 #include "subsystems.hpp"
+#include "tracking.hpp"
 /**
  * You can add C++-only headers here
  */
