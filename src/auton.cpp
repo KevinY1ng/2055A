@@ -11,5 +11,6 @@
 #include "lemlib/api.hpp"
 
 void PID_Test() {
-    //chassis.setPose(0,0,0);
+    chassis.setPose(0,0,0);
+    chassis.moveToPose(0,24,0,5000);
 }

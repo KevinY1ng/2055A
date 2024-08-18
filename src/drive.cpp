@@ -1,19 +1,19 @@
 #include "main.h"
 
-void setDrive(int left, int right) {
-    drive_LF.move_velocity(left);
-    drive_LM.move_velocity(left);
-    drive_LB.move_velocity(left);
+void setDrive(double left, double right) {
+    drive_LF.move_voltage(left);
+    drive_LM.move_voltage(left);
+    drive_LB.move_voltage(left);
 
-    drive_RF.move_velocity(right);
-    drive_RM.move_velocity(right);
-    drive_RB.move_velocity(right);
+    drive_RF.move_voltage(right);
+    drive_RM.move_voltage(right);
+    drive_RB.move_voltage(right);
 }
 
 void Arcade() {
     const int deadband = 5;
-    int x = abs(controller1.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
-    int y = abs(controller1.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
+    int x = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+    int y = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
     double LjoyY = y/10.0;
     double LjoyX = x/10.0;
     double power = 0;
@@ -58,18 +58,32 @@ void Arcade() {
         }
     }
 
-    power = power * 600 / 127;
-    turn = turn * 600 / 127;
+    power = power * 12000 / 127;
+    turn = turn * 12000 / 127;
 
-    if (controller1.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) < 0) power = -power;
+    if (controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y) < 0) power = -power;
 
-    if (controller1.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) < 0) turn = -turn;
+    if (controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) < 0) turn = -turn;
 
     double leftPower = power + turn;
     double rightPower = power - turn;
     setDrive(leftPower, rightPower);
 }
 
+void Tank() {
+    int x = (controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+    int y = (controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
+    int rightdrive;
+    int leftdrive;
+
+    rightdrive = x*(6000/127);
+    leftdrive = y*(6000/127);
+
+    
+    setDrive(leftdrive, rightdrive);
+}
+
 void setDriveMotors() {
     Arcade();
+    // Tank();
 }

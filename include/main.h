@@ -72,6 +72,9 @@ void opcontrol(void);
 
 #ifdef __cplusplus
 #include "globals.hpp"
+#include "drive.hpp"
+#include "auton.hpp"
+#include "subsystems.hpp"
 /**
  * You can add C++-only headers here
  */
