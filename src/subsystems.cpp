@@ -1,51 +1,9 @@
 #include "main.h"
 
-// void Turn(double targetheading, double maxspeed) {
 
-//     double heading = imu.get_rotation();
-//     double error = targetheading - heading;
-
-//     double integral = 0;
-// 	double prevError = error;
-// 	double dt = 50;
-
-//     while (abs(error)>5) {
-
-//         double heading = imu.get_rotation();
-//         double error = targetheading - heading;
-
-//         double proportional = error * kP;
-
-// 		integral += error;
-// 		double integ = integral * kI;
-
-// 		double direvative = (error - prevError) / dt * kD;
-// 		prevError = error;
-
-// 		double output = proportional + integ + direvative;
-
-// 		output = std::clamp(output, -1.0, 1.0);
-
-// 		leftFront.move(maxSpeed * output);
-// 		leftBack.move(maxSpeed * output);
-// 		rightFront.move(-maxSpeed * output);
-// 		rightBack.move(-maxSpeed * output);
-
-// 		pros::delay(dt);
-
-//     }
-
-//     leftFront.move(0);
-// 	leftBack.move(0);
-// 	rightFront.move(0);
-// 	rightBack.move(0);
-
-// }
-
-
-//------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //Clamping Mobile Goal
-// ------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 bool clamp_status = false;
 
@@ -56,7 +14,7 @@ void Clamp_Goal() {
     }
 }
 
-//------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 //Clamp Tilt Angle
 // ------------------------------------------------------------------------------------------------
 
@@ -68,6 +26,10 @@ void Clamp_Tilt () {
         tilt.set_value(tilt_status);
     }
 }
+
+// -------------------------------------------------------------------------------------------------
+//PID Functions
+// -------------------------------------------------------------------------------------------------
 
 void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
     double currentheadibng = imu.get_rotation();
@@ -109,7 +71,7 @@ void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
 
         lasterror = error;
 
-        pros::delay(20);
+        pros::delay(50);
     }
       drive_LF.move(0);
         drive_LM.move(0);
@@ -118,4 +80,58 @@ void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
         drive_RF.move(0);
         drive_RM.move(0);
         drive_RB.move(0);
+}
+
+void driveDistance(double targetdistance, double maxspeed, double kP, double kI, double kD) {
+    const double pi = 3.14159;
+    double tpr = 360;
+    int ticks = ((drive_LF.get_position() + drive_LB.get_position()) / 2);
+    double currentdistance = ((2.75*2) * pi) * (ticks / 360);
+    double error = targetdistance - currentdistance;
+    double preverror;
+    double errortotal = 0;
+    int dT = 50;
+
+    while (error > 3) {
+        int ticks = ((drive_LF.get_position() + drive_LB.get_position()) / 2);
+        double currentdistance = ((2.75*2) * pi) * (ticks / 360);
+        double error = targetdistance - currentdistance;
+
+        if (error < 2 || error !=0) {
+            errortotal =+ error;
+        }
+        else {
+            errortotal = 0;
+        }
+
+        if (errortotal > (50/kI)) {
+            errortotal = 50 / kI;
+        }
+
+        double porportional = error * kP;
+        double integral = errortotal * kI;
+        double derivative = (preverror - error) / dT * kD;
+
+        double output = porportional + integral + derivative;
+
+        preverror = error;
+
+        drive_LF.move(maxspeed * output);
+        drive_LM.move(maxspeed * output);
+        drive_LB.move(maxspeed * output);
+
+        drive_RF.move(maxspeed * output);
+        drive_RM.move(maxspeed * output);
+        drive_RB.move(maxspeed * output);
+
+        pros::delay(50);
+    }
+
+    drive_LF.move(0);
+    drive_LM.move(0);
+    drive_LB.move(0);
+
+    drive_RF.move(0);
+    drive_RM.move(0);        
+    drive_RB.move(0);
 }

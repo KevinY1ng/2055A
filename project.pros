@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "PID_test",
+    "project_name": "PID_tes",
     "target": "v5",
     "templates": {
       "LemLib": {

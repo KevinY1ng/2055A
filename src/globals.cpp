@@ -55,7 +55,7 @@ pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);
 
 //inertial
-pros::IMU imu(10);
+pros::IMU imu(4);
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, lemlib::Omniwheel::NEW_2, -0.39);

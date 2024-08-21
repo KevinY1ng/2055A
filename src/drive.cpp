@@ -1,17 +1,18 @@
 #include "main.h"
 
 void setDrive(double left, double right) {
-    drive_LF.move_voltage(left);
+    //drive_LF.move_voltage(left);
     drive_LM.move_voltage(left);
-    drive_LB.move_voltage(left);
+    //drive_LB.move_voltage(left);
 
-    drive_RF.move_voltage(right);
+    //drive_RF.move_voltage(right);
     drive_RM.move_voltage(right);
-    drive_RB.move_voltage(right);
+    //drive_RB.move_voltage(right);
 }
 
 void Arcade() {
-    const int deadband = 5;
+    const int deadband = 4;
+    const int turndeadband = 127;
     int x = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
     int y = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
     double LjoyY = y/10.0;
@@ -32,7 +33,7 @@ void Arcade() {
     //     power = 0;
     // }
 
-    if (y > deadband || x > deadband) {
+    if (x > turndeadband || y > deadband) {
         if (y > 85) {
             power = (12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyY - 6.0)))) * 10.0 - 3.0;
         }
@@ -43,7 +44,7 @@ void Arcade() {
             power = 5*pow((1.0/5.5)*(LjoyY), 3.0) * 12.7;
         }
 
-        if (x > 95) {
+        if (x > 85) { //95
             turn = 0.8*(12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyX - 6.0)))) * 10.0 - 3.0;
             // turn = 0.45*(12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyX - 6.0)))) * 10.0 - 3.0;
 
