@@ -77,6 +77,7 @@ void opcontrol(void);
 #include "auton.hpp"
 #include "subsystems.hpp"
 #include "tracking.hpp"
+#include "PID.hpp"
 /**
  * You can add C++-only headers here
  */
