@@ -7,3 +7,5 @@ void setDrive(double left, double right);
 void Arcade();
 
 void Tank();
+
+void Arcade2();

@@ -1,18 +1,17 @@
 #include "main.h"
 
 void setDrive(double left, double right) {
-    //drive_LF.move_voltage(left);
+    drive_LF.move_voltage(left);
     drive_LM.move_voltage(left);
-    //drive_LB.move_voltage(left);
+    drive_LB.move_voltage(left);
 
-    //drive_RF.move_voltage(right);
+    drive_RF.move_voltage(right);
     drive_RM.move_voltage(right);
-    //drive_RB.move_voltage(right);
+    drive_RB.move_voltage(right);
 }
 
 void Arcade() {
-    const int deadband = 4;
-    const int turndeadband = 127;
+    const int deadband = 5;
     int x = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
     int y = abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y));
     double LjoyY = y/10.0;
@@ -33,8 +32,11 @@ void Arcade() {
     //     power = 0;
     // }
 
-    if (x > turndeadband || y > deadband) {
-        if (y > 85) {
+    if (x > deadband || y > deadband) {
+        if (y < deadband) {
+            power = 0;
+        }
+        else if (y > 85) {
             power = (12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyY - 6.0)))) * 10.0 - 3.0;
         }
         else if (y > 55 && y <= 85) {
@@ -44,7 +46,10 @@ void Arcade() {
             power = 5*pow((1.0/5.5)*(LjoyY), 3.0) * 12.7;
         }
 
-        if (x > 85) { //95
+        if (x < deadband) {
+            turn = 0;
+        }
+        else if (x > 95) { //95
             turn = 0.8*(12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyX - 6.0)))) * 10.0 - 3.0;
             // turn = 0.45*(12.7 / (1.0 + exp(-(3.0/4.0)*(LjoyX - 6.0)))) * 10.0 - 3.0;
 
@@ -59,6 +64,8 @@ void Arcade() {
         }
     }
 
+    // power = power * 12000 / 127;
+    // turn = turn * 12000 / 127;
     power = power * 12000 / 127;
     turn = turn * 12000 / 127;
 

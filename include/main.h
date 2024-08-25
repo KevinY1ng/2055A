@@ -78,6 +78,7 @@ void opcontrol(void);
 #include "subsystems.hpp"
 #include "tracking.hpp"
 #include "PID.hpp"
+#include "opcontrol.hpp"
 /**
  * You can add C++-only headers here
  */

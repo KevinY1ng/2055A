@@ -12,13 +12,13 @@
 #include "lemlib/api.hpp"
 #include <cstddef>
 
-int MOTOR_LB = -11;
-int MOTOR_LM = -13;
-int MOTOR_LF = -1;
+int MOTOR_LB = -11; //-11
+int MOTOR_LM = -13; //-13
+int MOTOR_LF = -1; //-1
 
-int MOTOR_RB = 20;
-int MOTOR_RM = 12;
-int MOTOR_RF = 18;
+int MOTOR_RB = 20; //20
+int MOTOR_RM = 12; //12
+int MOTOR_RF = 18; //18
 
 int VERT_TRACKING = 14;
 int HOR_TRACKING = 16;
@@ -55,7 +55,7 @@ pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);
 
 //inertial
-pros::IMU imu(4);
+pros::IMU imu(INERTIAL_PORT);
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, lemlib::Omniwheel::NEW_2, -0.39);
@@ -71,9 +71,9 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    5, // kP    .
+    14, // kP    .
     0, // KI
-    0, // kD 
+    1, // kD 
     0, // anti windup
     1, // smallErrorRange
     300, // smallErrorTimeout
@@ -101,7 +101,7 @@ lemlib::OdomSensors sensors {
     nullptr, // vertical tracking wheel 2
     &hort_tracking, // horizontal tracking wheel 1
     nullptr, // horizontal tracking wheel 2
-    nullptr // &Inertial // inertial sensor
+    &imu // &Inertial // inertial sensor
 };
 
 // create the chassis

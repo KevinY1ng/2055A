@@ -11,7 +11,7 @@ void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
     float lasterror;
     double dT = 50;
 
-    while (abs(error)>2) {
+    while (abs(error)>0.1) {
         double currentheading = imu.get_rotation();
         double error = targetheading - currentheading;
 

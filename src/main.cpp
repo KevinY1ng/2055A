@@ -2,6 +2,7 @@
 #include "lemlib/api.hpp"
 #include "lemlib/pose.hpp"
 
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -28,17 +29,26 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
+	drive_LB.set_brake_mode(MOTOR_BRAKE_COAST);
+	drive_LM.set_brake_mode(MOTOR_BRAKE_COAST);
+    drive_LF.set_brake_mode(MOTOR_BRAKE_COAST);
+
+    drive_RB.set_brake_mode(MOTOR_BRAKE_COAST);
+	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
+    drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
+
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
+
 	pros::Task screen_task([&]() {
-        while (true) {
-            // print robot location to the brain screen
-            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
-            // delay to save resources
-            pros::delay(20);
-        }
+		while (true) {
+			// print robot location to the brain screen
+			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+			pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+			pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+			// delay to save resources
+			pros::delay(20);
+		}
     });
 }
 
@@ -74,6 +84,7 @@ void competition_initialize() {}
 void autonomous() {
 	PID_Test();
 	// straightTest();
+	// PID_Turn();
 }
 
 /**
@@ -90,19 +101,26 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	// pros::Task pos_track(screen);
-	while (true) 
-	{
-		setDriveMotors();
-	}
+	drive_LB.set_brake_mode(MOTOR_BRAKE_COAST);
+	drive_LM.set_brake_mode(MOTOR_BRAKE_COAST);
+    drive_LF.set_brake_mode(MOTOR_BRAKE_COAST);
+
+    drive_RB.set_brake_mode(MOTOR_BRAKE_COAST);
+	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
+    drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
+
+
 	pros::Task screen_task([&]() {
         while (true) {
             // print robot location to the brain screen
-            pros::lcd::print(0, "X: %f", chassis.getPose().x); // x
-            pros::lcd::print(1, "Y: %f", chassis.getPose().y); // y
-            pros::lcd::print(2, "Theta: %f", chassis.getPose().theta); // heading
+			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+            pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+        	pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
             // delay to save resources
             pros::delay(20);
         }
-	});
+    });
+
+	my_opcontrol();
+
 }
