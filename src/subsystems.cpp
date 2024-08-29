@@ -22,12 +22,18 @@ bool tilt_status = false;
 
 void Clamp_Tilt () {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
-        tilt_status =! tilt_status;
+        tilt_status = !tilt_status;
         tilt.set_value(tilt_status);
     }
 }
 
+void setIntake(int power)
+{
+    intake.move(power);
+}
+
 void driveIntake() 
 {
-    intake.move(127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)));    
+    int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1));
+    setIntake(power);
 }
