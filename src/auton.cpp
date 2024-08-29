@@ -12,7 +12,7 @@
 
 void PID_Test() {
     chassis.setPose(0,0,0);
-    chassis.moveToPose(0, 24, 0, 5000, {}, false);
+    //chassis.moveToPose(0, 24, 0, 5000, {}, false);
     // turn(90,50,0.021,0,0.092);
 }
 
@@ -24,7 +24,9 @@ void straightTest() {
 }
 
 void PID_Turn() {
-    driveDistance(24,30,5,0,0);
+    driveDistance(24,7,0,4);
+    pros::delay(5000);
+    //driveDistance(-24,20,0.2,0,0.6);
 }
 
     

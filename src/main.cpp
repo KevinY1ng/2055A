@@ -29,13 +29,13 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
-	drive_LB.set_brake_mode(MOTOR_BRAKE_COAST);
-	drive_LM.set_brake_mode(MOTOR_BRAKE_COAST);
-    drive_LF.set_brake_mode(MOTOR_BRAKE_COAST);
+	drive_LB.set_brake_mode(MOTOR_BRAKE_HOLD);
+	drive_LM.set_brake_mode(MOTOR_BRAKE_HOLD);
+    drive_LF.set_brake_mode(MOTOR_BRAKE_HOLD);
 
-    drive_RB.set_brake_mode(MOTOR_BRAKE_COAST);
-	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
-    drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
+    drive_RB.set_brake_mode(MOTOR_BRAKE_HOLD);
+	drive_RM.set_brake_mode(MOTOR_BRAKE_HOLD);
+    drive_RF.set_brake_mode(MOTOR_BRAKE_HOLD);
 
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
@@ -45,7 +45,7 @@ void initialize() {
 			// print robot location to the brain screen
 			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
 			pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-			pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+			//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
 			// delay to save resources
 			pros::delay(20);
 		}
@@ -82,9 +82,9 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	PID_Test();
+	//PID_Test();
 	// straightTest();
-	// PID_Turn();
+	PID_Turn();
 }
 
 /**
@@ -115,7 +115,7 @@ void opcontrol() {
             // print robot location to the brain screen
 			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
             pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-        	pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+        	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
             // delay to save resources
             pros::delay(20);
         }

@@ -29,6 +29,8 @@ int INERTIAL_PORT = 4;
 char CLAMP_PORT = 'A';
 char TILT_PORT = 'B';
 
+int motor_intake = 7;
+
 
 //Drivetrain
 pros::Motor drive_LB(MOTOR_LB, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
@@ -38,6 +40,8 @@ pros::Motor drive_LF(MOTOR_LF, pros::v5::MotorGears::blue, pros::v5::MotorUnits:
 pros::Motor drive_RB(MOTOR_RB, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 pros::Motor drive_RM(MOTOR_RM, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 pros::Motor drive_RF(MOTOR_RF, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
+
+pros::Motor intake(motor_intake, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 
 //MotorGroups
@@ -58,28 +62,28 @@ pros::Rotation hort_encoder(HOR_TRACKING);
 pros::IMU imu(INERTIAL_PORT);
 
 //Tracking Wheels
-lemlib::TrackingWheel vert_tracking(&vert_encoder, lemlib::Omniwheel::NEW_2, -0.39);
-lemlib::TrackingWheel hort_tracking(&hort_encoder, lemlib::Omniwheel::NEW_2, -0.3);
+lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.39);
+lemlib::TrackingWheel hort_tracking(&hort_encoder, 1.95, -0.3);
 
 lemlib::Drivetrain drivetrain {
     &Left_Drive, // left motor group
     &Right_Drive, // right motor group
-    11.25, // 10 inch track width
+    11.5, // 10 inch track width
     2.75, // using new 4" omnis
     450, // drivetrain rpm is 360
     2 // horizontal drift is 2 (for now)
 };
 
 lemlib::ControllerSettings linearController {
-    14, // kP    .
+    15, // kP    .// 990000
     0, // KI
-    1, // kD 
+    1, // kD //12900
     0, // anti windup
-    1, // smallErrorRange
-    300, // smallErrorTimeout
-    3, // largeErrorRange
-    600, // largeErrorTimeout
-    5 // slew rate     //3
+    0, // smallErrorRange // 0.3
+    0, // smallErrorTimeout // 300
+    0, // largeErrorRange // 3
+    0, // largeErrorTimeout // 600
+    0 // slew rate  //5   //3
 };
  
 // turning PID

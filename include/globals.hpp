@@ -36,4 +36,6 @@ extern pros::Rotation hort_encoder;
 
 extern pros::IMU imu;
 
+extern pros::Motor intake;
+
 

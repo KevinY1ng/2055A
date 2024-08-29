@@ -55,23 +55,41 @@ void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
         drive_RB.move(0);
 }
 
-void driveDistance(double targetdistance, double maxspeed, double kP, double kI, double kD) {
+void driveDistance(const double targetdistance, double kP, double kI, double kD) {
     const double pi = 3.14159;
     double tpr = 360;
-    int ticks = ((drive_LF.get_position() + drive_LB.get_position()) / 2);
-    double currentdistance = ((2.75*2) * pi) * (ticks / 360); //check teeth number on drivetrin
+    double ticks;
+    double currentdistance = ((1.017*2) * pi) * (ticks / 36000);
     double error = targetdistance - currentdistance;
     double preverror;
     double errortotal = 0;
-    int dT = 50;
+    int dT = 20;
+    double proportional;
+    double integral;
+    double derivative;
+    double output;
+    
 
-    while (error > 3) {
-        int ticks = ((drive_LF.get_position() + drive_LB.get_position()) / 2);
-        double currentdistance = ((2.75*2) * pi) * (ticks / 360);
-        double error = targetdistance - currentdistance;
+    while (abs(error) > 0.05) {
+        ticks = (vert_encoder.get_position());
+        currentdistance = ((1.017*2) * pi) * (ticks / 36000);
+        error = targetdistance - currentdistance;
+        pros::lcd::set_text(3, "error: " + std::to_string(error));
+        pros::lcd::set_text(4, "current distance: " + std::to_string(currentdistance));
+        pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
 
-        if (error < 2 || error !=0) {
-            errortotal =+ error;
+        // if (currentdistance >= targetdistance) {
+        //     drive_LF.move(0);
+        //     drive_LM.move(0);
+        //     drive_LB.move(0);
+
+        //     drive_RF.move(0);
+        //     drive_RM.move(0);        
+        //     drive_RB.move(0);
+        // }
+
+        if (error < 2 && error !=0) {
+            errortotal += error;
         }
         else {
             errortotal = 0;
@@ -81,23 +99,23 @@ void driveDistance(double targetdistance, double maxspeed, double kP, double kI,
             errortotal = 50 / kI;
         }
 
-        double porportional = error * kP;
-        double integral = errortotal * kI;
-        double derivative = (preverror - error) / dT * kD;
+        proportional = error * kP;
+        integral = errortotal * kI;
+        derivative = (preverror - error) / dT * kD;
 
-        double output = porportional + integral + derivative;
+        output = proportional + integral + derivative;
 
         preverror = error;
 
-        drive_LF.move(maxspeed * output);
-        drive_LM.move(maxspeed * output);
-        drive_LB.move(maxspeed * output);
+        drive_LF.move(output);
+        drive_LM.move(output);
+        drive_LB.move(output);
 
-        drive_RF.move(maxspeed * output);
-        drive_RM.move(maxspeed * output);
-        drive_RB.move(maxspeed * output);
+        drive_RF.move(output);
+        drive_RM.move(output);
+        drive_RB.move(output);
 
-        pros::delay(50);
+        pros::delay(20);
     }
 
     drive_LF.move(0);
@@ -107,6 +125,15 @@ void driveDistance(double targetdistance, double maxspeed, double kP, double kI,
     drive_RF.move(0);
     drive_RM.move(0);        
     drive_RB.move(0);
+
+    pros::delay(3000);
+    ticks = (vert_encoder.get_position());
+    currentdistance = ((1.017*2) * pi) * (ticks / 36000);
+    error = targetdistance - currentdistance;
+    pros::lcd::set_text(3, "error: " + std::to_string(error));
+    pros::lcd::set_text(4, "current distance: " + std::to_string(currentdistance));
+    pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
+
 }
 
 void swingleft(double radius, double angle, double maxspeed, double kP, double kI, double kD) {

@@ -26,3 +26,8 @@ void Clamp_Tilt () {
         tilt.set_value(tilt_status);
     }
 }
+
+void driveIntake() 
+{
+    intake.move(127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)));    
+}

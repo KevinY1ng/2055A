@@ -16,5 +16,6 @@ void my_opcontrol()
     while (true)
     {
         setDriveMotors();
+        driveIntake();
     }
 }
