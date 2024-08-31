@@ -24,9 +24,11 @@ void straightTest() {
 }
 
 void PID_Turn() {
-    driveDistance(48,9,0,10);
-    pros::delay(5000);
+    // driveDistance(48,0.7,8,0,0);
+    driveDistance(48, 0.7, 8, 0, 0, 1.95);
+    //pros::delay(5000);
     //driveDistance(-24,20,0.2,0,0.6);
-}
+}   
+
 
     

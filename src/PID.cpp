@@ -55,7 +55,7 @@ void turn(double targetheading, double maxspeed, float kP, float kI, float kD) {
         drive_RB.move(0);
 }
 
-void driveDistance(const double targetdistance, double kP, double kI, double kD) {
+void driveDistance(const double targetdistance, double maxspeed, double kP, double kI, double kD, double anglekP) {
     const double pi = 3.14159;
     double tpr = 360;
     double ticks;
@@ -68,15 +68,27 @@ void driveDistance(const double targetdistance, double kP, double kI, double kD)
     double integral;
     double derivative;
     double output;
+    double targetangle = 0;
+    double currentangle = chassis.getPose().theta;
+    double anglep;
+    double angleerror;
+    double prevangleerror;
+    double horticks = hort_encoder.get_position();
+    double hortcurrentdistance;
     
 
     while (abs(error) > 0.05) {
         ticks = (vert_encoder.get_position());
         currentdistance = ((1.017*2) * pi) * (ticks / 36000);
+        hortcurrentdistance = ((1.017*2) * pi) * (ticks / 36000);
         error = targetdistance - currentdistance;
         pros::lcd::set_text(3, "error: " + std::to_string(error));
         pros::lcd::set_text(4, "current distance: " + std::to_string(currentdistance));
-        pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
+
+        targetangle = 0;
+        currentangle = chassis.getPose().theta;
+        angleerror = currentangle - targetangle;
+        // pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
 
         // if (currentdistance >= targetdistance) {
         //     drive_LF.move(0);
@@ -101,21 +113,51 @@ void driveDistance(const double targetdistance, double kP, double kI, double kD)
 
         proportional = error * kP;
         integral = errortotal * kI;
-        derivative = (preverror - error) / dT * kD;
+        derivative = (error - preverror) / dT * kD;
+
+        anglep = angleerror * anglekP;
 
         output = proportional + integral + derivative;
-
+        
         preverror = error;
+        prevangleerror = angleerror;
 
-        drive_LF.move(output);
-        drive_LM.move(output);
-        drive_LB.move(output);
+        if (-1 < chassis.getPose().theta < 1) {
 
-        drive_RF.move(output);
-        drive_RM.move(output);
-        drive_RB.move(output);
+        drive_LF.move(abs((maxspeed * output) - anglep));
+        drive_LM.move(abs((maxspeed * output) - anglep));
+        drive_LB.move(abs((maxspeed * output) - anglep));
+
+        drive_RF.move(abs((maxspeed * output) + anglep));
+        drive_RM.move(abs((maxspeed * output) + anglep));
+        drive_RB.move(abs((maxspeed * output) + anglep));
+
+        }
+
+        else {
+
+            drive_LF.move(abs((maxspeed * output)));
+            drive_LM.move(abs((maxspeed * output)));
+            drive_LB.move(abs((maxspeed * output)));
+
+            drive_RF.move(abs((maxspeed * output)));
+            drive_RM.move(abs((maxspeed * output)));
+            drive_RB.move(abs((maxspeed * output)));
+        }
+
+
+        // else {
+        //     drive_LF.move(abs((maxspeed * output)));
+        //     drive_LM.move(abs((maxspeed * output)));
+        //     drive_LB.move(abs((maxspeed * output)));
+
+        //     drive_RF.move(abs((maxspeed * output)));
+        //     drive_RM.move(abs((maxspeed * output)));
+        //     drive_RB.move(abs((maxspeed * output)));
+        // }
 
         pros::delay(20);
+    
     }
 
     drive_LF.move(0);
@@ -126,18 +168,19 @@ void driveDistance(const double targetdistance, double kP, double kI, double kD)
     drive_RM.move(0);        
     drive_RB.move(0);
 
+    pros::lcd::set_text(1, "DONE!");
     pros::delay(3000);
     ticks = (vert_encoder.get_position());
     currentdistance = ((1.017*2) * pi) * (ticks / 36000);
     error = targetdistance - currentdistance;
     pros::lcd::set_text(3, "error: " + std::to_string(error));
-    pros::lcd::set_text(4, "current distance: " + std::to_string(currentdistance));
-    pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
+    pros::lcd::set_text(4, "horizangtal_error: " + std::to_string(hort_encoder.get_position()));
+    pros::lcd::set_text(7, "angle: " + std::to_string(chassis.getPose().theta));
 
 }
 
 void swingleft(double radius, double angle, double maxspeed, double kP, double kI, double kD) {
-   const double botwidth = 10;
+   const double botwidth = 11.25;
    const double pi = 3.14159;
    const double dT = 50;
    double errortotal = 0;
