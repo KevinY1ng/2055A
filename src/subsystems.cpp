@@ -32,8 +32,9 @@ void setIntake(int power)
     intake.move(power);
 }
 
+// this function is used for turning on the intake when driving
 void driveIntake() 
 {
-    int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1));
-    setIntake(power);
+    int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)); // power = 127 if L1 is being pressed, otherwise power = 0
+    setIntake(power); // sets intake power to "power"
 }

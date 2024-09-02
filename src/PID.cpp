@@ -85,20 +85,9 @@ void driveDistance(const double targetdistance, double maxspeed, double kP, doub
         pros::lcd::set_text(3, "error: " + std::to_string(error));
         pros::lcd::set_text(4, "current distance: " + std::to_string(currentdistance));
 
-        targetangle = 0;
         currentangle = chassis.getPose().theta;
         angleerror = currentangle - targetangle;
         // pros::lcd::set_text(7, "ticks: " + std::to_string(ticks));
-
-        // if (currentdistance >= targetdistance) {
-        //     drive_LF.move(0);
-        //     drive_LM.move(0);
-        //     drive_LB.move(0);
-
-        //     drive_RF.move(0);
-        //     drive_RM.move(0);        
-        //     drive_RB.move(0);
-        // }
 
         if (error < 2 && error !=0) {
             errortotal += error;
@@ -122,20 +111,8 @@ void driveDistance(const double targetdistance, double maxspeed, double kP, doub
         preverror = error;
         prevangleerror = angleerror;
 
-        if (-1 < chassis.getPose().theta < 1) {
-
-        drive_LF.move(abs((maxspeed * output) - anglep));
-        drive_LM.move(abs((maxspeed * output) - anglep));
-        drive_LB.move(abs((maxspeed * output) - anglep));
-
-        drive_RF.move(abs((maxspeed * output) + anglep));
-        drive_RM.move(abs((maxspeed * output) + anglep));
-        drive_RB.move(abs((maxspeed * output) + anglep));
-
-        }
-
-        else {
-
+        if (-1 < angleerror < 1) 
+        {
             drive_LF.move(abs((maxspeed * output)));
             drive_LM.move(abs((maxspeed * output)));
             drive_LB.move(abs((maxspeed * output)));
@@ -143,6 +120,17 @@ void driveDistance(const double targetdistance, double maxspeed, double kP, doub
             drive_RF.move(abs((maxspeed * output)));
             drive_RM.move(abs((maxspeed * output)));
             drive_RB.move(abs((maxspeed * output)));
+        }
+
+        else 
+        {
+            drive_LF.move(abs((maxspeed * output) - anglep));
+            drive_LM.move(abs((maxspeed * output) - anglep));
+            drive_LB.move(abs((maxspeed * output) - anglep));
+
+            drive_RF.move(abs((maxspeed * output) + anglep));
+            drive_RM.move(abs((maxspeed * output) + anglep));
+            drive_RB.move(abs((maxspeed * output) + anglep));
         }
 
 
@@ -169,7 +157,7 @@ void driveDistance(const double targetdistance, double maxspeed, double kP, doub
     drive_RB.move(0);
 
     pros::lcd::set_text(1, "DONE!");
-    pros::delay(3000);
+    pros::delay(2000);
     ticks = (vert_encoder.get_position());
     currentdistance = ((1.017*2) * pi) * (ticks / 36000);
     error = targetdistance - currentdistance;

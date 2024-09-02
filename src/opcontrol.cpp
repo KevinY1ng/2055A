@@ -15,7 +15,7 @@ void my_opcontrol()
 {
     while (true)
     {
-        setDriveMotors();
-        driveIntake();
+        setDriveMotors(); // sets motors based on joystick inputs
+        driveIntake(); // sets intake based on L1 input
     }
 }
