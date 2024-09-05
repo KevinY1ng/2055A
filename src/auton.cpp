@@ -12,7 +12,19 @@
 
 void PID_Test() {
     chassis.setPose(0,0,0);
-    //chassis.moveToPose(0, 24, 0, 5000, {}, false);
+    chassis.moveToPose(0, 24, 0, 5000);
+    // chassis.moveToPose(0, 0, 90, 5000);
+    chassis.waitUntilDone();
+    pros::delay(1000);
+    chassis.moveToPose(0, 0, 0, 5000, {.forwards=false});
+    chassis.waitUntilDone();
+    pros::delay(1000);
+    chassis.moveToPose(0, 48, 0, 5000);
+    chassis.waitUntilDone();   
+    pros::delay(1000);
+    chassis.moveToPose(0, 0, 0, 5000, {.forwards=false});
+    chassis.waitUntilDone();
+
     // turn(90,50,0.021,0,0.092);
 }
 

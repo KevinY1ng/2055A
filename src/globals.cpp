@@ -75,28 +75,28 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    15, // kP    .// 990000
+    10, // kP    .// 990000
     0, // KI
-    1, // kD //12900
+    2, // kD //12900
     0, // anti windup
-    0, // smallErrorRange // 0.3
-    0, // smallErrorTimeout // 300
-    0, // largeErrorRange // 3
-    0, // largeErrorTimeout // 600
-    0 // slew rate  //5   //3
+    0.7, // smallErrorRange // 0.3
+    300, // smallErrorTimeout // 300
+    3, // largeErrorRange // 3
+    600, // largeErrorTimeout // 600
+    5 // slew rate  //5   //3
 };
  
 // turning PID
 lemlib::ControllerSettings angularController {
-    2.1, // kP
-    0, // kI
-    12, // kD
-    3, // anti windup
-    1, // smallErrorRange
-    100, // smallErrorTimeout
-    3, // largeErrorRange
-    500, // largeErrorTimeout
-    3 // slew rate
+    6.5, // kP         // 4 kP // 16 kD <-- last values that worked       // 5 kP // 22.5 kD <-- last values that worked
+    0, // kI // 0.003
+    30.5, // kD
+    0, // anti windup // 3
+    0, // smallErrorRange // 1
+    0, // smallErrorTimeout // 100
+    0, // largeErrorRange // 3
+    0, // largeErrorTimeout // 500
+    0 // slew rate // 3
 };
 
 // odometry struct
