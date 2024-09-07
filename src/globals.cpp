@@ -75,20 +75,20 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    10, // kP    .// 990000
+    9, // kP    .// 990000     // 10 kP, 2 kD     // 9 kP, 0 kI, 3.5 kD | chassis.moveToPose(0, 48, 0, 5000, {.earlyExitRange = 2});  <-- these PID values with this function works really well
     0, // KI
-    2, // kD //12900
+    3.5, // kD //12900
     0, // anti windup
-    0.7, // smallErrorRange // 0.3
-    300, // smallErrorTimeout // 300
-    3, // largeErrorRange // 3
-    600, // largeErrorTimeout // 600
-    5 // slew rate  //5   //3
+    0, // smallErrorRange // 0.3
+    0, // smallErrorTimeout // 300
+    0, // largeErrorRange // 3
+    0, // largeErrorTimeout // 600
+    0 // slew rate  //5   //3
 };
  
 // turning PID
 lemlib::ControllerSettings angularController {
-    6.5, // kP         // 4 kP // 16 kD <-- last values that worked       // 5 kP // 22.5 kD <-- last values that worked
+    6.5, // kP         // 4 kP, 16 kD <-- last values that worked       // 5 kP, 22.5 kD <-- last values that worked //     6.5 kP, 30.5 kD <-- last values that worked     // we could fine-tune kP and kD more, but haven't yet
     0, // kI // 0.003
     30.5, // kD
     0, // anti windup // 3
