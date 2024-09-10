@@ -50,5 +50,18 @@ void PID_Turn() {
     //driveDistance(-24,20,0.2,0,0.6);
 }   
 
+void auton_test()
+{
+    chassis.setPose(0, 0, 0);
+    chassis.moveToPose(0, 24, 0, 3000);
+    chassis.turnToHeading(90, 1000);
+    setIntake(127);
+}
+
+void mogo_rush()
+{
+    chassis.setPose(51,-36,90);
+    chassis.moveToPose(14, -36, 90, 4000, {.forwards=false}, false);
+}
 
     

@@ -82,7 +82,7 @@ lemlib::ControllerSettings linearController {
     0, // smallErrorRange // 0.3
     0, // smallErrorTimeout // 300
     0, // largeErrorRange // 3
-    0, // largeErrorTimeout // 600
+    0, // largeErrorTimeout // 600 
     0 // slew rate  //5   //3
 };
  
