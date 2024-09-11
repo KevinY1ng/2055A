@@ -52,8 +52,8 @@ pros::MotorGroup Right_Drive({20, 12, 18}, pros::v5::MotorGears::blue);
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 //Pneumatics
-pros::adi::DigitalOut clamp('A', false);
-pros::adi::DigitalOut tilt('B', false);
+pros::adi::DigitalOut tilt('A', false);
+pros::adi::DigitalOut clamp('B', false);
 
 pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);
