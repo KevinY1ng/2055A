@@ -61,7 +61,30 @@ void auton_test()
 void mogo_rush()
 {
     chassis.setPose(51,-36,90);
-    chassis.moveToPose(14, -36, 90, 4000, {.forwards=false}, false);
+    chassis.moveToPoint(14, -36, 4000, {.forwards = false}, false);
+    chassis.turnToHeading(60, 1000, {}, false);
+
+    /* PATH PLAN
+    51, -36, 90
+    14, -36, 90
+    14, -36, 60
+    12, -38, 60
+    12, -38, 135
+    19, -42, 135
+    19, -42, 190
+    22, -35, 190
+    22, -35, 36
+    44, -4, 36
+    44, -4, -78
+    37, -2, -78
+    */
 }
 
     
+//second option(starts from the right)
+void mogo_rush()
+{
+    chassis.setPose(51,25,90);
+    chassis.moveToPoint(34, 25, 4000, {.forwards = false}, false);
+    chassis.turnToHeading(-24, 1000, {}, false);
+}
