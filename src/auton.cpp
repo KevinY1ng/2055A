@@ -82,7 +82,7 @@ void mogo_rush()
 
     
 //second option(starts from the right)
-void mogo_rush()
+void mogo_rushright()
 {
     chassis.setPose(51,25,90);
     chassis.moveToPoint(34, 25, 4000, {.forwards = false}, false);

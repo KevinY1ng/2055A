@@ -17,6 +17,7 @@ void my_opcontrol()
     {
         setDriveMotors(); // sets motors based on joystick inputs
         driveIntake(); // sets intake based on L1 input
+        Clamp_Goal();
         Clamp_Tilt();
     }
 }

@@ -22,8 +22,8 @@ extern pros::MotorGroup Right_Drive;
 extern pros::Controller controller;
 
 //Pneumatics
-extern pros::adi::DigitalOut clamp;
 extern pros::adi::DigitalOut tilt;
+extern pros::adi::DigitalOut clamp;
 
 extern lemlib::Drivetrain drivetrain;
 extern lemlib::ControllerSettings linearController;

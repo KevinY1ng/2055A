@@ -27,9 +27,9 @@ int INERTIAL_PORT = 4;
 
 // Pneumatics
 char CLAMP_PORT = 'A';
-char TILT_PORT = 'B';
+char TILT_PORT = 'C';
 
-int motor_intake = 7;
+int motor_intake = -7;
 
 
 //Drivetrain
@@ -53,7 +53,7 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 //Pneumatics
 pros::adi::DigitalOut tilt('A', false);
-pros::adi::DigitalOut clamp('B', false);
+pros::adi::DigitalOut clamp('C', false);
 
 pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);

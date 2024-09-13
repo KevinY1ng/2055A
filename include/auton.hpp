@@ -10,3 +10,5 @@ void auton_test();
 
 void mogo_rush();
 
+void mogo_rushright();
+
