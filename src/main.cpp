@@ -122,6 +122,6 @@ void opcontrol() {
         }
     });
 
-	// my_opcontrol();
+	my_opcontrol();
 
 }

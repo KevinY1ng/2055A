@@ -61,13 +61,22 @@ void auton_test()
 void mogo_rush()
 {
     chassis.setPose(51,-36,90);
-    chassis.moveToPoint(14, -36, 4000, {.forwards = false}, false);
-    chassis.turnToHeading(60, 1000, {}, false);
+    chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
+    clamp.set_value(true);
+    chassis.waitUntilDone();
+    chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
+    chassis.moveToPoint(9, -41, 2000, {.forwards = false, .maxSpeed = 85}, false);
+    clamp.set_value(false);
+    tilt.set_value(false);
+    pros::delay(500);
+    chassis.turnToHeading(115, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
+    setIntake(-110);
+    
 
     /* PATH PLAN
     51, -36, 90
-    14, -36, 90
-    14, -36, 60
+    12, -36, 90
+    12, -36, 60
     12, -38, 60
     12, -38, 135
     19, -42, 135
