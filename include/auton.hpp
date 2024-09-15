@@ -12,3 +12,7 @@ void mogo_rush();
 
 void mogo_rushright();
 
+void elim5ring();
+
+void progskills();
+

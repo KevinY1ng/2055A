@@ -29,7 +29,8 @@ int INERTIAL_PORT = 4;
 char CLAMP_PORT = 'A';
 char TILT_PORT = 'C';
 
-int motor_intake = -7;
+int MOTOR_INTAKE_1 = 7;
+int MOTOR_INTAKE_2 = -3;
 
 
 //Drivetrain
@@ -41,8 +42,8 @@ pros::Motor drive_RB(MOTOR_RB, pros::v5::MotorGears::blue, pros::v5::MotorUnits:
 pros::Motor drive_RM(MOTOR_RM, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 pros::Motor drive_RF(MOTOR_RF, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
-pros::Motor intake(motor_intake, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
-
+pros::Motor intake1(MOTOR_INTAKE_1, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
+pros::Motor intake2(MOTOR_INTAKE_2, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 //MotorGroups
 pros::MotorGroup Left_Drive({-11, -13, -1}, pros::v5::MotorGears::blue);

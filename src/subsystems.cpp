@@ -8,7 +8,7 @@
 bool clamp_status = false;
 
 void Clamp_Goal () {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1)) {
         clamp_status = !clamp_status;
         // clamp_status = true;
         clamp.set_value(clamp_status);
@@ -23,7 +23,7 @@ void Clamp_Goal () {
 bool tilt_status = false;
 
 void Clamp_Tilt () {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
         tilt_status = !tilt_status;
         tilt.set_value(tilt_status);
     }
@@ -31,12 +31,13 @@ void Clamp_Tilt () {
 
 void setIntake(int power)
 {
-    intake.move(power);
+    intake1.move(power);
+    intake2.move(power);
 }
 
 // this function is used for turning on the intake when driving
 void driveIntake() 
 {
-    int power = 115 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)); // power = 127 if L1 is being pressed, otherwise power = 0
+    int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)); // power = 127 if L1 is being pressed, otherwise power = 0
     setIntake(power); // sets intake power to "power"
 }
