@@ -29,10 +29,19 @@ void Clamp_Tilt () {
     }
 }
 
+bool checkForJam = false;
 void setIntake(int power)
 {
     intake1.move(power);
     intake2.move(power);
+    if (abs(power) > 0)
+    {
+        checkForJam = true;
+    }
+    else
+    {
+        checkForJam = false;
+    }
 }
 
 // this function is used for turning on the intake when driving
@@ -40,4 +49,43 @@ void driveIntake()
 {
     int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)); // power = 127 if L1 is being pressed, otherwise power = 0
     setIntake(power); // sets intake power to "power"
+}
+
+bool checkForJam()
+{
+    if (abs(intake1.get_actual_velocity()) > 10)
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+void fixJam()
+{
+    setIntake(0);
+    pros::delay(250);
+    setIntake(127);
+}
+
+void antiJamTask()
+{
+    whlie (true)
+    {
+        if (checkForJam)
+        {
+            if (abs(intake1.get_actual_velocity()) < 10)
+            {
+                setIntake(0);
+                pros::lcd::set_text(2, "JAM DETECTED: MOTOR STOPPED.")
+                pros::delay(250);
+                setIntake(127);
+                pros::lcd::set_text(3, "WAIT COMPLETED: MOTOR SPINNING.")
+            }
+        }
+    pros::delay(100);
+    }
+    
 }

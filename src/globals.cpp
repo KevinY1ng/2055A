@@ -29,8 +29,10 @@ int INERTIAL_PORT = 4;
 char CLAMP_PORT = 'A';
 char TILT_PORT = 'C';
 
-int MOTOR_INTAKE_1 = 7;
-int MOTOR_INTAKE_2 = -3;
+int MOTOR_INTAKE_1 = 7; // bottom intake
+int MOTOR_INTAKE_2 = -3; // top intake
+
+int OPTICAL_SENSOR = 9;
 
 
 //Drivetrain
@@ -61,6 +63,8 @@ pros::Rotation hort_encoder(HOR_TRACKING);
 
 //inertial
 pros::IMU imu(INERTIAL_PORT);
+
+pros::Optical
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.39);
