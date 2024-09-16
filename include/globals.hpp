@@ -24,6 +24,7 @@ extern pros::Controller controller;
 //Pneumatics
 extern pros::adi::DigitalOut tilt;
 extern pros::adi::DigitalOut clamp;
+extern pros::adi::DigitalOut doinker;
 
 extern lemlib::Drivetrain drivetrain;
 extern lemlib::ControllerSettings linearController;
@@ -39,4 +40,5 @@ extern pros::IMU imu;
 extern pros::Motor intake1;
 extern pros::Motor intake2;
 
+extern pros::Optical colorsensor;
 

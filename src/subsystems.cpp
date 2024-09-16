@@ -51,7 +51,7 @@ void driveIntake()
     setIntake(power); // sets intake power to "power"
 }
 
-bool checkForJam()
+bool checkforJam()
 {
     if (abs(intake1.get_actual_velocity()) > 10)
     {
@@ -72,20 +72,29 @@ void fixJam()
 
 void antiJamTask()
 {
-    whlie (true)
+    while (true)
     {
         if (checkForJam)
         {
             if (abs(intake1.get_actual_velocity()) < 10)
             {
                 setIntake(0);
-                pros::lcd::set_text(2, "JAM DETECTED: MOTOR STOPPED.")
+                pros::lcd::set_text(2, "JAM DETECTED: MOTOR STOPPED.");
                 pros::delay(250);
                 setIntake(127);
-                pros::lcd::set_text(3, "WAIT COMPLETED: MOTOR SPINNING.")
+                pros::lcd::set_text(3, "WAIT COMPLETED: MOTOR SPINNING.");
             }
         }
     pros::delay(100);
     }
-    
 }
+
+void doink() {
+    bool doink_status = false;
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+        doink_status != doink_status;
+        doinker.set_value(doink_status);
+    }
+}
+    
+  

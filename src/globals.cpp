@@ -23,16 +23,16 @@ int MOTOR_RF = 18; //18
 int VERT_TRACKING = 14;
 int HOR_TRACKING = 16;
 
-int INERTIAL_PORT = 4;
+int INERTIAL_PORT = 2;
 
 // Pneumatics
 char CLAMP_PORT = 'A';
 char TILT_PORT = 'C';
 
-int MOTOR_INTAKE_1 = 7; // bottom intake
+int MOTOR_INTAKE_1 = -4; // bottom intake
 int MOTOR_INTAKE_2 = -3; // top intake
 
-int OPTICAL_SENSOR = 9;
+int OPTICAL_SENSOR = 10;
 
 
 //Drivetrain
@@ -56,6 +56,7 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 //Pneumatics
 pros::adi::DigitalOut tilt('A', true);
+pros::adi::DigitalOut doinker('B', false);
 pros::adi::DigitalOut clamp('C', false);
 
 pros::Rotation vert_encoder(VERT_TRACKING);
@@ -64,7 +65,7 @@ pros::Rotation hort_encoder(HOR_TRACKING);
 //inertial
 pros::IMU imu(INERTIAL_PORT);
 
-pros::Optical
+pros::Optical colorsensor(OPTICAL_SENSOR);
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.39);

@@ -13,11 +13,13 @@
 
 void my_opcontrol()
 {
+    // pros::rtos::Task my_task(my_task_fn);
     while (true)
     {
         setDriveMotors(); // sets motors based on joystick inputs
         driveIntake(); // sets intake based on L1 input
         Clamp_Goal();
-        Clamp_Tilt();
+        Clamp_Tilt(); 
+        doink();
     }
 }

@@ -5,4 +5,4 @@ void Clamp_Tilt();
 
 void setIntake(int power);
 void driveIntake();
-
+void doink();

@@ -19,6 +19,55 @@ void on_center_button() {
 	}
 }
 
+void colorsortred() {
+	double colorvalue;
+	while (true) {
+		colorvalue = colorsensor.get_hue();
+		pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
+	// 	if (colorvalue >= 195 && colorvalue <= 230) { 
+	// 		pros::lcd::set_text(4, "BLUE RING DETECTED :(");
+	// 		intake1.move(127);
+	// 		intake2.move(-127);
+	// 		pros::delay(1800);
+	// 	}
+	// 	else if (colorvalue >= 350 && colorvalue <= 360 || colorvalue >= 0 && colorvalue <= 10) {
+			// pros::delay(500);
+	// 		setIntake(127);
+	// 	}
+	// 	else
+	// 	{
+	// 		driveIntake();
+	// 	}
+
+		
+		pros::delay(20);
+	}
+}
+
+
+void colorsortblue()
+{
+	double colorvalue;
+	while (true)
+	{
+		colorvalue = colorsensor.get_hue();
+		pros::lcd::set_text(3, std::to_string(colorvalue));
+		if (colorvalue >= 350 && colorvalue <= 360 || colorvalue >= 0 && colorvalue <= 10) { 
+			pros::lcd::set_text(4, "RED RING DETECTED :(");
+			intake1.move(127);
+			intake2.move(-127);
+			pros::delay(1800);
+		}
+		else
+		{
+			driveIntake();
+		}
+		
+		pros::delay(20);
+	}
+}
+
+
 /**
  * Runs initialization code. This occurs as soon as the program is started.
  *
@@ -27,7 +76,6 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
 
 	drive_LB.set_brake_mode(MOTOR_BRAKE_HOLD);
 	drive_LM.set_brake_mode(MOTOR_BRAKE_HOLD);
@@ -39,17 +87,16 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
+	pros::Task my_task(colorsortred);
 
-	pros::Task screen_task([&]() {
-		while (true) {
-			// print robot location to the brain screen
-			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
-			pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-			pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-			// delay to save resources
-			pros::delay(20);
-		}
-    });
+	// pros::Task screen_task([&]() {
+	// 	double colorvalue;
+	// 	while (true) {
+	// 		colorvalue = colorsensor.get_hue();
+	// 		pros::lcd::set_text(4, std::to_string(colorvalue));
+	// 		pros::delay(20);
+	// 	}
+    // });
 }
 
 /**
@@ -86,7 +133,9 @@ void autonomous() {
 	// PID_Test();
 	// straightTest();
 	// PID_Turn();
-	mogo_rush(); // SLOT 3
+	//mogo_rush(); // SLOT 3
+	//elim5ring(); //SLOT 4
+	soloawp(); //slot 5
 }
 
 /**
@@ -111,17 +160,21 @@ void opcontrol() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
 
+	pros::Task my_task(colorsortred);
 
-	pros::Task screen_task([&]() {
-        while (true) {
-            // print robot location to the brain screen
-			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
-            pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-        	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-            // delay to save resources
-            pros::delay(20);
-        }
-    });
+	// pros::rtos::Task my_task(my_task_fn);
+
+
+	// pros::Task screen_task([&]() {
+    //     while (true) {
+    //         // print robot location to the brain screen
+	// 		pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+    //         pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+    //     	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+    //         // delay to save resources
+    //         pros::delay(20);
+    //     }
+    // });
 
 	my_opcontrol();
 

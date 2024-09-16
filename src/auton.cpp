@@ -98,37 +98,34 @@ void mogo_rushright()
     chassis.turnToHeading(-24, 1000, {}, false);
 }
 
-// void elim5ring() {
+void elim5ring() {
 // //Get Mobile Goal
 //     chassis.setpose(-47,36,295);
 //     clamp.set_value(true);
-//     chassis.moveToPose(-24,26,295,2000);
+//     chassis.moveToPose(-24,26,295,2000,{.maxspeed = 85});
 //     clamp.set_value(false);
 //     tilt.set_value(false);
 //     chassis.waitUntilDone();
-//     setIntake(115);
-//     pros::delay(300);
 
 //     //Get 2nd Ring
-//     intake.brake();
 //     chassis.turnToHeading(0,2000);
-//     pros::delay(100);
 //     setIntake(115);
-//     chassis.moveToPoint(-24,45,0,3000,{.maxspeed = 80}, false);
-//     pros::delay(500);
+//     pros::delay(100);
+//     chassis.moveToPoint(-24,45,0,3000,{.maxspeed = 90}, false);
+//     pros::delay(100);
 //     intake.brake();
 
 //     //Get 3rd and 4th Ring
 //     chassis.turnToHeading(90,1000);
 //     setIntake(111);
-//     chassis.moveToPoint(-14,45,90,2000,true);
-//     pros::delay(500);
+//     chassis.moveToPoint(-14,45,90,2000,{.maxspeed = 85}, false);
+//     pros::delay(200);
 //     chassis.moveToPoint(-17,45,90,2000,(.forwards = false),false)
-//     pros::delay(500);
+//     pros::delay(100);
 //     chassis.turnToHeading(45,1000);
 //     pros::delay(50);
 //     chassis.moveToPoint(-12,48,61,2000);
-//     pros::delay(500);
+//     pros::delay(100);
 //     intake.brake();
 
 //     //Get 5th Ring
@@ -137,22 +134,52 @@ void mogo_rushright()
 //     chassis.turnToHeading(180,1000);
 //     pros::delay(100);
 //     chassis.moveToPoint(-46,12,180,3000);
-// }
+}
 
 void progskills() {
 // First Corners Rings
-// -61,-21,270
-// -47,-21,270
-// -47,-21,90
-// -23,-21,90
-// -23,-21,180
-// -24,-45,180
-// -24,-45,270
-// -51,-45,270
-// -51,-45,170
-// -50,-48,170
-// -50,-48,45
-// -57,-54,45
+/*
+-61,-21,270
+-47,-21,270
+-47,-21,90
+-23,-21,90
+-23,-21,180
+-24,-45,180
+-24,-45,270
+-51,-45,270
+-51,-45,170
+-50,-48,170
+-50,-48,45
+-57,-54,45
+*/
 
+}
 
+void soloawp() {
+//Score Alliance Ring
+chassis.setPose(-58,-8,180);
+chassis.moveToPoint(-58,0,1000,{.forwards = false, .maxSpeed = 30});
+chassis.turnToHeading(90,500, {.maxSpeed = 50});
+intake2.move(-127);
+pros::delay(300);
+intake2.brake();
+pros::delay(1000);
+
+//Get 2nd Ring
+// setIntake(127);
+// chassis.moveToPose(-43,0,90,2000);
+
+// //Get Mobile Goal
+// chassis.turnToHeading(215,300, {.maxSpeed = 85});
+// chassis.moveToPoint(-26,26,2000, {.forwards = false, .maxSpeed = 105});
+
+// //Get 3rd and 4th Ring
+// chassis.turnToHeading(5,500, {.direction = AngularDirection::CW_CLOCKWISE});
+// setIntake(127);
+// chassis.moveToPoint(23,54,1000,{.maxSpeed = 90});
+// chassis.turnToHeading(90,500);
+// intake1.brake();
+// intake2.brake();
+// chassis.moveToPoint(-14,54,1000);
+// intake1.move(127);
 }
