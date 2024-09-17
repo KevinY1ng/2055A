@@ -60,17 +60,20 @@ void auton_test()
 
 void mogo_rush()
 {
-    chassis.setPose(51,-36,90);
-    chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
-    clamp.set_value(true);
-    chassis.waitUntilDone();
-    chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
-    chassis.moveToPoint(9, -41, 2000, {.forwards = false, .maxSpeed = 85}, false);
-    clamp.set_value(false);
-    tilt.set_value(false);
-    pros::delay(500);
-    chassis.turnToHeading(115, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
-    setIntake(-110);
+    setIntake(127);
+    // chassis.setPose(51,-36,90);
+    // chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
+    // clamp.set_value(true);
+    // chassis.waitUntilDone();
+    // chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
+    // chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 85}, false);
+    // clamp.set_value(false);
+    // tilt.set_value(false);
+    // pros::delay(500);
+    // chassis.turnToHeading(105, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
+    // chassis.moveToPoint(22, -46, 2000, {});
+    // setIntake(127);
+    // chassis.waitUntilDone();
     
 
     /* PATH PLAN
@@ -93,10 +96,23 @@ void mogo_rush()
 //second option(starts from the right)
 void mogo_rushright()
 {
-    chassis.setPose(51,25,90);
-    chassis.moveToPoint(34, 25, 4000, {.forwards = false}, false);
-    chassis.turnToHeading(-24, 1000, {}, false);
+    chassis.setPose(60,0,-90);
+    setIntake(-127);
+    chassis.moveToPoint(51, 0, 4000, {.forwards = false}, false);
+    chassis.turnToHeading(132, 1000, {}, false);
 }
+
+ /* PATH PLAN
+    60,0,-90 (start position), scored in Assistance Wall Stick
+    51,0,-90(suck the ring, but don't send them to the hood)
+    51,0,132(turn to face Mobile Goal)
+    31,17,132(grab Mobile Goal)
+    31,17,-15(turn to face the ring)
+    25,46,-15(suck the ring)
+    10,46,-90(suck two ring that in the front)
+    10,46,-180(turn to face the ladder)
+    10,26,-180(reach ladder)
+    */
 
 void elim5ring() {
 // //Get Mobile Goal
@@ -137,21 +153,36 @@ void elim5ring() {
 }
 
 void progskills() {
-// First Corners Rings
-/*
--61,-21,270
--47,-21,270
--47,-21,90
--23,-21,90
--23,-21,180
--24,-45,180
--24,-45,270
--51,-45,270
--51,-45,170
--50,-48,170
--50,-48,45
--57,-54,45
-*/
+
+    //TIMEOUTS TEMPORARY
+
+    //set pose
+    chassis.setPose(-56.5, 0, 90);
+    //alliance stake
+    setIntake(-127);
+    pros::delay(1500);
+    setIntake(0);
+    //collect ring
+    chassis.moveToPoint(-24, -24, 2000);
+    chassis.waitUntil(10);
+    setIntake(127);
+    chassis.waitUntilDone();
+    pros::delay(500);
+    //get mogo
+    chassis.turnToHeading(90, 1000);
+    tilt.set_value(false);
+    clamp.set_value(false);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-51,-24,1000,{}, false);
+    clamp.set_value(true);
+    tilt.set_value(true);
+    pros::delay(500);
+    //get ring
+    chassis.moveToPoint(-24, -48, 100, {}, false);
+    pros::delay(500);
+    chassis.turnToHeading(180, 1000, {}, false);
+    chassis.moveToPoint(-43, -48, 750, {}, false);
+    
 
 }
 

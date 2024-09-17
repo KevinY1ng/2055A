@@ -24,20 +24,20 @@ void colorsortred() {
 	while (true) {
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
-	// 	if (colorvalue >= 195 && colorvalue <= 230) { 
-	// 		pros::lcd::set_text(4, "BLUE RING DETECTED :(");
-	// 		intake1.move(127);
-	// 		intake2.move(-127);
-	// 		pros::delay(1800);
-	// 	}
-	// 	else if (colorvalue >= 350 && colorvalue <= 360 || colorvalue >= 0 && colorvalue <= 10) {
-			// pros::delay(500);
-	// 		setIntake(127);
-	// 	}
-	// 	else
-	// 	{
-	// 		driveIntake();
-	// 	}
+		if (colorvalue >= 195 && colorvalue <= 230) { 
+			pros::lcd::set_text(4, "BLUE RING DETECTED :(");
+			intake1.move(127);
+			intake2.move(-127);
+			pros::delay(1800);
+		}
+		else if (colorvalue >= 350 && colorvalue <= 360 || colorvalue >= 0 && colorvalue <= 10) {
+			pros::delay(500);
+			setIntake(127);
+		}
+		else
+		{
+			driveIntake();
+		}
 
 		
 		pros::delay(20);
@@ -52,7 +52,7 @@ void colorsortblue()
 	{
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorvalue));
-		if (colorvalue >= 350 && colorvalue <= 360 || colorvalue >= 0 && colorvalue <= 10) { 
+		if (colorvalue >= 0 && colorvalue <= 30) { 
 			pros::lcd::set_text(4, "RED RING DETECTED :(");
 			intake1.move(127);
 			intake2.move(-127);
@@ -87,7 +87,7 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
-	pros::Task my_task(colorsortred);
+	pros::Task my_task(colorsortblue);
 
 	// pros::Task screen_task([&]() {
 	// 	double colorvalue;
@@ -133,9 +133,9 @@ void autonomous() {
 	// PID_Test();
 	// straightTest();
 	// PID_Turn();
-	//mogo_rush(); // SLOT 3
+	mogo_rush(); // SLOT 3
 	//elim5ring(); //SLOT 4
-	soloawp(); //slot 5
+	// soloawp(); //slot 5
 }
 
 /**
@@ -160,7 +160,7 @@ void opcontrol() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
 
-	pros::Task my_task(colorsortred);
+	pros::Task my_task(colorsortblue);
 
 	// pros::rtos::Task my_task(my_task_fn);
 

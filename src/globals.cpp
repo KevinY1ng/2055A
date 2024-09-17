@@ -28,6 +28,7 @@ int INERTIAL_PORT = 2;
 // Pneumatics
 char CLAMP_PORT = 'A';
 char TILT_PORT = 'C';
+char DOINKER_PORT = 'B';
 
 int MOTOR_INTAKE_1 = -4; // bottom intake
 int MOTOR_INTAKE_2 = -3; // top intake

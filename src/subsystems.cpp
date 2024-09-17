@@ -34,14 +34,6 @@ void setIntake(int power)
 {
     intake1.move(power);
     intake2.move(power);
-    if (abs(power) > 0)
-    {
-        checkForJam = true;
-    }
-    else
-    {
-        checkForJam = false;
-    }
 }
 
 // this function is used for turning on the intake when driving
@@ -89,10 +81,10 @@ void antiJamTask()
     }
 }
 
+bool doink_status = false;
 void doink() {
-    bool doink_status = false;
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
-        doink_status != doink_status;
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+        doink_status = !doink_status;
         doinker.set_value(doink_status);
     }
 }
