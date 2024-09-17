@@ -87,7 +87,7 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
-	pros::Task my_task(colorsortblue);
+	// pros::Task my_task(colorsortblue);
 
 	// pros::Task screen_task([&]() {
 	// 	double colorvalue;
@@ -160,7 +160,7 @@ void opcontrol() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
 
-	pros::Task my_task(colorsortblue);
+	// pros::Task my_task(colorsortblue);
 
 	// pros::rtos::Task my_task(my_task_fn);
 

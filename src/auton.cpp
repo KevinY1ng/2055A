@@ -60,20 +60,30 @@ void auton_test()
 
 void mogo_rush()
 {
+    chassis.setPose(51,-36,90);
+    chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
+    clamp.set_value(true);
+    chassis.waitUntilDone();
+    chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
+    chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 85}, false);
+    clamp.set_value(false);
+    tilt.set_value(false);
+    pros::delay(500);
+    chassis.turnToHeading(105, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
+    chassis.moveToPoint(23, -46, 2000, {.maxSpeed=65});
     setIntake(127);
-    // chassis.setPose(51,-36,90);
-    // chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
-    // clamp.set_value(true);
-    // chassis.waitUntilDone();
-    // chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
-    // chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 85}, false);
-    // clamp.set_value(false);
-    // tilt.set_value(false);
-    // pros::delay(500);
-    // chassis.turnToHeading(105, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
-    // chassis.moveToPoint(22, -46, 2000, {});
-    // setIntake(127);
-    // chassis.waitUntilDone();
+    chassis.waitUntilDone();
+    pros::delay(500);
+    setIntake(0);
+    tilt.set_value(true);
+    clamp.set_value(true);
+    pros::delay(250);
+    chassis.turnToHeading(185, 1000, {.maxSpeed=65}, false);
+    chassis.moveToPoint(23, -30, 2000, {.forwards=false, .maxSpeed=85}, false);
+    clamp.set_value(false);
+    tilt.set_value(false);
+    
+
     
 
     /* PATH PLAN
@@ -100,6 +110,7 @@ void mogo_rushright()
     setIntake(-127);
     chassis.moveToPoint(51, 0, 4000, {.forwards = false}, false);
     chassis.turnToHeading(132, 1000, {}, false);
+    chassis.moveToPose(24, 24, 90, 5000, {}, false);
 }
 
  /* PATH PLAN
