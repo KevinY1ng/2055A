@@ -225,16 +225,13 @@ void progskills() {
     //TIMEOUTS TEMPORARY
 
     //set pose
-    chassis.setPose(-56.5, 0, 90);
+    chassis.setPose(-56.5, 2, 90);
     //alliance stake
     setIntake(-127);
     pros::delay(1500);
     setIntake(0);
     //collect ring
-    chassis.moveToPoint(-24, -24, 2000);
-    chassis.waitUntil(10);
-    chassis.cancelMotion();
-    chassis.moveToPoint(-24, -24, 2000, {.maxSpeed = 60});
+    chassis.moveToPoint(-24, -24, 2500, {.maxSpeed = 60});
     setIntake(127);
     chassis.waitUntilDone();
     pros::delay(500);
@@ -244,29 +241,41 @@ void progskills() {
     tilt.set_value(true);
     clamp.set_value(true);
     chassis.waitUntilDone();
-    chassis.moveToPoint(-51,-24,1000,{.forwards = false}, false);
+    chassis.moveToPose(-51,-24, 90, 1000,{.forwards = false}, false);
     clamp.set_value(false);
     pros::delay(500);
     tilt.set_value(false);
     pros::delay(500);
     //get ring
     setIntake(127);
-    chassis.moveToPoint(-24, -46, 1000);
+    chassis.moveToPoint(-24, -48, 1000);
     chassis.waitUntil(10);
     chassis.cancelMotion();
-    chassis.moveToPoint(-24, -46, 500, {.maxSpeed = 60}, false);
+    chassis.moveToPoint(-24, -48, 500, {.maxSpeed = 60}, false);
     pros::delay(500);
     //get ring
     chassis.turnToHeading(180, 750, {}, false);
-    chassis.moveToPoint(-55, -46, 1500, {.maxSpeed=60}, false);
+    chassis.moveToPoint(-55, -48, 1500, {.maxSpeed=60}, false);
     pros::delay(500);
-    chassis.turnToPoint(-48, -58, 750, {}, false);
-    chassis.moveToPoint(-48, -58, 750, {.maxSpeed = 60, .minSpeed = 10}, false);
+    chassis.turnToPoint(-48, -60, 750, {}, false);
+    chassis.moveToPoint(-48, -60, 750, {.maxSpeed = 60, .minSpeed = 10}, false);
     chassis.turnToHeading(90, 500, {.minSpeed = 10});
-    chassis.moveToPoint(0, -58, 1500, {}, false);
+    chassis.moveToPoint(0, -60, 1500, {}, false);
+    pros::delay(500);
+    chassis.moveToPoint(-48, -48, 1500, {.forwards=false}, false);
+    chassis.turnToHeading(45, 750, {}, false);
+    chassis.moveToPose(-60, -60, 45, 750, {.forwards = false}, false);
+    tilt.set_value(true);
+    clamp.set_value(true);
+    setIntake(0);
+    pros::delay(500);
+    chassis.turnToPoint(-39, 0, 500, {}, false);
+    chassis.moveToPoint(-39, 0, 3000, {.minSpeed=60}, false);
+    chassis.moveToPoint(-24, 24, 1000, {.maxSpeed=60}, false);
+
 }
 
-void progski(500)lls2()  {
+void progskills2()  {
 
     
 }
@@ -275,9 +284,11 @@ void soloawp() {
 //Score Alliance Ring
 chassis.setPose(-58,-8,180);
 chassis.moveToPoint(-58,0,1000,{.forwards = false, .maxSpeed = 30});
-chassis.turnToHeading(90,500, {.maxSpeed = 50});
+pros::delay(1000);
+chassis.turnToHeading(90,2000, {.maxSpeed = 45});
+pros::delay(2000);
 intake2.move(-127);
-pros::delay(300);
+pros::delay(700);
 intake2.brake();
 pros::delay(1000);
 
