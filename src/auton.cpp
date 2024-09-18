@@ -53,10 +53,36 @@ void PID_Turn() {
 void auton_test()
 {
     chassis.setPose(0, 0, 0);
-    chassis.moveToPose(0, 24, 0, 3000);
-    chassis.turnToHeading(90, 1000);
-    setIntake(127);
+    clamp.set_value(true);
+    chassis.moveToPose(0, -24, 0, 3000, {.forwards=false, .maxSpeed=60});
+    // setIntake(127);
+    chassis.waitUntilDone();
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
+    pros::delay(500);
 }
+
+/*
+how to clamp
+A - high
+C - high
+Go up to mobile goal
+C - low
+A - low
+
+how to let go 
+C - high
+
+*/
+
+/*
+when you first start the code:
+open the clamp
+close the clamp
+then tilt
+and you've got the mobile goal
+*/
 
 void mogo_rush()
 {
@@ -65,26 +91,57 @@ void mogo_rush()
     clamp.set_value(true);
     chassis.waitUntilDone();
     chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
+     // Move to (7, -43), unclamp, tilt
     chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 85}, false);
     clamp.set_value(false);
+    pros::delay(500);
     tilt.set_value(false);
     pros::delay(500);
+      // Turn and move to new point
     chassis.turnToHeading(105, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 85}, false);
-    chassis.moveToPoint(23, -46, 2000, {.maxSpeed=65});
+    chassis.moveToPoint(23, -46, 2000, {.maxSpeed=60});
     setIntake(127);
     chassis.waitUntilDone();
     pros::delay(500);
     setIntake(0);
+     // Clamp and move back
     tilt.set_value(true);
     clamp.set_value(true);
     pros::delay(250);
-    chassis.turnToHeading(185, 1000, {.maxSpeed=65}, false);
-    chassis.moveToPoint(23, -30, 2000, {.forwards=false, .maxSpeed=85}, false);
+    chassis.turnToHeading(185, 1000, {}, false);
+    chassis.moveToPoint(23, -30, 2000, {.forwards=false}, false);
     clamp.set_value(false);
+    pros::delay(500);
     tilt.set_value(false);
-    
+    pros::delay(500);
+    /*
+    // Move to (12, -36, 90)
+    chassis.moveToPoint(12, -36, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.waitUntilDone();
 
+     // Move to (12, -38, 60)
+    chassis.moveToPoint(12, -38, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.turnToHeading(60, 1000, {.maxSpeed = 85}, false);
+
+      // Move to (19, -42, 135)
+    chassis.moveToPoint(19, -42, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.turnToHeading(135, 1000, {.maxSpeed = 85}, false);
     
+    // Move to (22, -35, 190)
+    chassis.moveToPoint(22, -35, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.turnToHeading(190, 1000, {.maxSpeed = 85}, false);
+
+    // following the path
+    chassis.moveToPoint(44, -4, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.turnToHeading(36, 1000, {.maxSpeed = 85}, false);
+    
+    // movement to (37, -2, -78)
+    chassis.moveToPoint(37, -2, 2000, {.forwards = true, .maxSpeed = 85});
+    chassis.turnToHeading(-78, 1000, {.maxSpeed = 85}, false);
+
+    // Clamp release and end
+    clamp.set_value(false);
+    */
 
     /* PATH PLAN
     51, -36, 90
@@ -114,7 +171,7 @@ void mogo_rushright()
 }
 
  /* PATH PLAN
-    60,0,-90 (start position), scored in Assistance Wall Stick
+    60,0,-90 (start position), scored in Alliance Wall Stake
     51,0,-90(suck the ring, but don't send them to the hood)
     51,0,132(turn to face Mobile Goal)
     31,17,132(grab Mobile Goal)
@@ -176,25 +233,42 @@ void progskills() {
     //collect ring
     chassis.moveToPoint(-24, -24, 2000);
     chassis.waitUntil(10);
+    chassis.cancelMotion();
+    chassis.moveToPoint(-24, -24, 2000, {.maxSpeed = 60});
     setIntake(127);
     chassis.waitUntilDone();
     pros::delay(500);
+    setIntake(0);
     //get mogo
-    chassis.turnToHeading(90, 1000);
-    tilt.set_value(false);
-    clamp.set_value(false);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(-51,-24,1000,{}, false);
-    clamp.set_value(true);
+    chassis.turnToHeading(90, 750);
     tilt.set_value(true);
+    clamp.set_value(true);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-51,-24,1000,{.forwards = false}, false);
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
     pros::delay(500);
     //get ring
-    chassis.moveToPoint(-24, -48, 100, {}, false);
+    setIntake(127);
+    chassis.moveToPoint(-24, -46, 1000);
+    chassis.waitUntil(10);
+    chassis.cancelMotion();
+    chassis.moveToPoint(-24, -46, 500, {.maxSpeed = 60}, false);
     pros::delay(500);
-    chassis.turnToHeading(180, 1000, {}, false);
-    chassis.moveToPoint(-43, -48, 750, {}, false);
-    
+    //get ring
+    chassis.turnToHeading(180, 750, {}, false);
+    chassis.moveToPoint(-55, -46, 1500, {.maxSpeed=60}, false);
+    pros::delay(500);
+    chassis.turnToPoint(-48, -58, 750, {}, false);
+    chassis.moveToPoint(-48, -58, 750, {.maxSpeed = 60, .minSpeed = 10}, false);
+    chassis.turnToHeading(90, 500, {.minSpeed = 10});
+    chassis.moveToPoint(0, -58, 1500, {}, false);
+}
 
+void progski(500)lls2()  {
+
+    
 }
 
 void soloawp() {

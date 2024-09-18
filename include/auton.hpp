@@ -17,3 +17,5 @@ void elim5ring();
 void progskills();
 
 void soloawp();
+
+void progskills2();

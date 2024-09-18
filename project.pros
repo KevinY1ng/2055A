@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Mogo Rush",
+    "project_name": "mogo rush",
     "target": "v5",
     "templates": {
       "LemLib": {
