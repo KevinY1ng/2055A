@@ -52,15 +52,9 @@ void PID_Turn() {
 
 void auton_test()
 {
-    chassis.setPose(0, 0, 0);
-    clamp.set_value(true);
-    chassis.moveToPose(0, -24, 0, 3000, {.forwards=false, .maxSpeed=60});
-    // setIntake(127);
-    chassis.waitUntilDone();
-    clamp.set_value(false);
-    pros::delay(500);
-    tilt.set_value(false);
-    pros::delay(500);
+    setIntake(127);
+    pros::delay(5000);
+    setIntake(0);
 }
 
 /*
@@ -86,6 +80,22 @@ and you've got the mobile goal
 
 void mogo_rush()
 {
+    /* NEW ROUTE */
+    chassis.setPose(51, -23, 90);
+    chassis.moveToPoint(25, -23, 2000, {.forwards=false, .maxSpeed=65}, false);
+    clamp.set_value(false);
+    tilt.set_value(false);
+    setIntake(127);
+    pros::delay(500);
+    chassis.turnToHeading(183, 1000, {.direction = AngularDirection::CW_CLOCKWISE, .maxSpeed = 60}, false);
+    chassis.moveToPoint(25, -43, 3000, {}, false);
+    pros::delay(5000);
+    setIntake(0);
+
+
+
+
+    /*
     chassis.setPose(51,-36,90);
     chassis.moveToPoint(14, -36, 2000, {.forwards = false, .maxSpeed = 85});
     clamp.set_value(true);
@@ -114,6 +124,7 @@ void mogo_rush()
     pros::delay(500);
     tilt.set_value(false);
     pros::delay(500);
+    */
     /*
     // Move to (12, -36, 90)
     chassis.moveToPoint(12, -36, 2000, {.forwards = true, .maxSpeed = 85});
@@ -197,36 +208,32 @@ void mogo_rushright()
 
 void elim5ring() {
 // //Get Mobile Goal
-//     chassis.setpose(-47,36,295);
-//     clamp.set_value(true);
-//     chassis.moveToPose(-24,26,295,2000,{.maxspeed = 85});
-//     clamp.set_value(false);
-//     tilt.set_value(false);
-//     chassis.waitUntilDone();
+    chassis.setPose(-47,36,295);
+    chassis.moveToPose(-24,26,295,2000,{.forwards = false, .maxSpeed = 65}, false);
+    clamp.set_value(false);
+    pros::delay(10);
+    tilt.set_value(false);
 
-//     //Get 2nd Ring
-//     chassis.turnToHeading(0,2000);
-//     setIntake(115);
-//     pros::delay(100);
-//     chassis.moveToPoint(-24,45,0,3000,{.maxspeed = 90}, false);
-//     pros::delay(100);
-//     intake.brake();
+//  //Get 2nd Ring
+    chassis.turnToHeading(0,2000,{}, true);
+    setIntake(115);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-24,48,3000,{.maxSpeed = 90});
 
-//     //Get 3rd and 4th Ring
-//     chassis.turnToHeading(90,1000);
-//     setIntake(111);
-//     chassis.moveToPoint(-14,45,90,2000,{.maxspeed = 85}, false);
-//     pros::delay(200);
-//     chassis.moveToPoint(-17,45,90,2000,(.forwards = false),false)
-//     pros::delay(100);
-//     chassis.turnToHeading(45,1000);
-//     pros::delay(50);
-//     chassis.moveToPoint(-12,48,61,2000);
+//  //Get 3rd and 4th Ring
+    chassis.turnToHeading(65,1000,{}, false);
+    setIntake(111);
+    chassis.moveToPose(-8,51,65,2000,{.maxSpeed = 85});
+    pros::delay(100);
+    chassis.moveToPoint(-19,46,2000,{.forwards = false});
+    pros::delay(100);
+    chassis.turnToHeading(98,1000);
+    chassis.moveToPoint(-10,45,2000, {.maxSpeed = 95});
 //     pros::delay(100);
 //     intake.brake();
 
 //     //Get 5th Ring
-//     chassis.moveToPose(-46,31,61,1000,{.forwards = false, .maxspeed = 110});
+    chassis.moveToPose(-46,31,61,1000,{.forwards = false, .maxSpeed = 110});
 //     pros::delay(100);
 //     chassis.turnToHeading(180,1000);
 //     pros::delay(100);

@@ -58,7 +58,7 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 //Pneumatics
 pros::adi::DigitalOut tilt('A', true);
 pros::adi::DigitalOut doinker('B', false);
-pros::adi::DigitalOut clamp('C', false);
+pros::adi::DigitalOut clamp('C', true);
 
 pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);
