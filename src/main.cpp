@@ -134,11 +134,11 @@ void autonomous() {
 	// straightTest();
 	// PID_Turn();
 	// mogo_rush(); // SLOT 3
-	// mogo_rushright(); // SLOT 6
+     mogo_rushright(); // SLOT 6
 	// auton_test(); // SLOT 1
 	//elim5ring(); //SLOT 4
 	// soloawp(); //slot 5 
-	progskills();//SLOT 8
+	 //progskills2();//SLOT 8
 }
 
 /**

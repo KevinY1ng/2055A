@@ -92,7 +92,7 @@ void mogo_rush()
     chassis.waitUntilDone();
     chassis.turnToHeading(50, 1000, {.maxSpeed = 85}, false);
      // Move to (7, -43), unclamp, tilt
-    chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 85}, false);
+    chassis.moveToPoint(7, -43, 2000, {.forwards = false, .maxSpeed = 60}, false);
     clamp.set_value(false);
     pros::delay(500);
     tilt.set_value(false);
@@ -102,14 +102,14 @@ void mogo_rush()
     chassis.moveToPoint(23, -46, 2000, {.maxSpeed=60});
     setIntake(127);
     chassis.waitUntilDone();
-    pros::delay(500);
+    pros::delay(1000);
     setIntake(0);
      // Clamp and move back
     tilt.set_value(true);
     clamp.set_value(true);
     pros::delay(250);
     chassis.turnToHeading(185, 1000, {}, false);
-    chassis.moveToPoint(23, -30, 2000, {.forwards=false}, false);
+    chassis.moveToPoint(23, -24, 2000, {.forwards=false, .maxSpeed = 60}, false);
     clamp.set_value(false);
     pros::delay(500);
     tilt.set_value(false);
@@ -163,23 +163,36 @@ void mogo_rush()
 //second option(starts from the right)
 void mogo_rushright()
 {
-    chassis.setPose(60,0,-90);
-    setIntake(-127);
-    chassis.moveToPoint(51, 0, 4000, {.forwards = false}, false);
-    chassis.turnToHeading(132, 1000, {}, false);
-    chassis.moveToPose(24, 24, 90, 5000, {}, false);
+    clamp.set_value(true);
+    chassis.setPose(53,24,90);
+    chassis.moveToPoint(24, 24, 2000, {.forwards = false,.maxSpeed=60}, false);
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
+    pros::delay(500);
+    chassis.turnToHeading(0, 1000, {}, false);
+    setIntake(127);
+    chassis.moveToPoint(24, 46, 2000, {.forwards = true}, false);
+    chassis.turnToHeading(-90, 1000, {}, false);
+    chassis.moveToPoint(8, 46, 3000, {.forwards = true,.maxSpeed=60}, false);
+    setIntake(0);
+    chassis.moveToPoint(13, 46, 1000, {.forwards = false}, false);
+    chassis.turnToHeading(0, 500, {}, false);
+    chassis.moveToPoint(13, 22, 2000, {.forwards = false}, false);
+
+   //chassis.moveToPose(, 24, 90, 5000, {}, false); setIntake(-127);
 }
 
  /* PATH PLAN
-    60,0,-90 (start position), scored in Alliance Wall Stake
-    51,0,-90(suck the ring, but don't send them to the hood)
-    51,0,132(turn to face Mobile Goal)
-    31,17,132(grab Mobile Goal)
-    31,17,-15(turn to face the ring)
-    25,46,-15(suck the ring)
-    10,46,-90(suck two ring that in the front)
-    10,46,-180(turn to face the ladder)
-    10,26,-180(reach ladder)
+    53,24,90 (start position)
+    
+    24,24,90(grab Mobile Goal)
+    24,24,0(turn to face the ring)
+    24,46,0(suck the ring)
+    24,46,-90(face the rings)
+    8,46,-90(suck two ring that in the front)
+    12,46,-0(turn to face the ladder)
+    12,23,0(reach ladder)
     */
 
 void elim5ring() {
@@ -276,7 +289,67 @@ void progskills() {
 }
 
 void progskills2()  {
+    //set pose
+   chassis.setPose(-65, -55, 90);
+   
+   chassis.turnToHeading(0, 1000);
+chassis.moveToPoint(-60, -45, 1000);
+chassis.turnToHeading(40, 1000);
+chassis.moveToPoint(-47, -34, 1000);
+chassis.turnToHeading(0, 1000);
 
+chassis.moveToPose(-25, 25, 90, 1000);
+chassis.turnToHeading(200, 1000);
+
+chassis.moveToPoint(-47, 15, 1000);
+chassis.turnToHeading(180, 1000);
+//clamp goal
+clamp.set_value(true);
+tilt.set_value(true);
+chassis.waitUntilDone();
+
+chassis.moveToPoint(-47, 40, 1000);
+//pick up ring
+setIntake(127);
+chassis.waitUntil(10);
+    chassis.cancelMotion();
+
+chassis.moveToPoint(-47, 52, 1000);
+
+//pick up ring
+setIntake(127);
+chassis.waitUntil(10);
+    chassis.cancelMotion();
+
+chassis.turnToHeading(230, 1000);
+chassis.moveToPoint(-54, 54, 1000);
+//pick up ring
+setIntake(127);
+chassis.waitUntil(10);
+    chassis.cancelMotion();
+
+chassis.moveToPose(-54, 49, 90,1000);
+
+//put down goal
+chassis.moveToPoint(-31, 48, 1000);
+chassis.turnToHeading(90, 1000);
+chassis.moveToPose(-61, 62, 120, 1000);
+chassis.turnToHeading(120, 1000);
+clamp.set_value(false);
+tilt.set_value(false);
+
+chassis.moveToPose(-60, 60, 90, 1000);
+chassis.moveToPoint(-8, 60, 1000);
+//pick up ring
+setIntake(127);
+chassis.waitUntil(10);
+    chassis.cancelMotion();
+
+chassis.moveToPose(19, 55, 140, 1000);
+//pick up ring
+setIntake(127);
+chassis.waitUntil(10);
+    chassis.cancelMotion();
     
 }
 
