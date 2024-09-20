@@ -16,6 +16,8 @@ void elim5ring();
 
 void progskills();
 
-void soloawp();
+void qualredmogoside();
 
 void progskills2();
+
+void qualbluemogoside();

@@ -34,10 +34,7 @@ void colorsortred() {
 			pros::delay(500);
 			setIntake(127);
 		}
-		else
-		{
-			driveIntake();
-		}
+		
 
 		
 		pros::delay(20);
@@ -87,7 +84,8 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 	chassis.calibrate();
-	// pros::Task my_task(colorsortblue);
+	pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
+	//pros::Task my_task(colorsortblue);
 
 	// pros::Task screen_task([&]() {
 	// 	double colorvalue;
@@ -130,14 +128,11 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
-	// PID_Test();
-	// straightTest();
-	// PID_Turn();
 	// mogo_rush(); // SLOT 3
-    //  mogo_rushright(); // SLOT 6a
-	// auton_test(); // SLOT 1
-	elim5ring(); //SLOT 4
-	// soloawp(); //slot 5 
+	//mogo_rushright(); // SLOT 6
+	//elim5ring(); //SLOT 4
+	qualredmogoside(); //slot 5 
+	qualbluemogoside(); //slot 1
 	 //progskills2();//SLOT 8
 }
 
@@ -163,7 +158,8 @@ void opcontrol() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
 
-	// pros::Task my_task(colorsortblue);
+	//pros::Task my_task(colorsortblue);
+	pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
 
 	// pros::rtos::Task my_task(my_task_fn);
 
