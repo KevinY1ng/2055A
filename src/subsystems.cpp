@@ -40,7 +40,9 @@ void setIntake(int power)
 void driveIntake() 
 {
     int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)); // power = 127 if L1 is being pressed, otherwise power = 0
-    setIntake(power); // sets intake power to "power"
+    intake1.move(power); // sets intake power to "power"
+    int power2 = 110 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2));
+    intake2.move(power2);
 }
 
 bool checkforJam()
