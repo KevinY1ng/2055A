@@ -30,7 +30,7 @@ void color_sort_red_team() {
 			pros::lcd::set_text(4, "BLUE RING DETECTED! :(");
 			// pros::delay(5);
 			intake1.move(127);
-			intake2.move(-25);
+			intake2.move(-127);
 			pros::delay(600);
 			//setIntake(0);
 		}
@@ -52,7 +52,7 @@ void color_sort_blue_team() {
 			pros::lcd::set_text(4, "RED RING DETECTED! :(");
 			// pros::delay(5);
 			intake1.move(127);
-			intake2.move(-25);
+			intake2.move(-127);
 			pros::delay(600);
 			//setIntake(0);
 		}
@@ -124,10 +124,11 @@ void autonomous() {
 	// auton_test(); // SLOT 1
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
-	// elim5ringBlue(); //SLOT 4
+	elim5ringBlue(); //SLOT 4
 	// qualredmogoside(); //slot 5 
-	qualbluemogoside(); //slot 6
+	// qualbluemogoside(); //slot 6
 	 //progskills2();//SLOT 8
+	//  progskills();
 }
 
 /**

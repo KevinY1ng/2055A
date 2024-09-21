@@ -19,7 +19,7 @@ void sortRed(int power,int timeout) {
                 pros::lcd::set_text(4, "RED RING DETECTED! :(");
                 // pros::delay(5);
                 intake1.move(127);
-                intake2.move(-25);
+                intake2.move(-127);
                 pros::delay(600);
                 //setIntake(0);
             }
