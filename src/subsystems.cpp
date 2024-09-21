@@ -12,7 +12,7 @@ void ClampTilt_Goal () {
         clamp_status = !clamp_status;
         // clamp_status = true;
         clamp.set_value(clamp_status);
-        pros::delay(100);
+        pros::delay(250);
         tilt.set_value(clamp_status);
         // clamp.set_value(false);
     }

@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "qualauton",
+    "project_name": "qualBlueMogo",
     "target": "v5",
     "templates": {
       "LemLib": {
@@ -298,7 +298,7 @@
       }
     },
     "upload_options": {
-      "slot": 7
+      "slot": 6
     },
     "use_early_access": false
   }

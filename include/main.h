@@ -67,8 +67,9 @@ void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
-void colorsortblue(void);
-void colorsortred(void);
+void color_sort_red_team(void);
+void color_sort_blue_team(void);
+void my_task_fn(void);
 #ifdef __cplusplus
 }
 #endif

@@ -8,11 +8,17 @@ void PID_Turn();
 
 void auton_test();
 
+void sortRed();
+
 void mogo_rush();
+
+void auton_test();
 
 void mogo_rushright();
 
-void elim5ring();
+void elim5ringRed();
+
+void elim5ringBlue();
 
 void progskills();
 
