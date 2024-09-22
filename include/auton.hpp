@@ -20,6 +20,10 @@ void elim5ringRed();
 
 void elim5ringBlue();
 
+void qual5ringRed();
+
+void qual5ringBlue();
+
 void progskills();
 
 void qualredmogoside();

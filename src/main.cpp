@@ -25,7 +25,7 @@ void color_sort_red_team() {
 	while (true) {
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorvalue));
-		if (colorvalue >= 45 && colorvalue <= 160)
+		if (colorvalue >= 150 && colorvalue <= 200)
 		{
 			pros::lcd::set_text(4, "BLUE RING DETECTED! :(");
 			// pros::delay(5);
@@ -47,7 +47,7 @@ void color_sort_blue_team() {
 	while (true) {
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorvalue));
-		if (colorvalue >= 7 && colorvalue <= 19)
+		if (colorvalue >= 0 && colorvalue <= 20)
 		{
 			pros::lcd::set_text(4, "RED RING DETECTED! :(");
 			// pros::delay(5);
@@ -120,15 +120,17 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
-	// elim5ringRed(); // SLOT 3
+	// qual5ringRed(); // SLOT 3
+	// qual5ringBlue(); // SLOT 4
+	// elim5ringRed(); // SLOT 1
 	// auton_test(); // SLOT 1
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
-	elim5ringBlue(); //SLOT 4
+	// elim5ringBlue(); //SLOT 2
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
 	 //progskills2();//SLOT 8
-	//  progskills();
+	 progskills();
 }
 
 /**
@@ -174,7 +176,8 @@ void opcontrol() {
     //     }
     // });
 
-	pros::rtos::Task my_task(color_sort_blue_team);
+	// pros::rtos::Task my_task(color_sort_blue_team);
+	pros::rtos::Task my_task(color_sort_red_team);
 	my_opcontrol();
 
 }
