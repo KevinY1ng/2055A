@@ -129,8 +129,8 @@ void autonomous() {
 	// elim5ringBlue(); //SLOT 2
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
-	 //progskills2();//SLOT 8
-	 progskills();
+	 elimBlueMogoSide();//SLOT 8
+	//  progskills();
 }
 
 /**
@@ -177,7 +177,7 @@ void opcontrol() {
     // });
 
 	// pros::rtos::Task my_task(color_sort_blue_team);
-	pros::rtos::Task my_task(color_sort_red_team);
+	// pros::rtos::Task my_task(color_sort_red_team);
 	my_opcontrol();
 
 }

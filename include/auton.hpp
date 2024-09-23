@@ -31,3 +31,5 @@ void qualredmogoside();
 void progskills2();
 
 void qualbluemogoside();
+
+void elimBlueMogoSide();

@@ -312,6 +312,7 @@ void qual5ringBlue()
         pros::delay(2000);
         chassis.turnToHeading(0, 1000, {.maxSpeed=65}, false);
         chassis.moveToPoint(24, 47, 3000, {}, false);
+        pros::delay(1000);
         chassis.turnToHeading(180, 2000, {.maxSpeed=65}, false);
         chassis.moveToPoint(24, 6, 5000, {.maxSpeed=70}, false);
     // //Get Mobile Goal
@@ -539,6 +540,44 @@ void qualbluemogoside() {
     // chassis.waitUntilDone();
     pros::delay(3000);
     setIntake(0);
+}
+
+void elimBlueMogoSide()
+{  
+    chassis.setPose(48,-22,-270);
+    clamp.set_value(true);
+    tilt.set_value(true);
+    chassis.moveToPose(20, -21, -270, 1850, {.forwards = false, .maxSpeed = 65}, false);
+    pros::delay(1000);
+    clamp.set_value(false);
+    tilt.set_value(false);
+    pros::delay(500);
+    setIntake(115);
+    pros::delay(500);
+
+    chassis.turnToHeading(180,1000);
+    pros::delay(500);
+    chassis.moveToPoint(24,-46,1000,{},false);
+    // pros::delay(2000);
+    // chassis.turnToHeading(0,1000, {.maxSpeed=60}, false);
+    pros::delay(1000);
+    for (int i = 0; i < 2; i++)
+    {
+        setDrive(6000,6000);
+        pros::delay(100);
+        setDrive(-6000, -6000);
+        pros::delay(100);
+    }
+    setDrive(0, 0);
+    chassis.turnToHeading(110, 1000, {}, false);
+    chassis.moveToPose(52, -52, 140, 3000, {}, false);
+    pros::delay(400);
+    setIntake(0);
+    chassis.waitUntilDone();
+    doinker.set_value(true);
+    pros::delay(500);
+    chassis.turnToHeading(195, 1000, {.minSpeed=120}, false);
+    setIntake(-127);
 }
 
 void qual3ringblue() {
