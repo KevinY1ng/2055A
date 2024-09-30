@@ -74,7 +74,7 @@ void antiJamTask()
 
 bool doink_status = false;
 void doink() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
         doink_status = !doink_status;
         doinker.set_value(doink_status);
     }

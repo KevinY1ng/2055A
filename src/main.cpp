@@ -122,14 +122,14 @@ void autonomous() {
 	
 	// qual5ringRed(); // SLOT 3
 	// qual5ringBlue(); // SLOT 4
-	// elim5ringRed(); // SLOT 1
+	elim5ringRed(); // SLOT 1
 	// auton_test(); // SLOT 1
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
 	// elim5ringBlue(); //SLOT 2
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
-	 elimBlueMogoSide();//SLOT 8
+	//  elimBlueMogoSide();//SLOT 8
 	//  progskills();
 }
 
