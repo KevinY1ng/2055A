@@ -403,6 +403,28 @@ void progskills() {
 
 }
 
+void prog_skills_new()
+{
+    // Set Position
+    chassis.setPose(-56, -7, -90);
+    // Turn towards mobile goal
+    chassis.turnToHeading(-30, 1000, {});
+    tilt.set_valie(true);
+    clamp.set_vlaue(true);
+    chassis.waitUntilDone();
+    // Move towards & clamp mobile goal
+    chassis.moveToPoint(-50, -19, 2000, {.forwards=false, .maxSpeed=60}, false);
+    pros::delay(250);
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
+    setIntake(127);
+    pros::delay(500);
+    // Turn towards ring
+    chassis.
+
+}
+
 void progskills2()  {
     //set pose
    chassis.setPose(-65, -55, 90);
