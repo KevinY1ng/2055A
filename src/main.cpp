@@ -120,6 +120,7 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
+	soloauton_AWP_Blue_Positive(); // SLOT 1
 	// qual5ringRed(); // SLOT 3
 	// qual5ringBlue(); // SLOT 4
 	// elim5ringRed(); // SLOT 1
@@ -130,7 +131,7 @@ void autonomous() {
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
 	//  elimBlueMogoSide();//SLOT 8
-	 progskills(); // SLOT 8
+	//  prog_skills_new(); // SLOT 8
 }
 
 /**

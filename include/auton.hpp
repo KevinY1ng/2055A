@@ -26,6 +26,8 @@ void qual5ringBlue();
 
 void progskills();
 
+void prog_skills_new();
+
 void qualredmogoside();
 
 void progskills2();
@@ -33,3 +35,5 @@ void progskills2();
 void qualbluemogoside();
 
 void elimBlueMogoSide();
+
+void soloauton_AWP_Blue_Positive();

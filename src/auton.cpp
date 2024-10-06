@@ -69,6 +69,7 @@ void mogo_rush()
     /* NEW ROUTE */
     chassis.setPose(51, -23, 90);
     chassis.moveToPoint(25, -23, 2000, {.forwards=false, .maxSpeed=65}, false);
+    //coordx/y, timeout in ms (if robot hasnt met target position, quits) {specifications .forwards means go backwards} asynchronous, if true it will run the next line simultaneously;
     clamp.set_value(false);
     tilt.set_value(false);
     setIntake(127);
@@ -409,21 +410,57 @@ void prog_skills_new()
     chassis.setPose(-56, -7, -90);
     // Turn towards mobile goal
     chassis.turnToHeading(-30, 1000, {});
-    tilt.set_valie(true);
-    clamp.set_vlaue(true);
+    tilt.set_value(true);
+    clamp.set_value(true);
     chassis.waitUntilDone();
     // Move towards & clamp mobile goal
-    chassis.moveToPoint(-50, -19, 2000, {.forwards=false, .maxSpeed=60}, false);
+    chassis.moveToPoint(-50, -19, 750, {.forwards=false, .maxSpeed=60}, false);
+    chassis.moveToPoint(-48, -23, 1000, {.forwards=false}, false);
     pros::delay(250);
     clamp.set_value(false);
     pros::delay(500);
     tilt.set_value(false);
-    setIntake(127);
-    pros::delay(500);
-    // Turn towards ring
-    chassis.
+    setIntake(127); // score preload
+    // Turn towards ring #2
+    chassis.turnToHeading(90, 1500, {.maxSpeed=75}, false);
+    // Move towards and intake ring #2
+    chassis.moveToPoint(-24, -23, 2500, {.maxSpeed=60}, false);
+    // Turn towards ring #3
+    chassis.turnToHeading(180, 1500, {.maxSpeed=75}, false);
+    // Move towards and intake ring #3
+    chassis.moveToPoint(-24, -46, 2500, {}, false);
+    // Turn towards ring #4
+    chassis.turnToHeading(-90, 1500, {.maxSpeed=75}, false);
+    // Move towards and intake ring #4
+    chassis.moveToPoint(-44, -46, 2000, {}, false);
+    // Move towards and intake ring #5
+    chassis.moveToPoint(-58, -46, 2000, {}, false);
+    // Turn towards ring #6
+    chassis.turnToHeading(-225, 1500, {.maxSpeed=75}, false);
+    // Move towards and intake  ring #6
+    chassis.moveToPoint(-49, -55, 2000, {}, false);
+    // Move to corner and drop Mobile Goal
+    chassis.turnToHeading(-270, 1000, {.maxSpeed=75}, false);
+    chassis.moveToPose(-57, -56, 42, 2000, {.forwards=false}, false);
+    tilt.set_value(true);
+    clamp.set_value(true);
 
-}
+    // PART 2
+    // Go to mobile goal #2 and clamp it
+    chassis.moveToPoint(-47, -46, 42, {}, false);
+    chassis.turnToHeading(180, 1000, {}, false);
+    chassis.moveToPoint(-47, 24, 5000, {.forwards=false, .maxSpeed=60}, false);
+    pros::delay(250);
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
+    pros::delay(250);
+    // Turn to ring #1
+    chassis.turnToHeading(90, 1000, {}, false);
+    // Move towards and intake ring #1
+    setIntake(127);
+    chassis.moveToPoint(-24, 24, 2000, {}, false);
+    }
 
 void progskills2()  {
     //set pose
@@ -636,4 +673,35 @@ void qual3ringblue() {
     chassis.turnToHeading(180,1000);
     chassis.moveToPoint(24,12,1000, {.maxSpeed = 60});
 
+}
+
+void soloauton_AWP_Blue_Positive(){
+    chassis.setPose(-37,-31,240);
+    chassis.moveToPoint(-33.5,-29,1000, {}, false);
+    clamp.set_value(false);
+    pros::delay(500);
+    tilt.set_value(false);
+    chassis.turnToPoint(-48,-46,1000);
+    setIntake(115);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-48,-46,1000, {}, false);
+    chassis.turnToPoint(-48,0,1000, {}, false);
+    chassis.moveToPoint(-48,0,1000, {}, false);
+    pros::delay(200);
+    chassis.moveToPoint(-48,20,500, {}, false);
+    setIntake(0);
+    clamp.set_value(true);
+    pros::delay(100);
+    tilt.set_value(true);
+    chassis.moveToPoint(-48,33.8,500, {}, false);
+    chassis.turnToHeading(300,500, {}, false);
+    chassis.moveToPoint(-24,24,500, {}, false);
+    clamp.set_value(false);
+    pros::delay(200);
+    tilt.set_value(false);
+    chassis.turnToPoint(-58,0, 1000, {}, false);
+    chassis.moveToPoint(-58,0, 2000, {}, false);
+    setIntake(115);
+    chassis.turnToHeading(90,500, {}, false);
+    chassis.moveToPoint(-29,0, 2000, {}, false);
 }
