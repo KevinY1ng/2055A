@@ -37,3 +37,5 @@ void qualbluemogoside();
 void elimBlueMogoSide();
 
 void soloauton_AWP_Blue_Positive();
+
+void soloauton_AWP_Blue_Negative();

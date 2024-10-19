@@ -120,18 +120,19 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
-	soloauton_AWP_Blue_Positive(); // SLOT 1
+	// soloauton_AWP_Blue_Positive(); // SLOT 1
+	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// qual5ringRed(); // SLOT 3
 	// qual5ringBlue(); // SLOT 4
 	// elim5ringRed(); // SLOT 1
-	// auton_test(); // SLOT 1
+	// auton_test(); // SLOT 2
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
 	// elim5ringBlue(); //SLOT 2
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
 	//  elimBlueMogoSide();//SLOT 8
-	//  prog_skills_new(); // SLOT 8
+	 prog_skills_new(); // SLOT 8
 }
 
 /**
