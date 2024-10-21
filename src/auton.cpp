@@ -40,8 +40,9 @@ void straightTest() {
 
 void auton_test()
 {
-    chassis.setPose(-47, -46, 180);
-    chassis.moveToPoint(-47, 19, 2750, {.forwards=false, .maxSpeed=60}, false);
+    chassis.setPose(-47, -54, 180);
+   chassis.moveToPoint(-47, 13, 3500, {.forwards=false, .maxSpeed=80}, false);
+    // chassis.moveToPoint(-47, 19, 1250, {.forwards=false, .maxSpeed=60}, false);
     chassis.moveToPoint(-47, 27, 1500, {.forwards=false}, false);
     pros::delay(250);
     clamp.set_value(false);
@@ -418,47 +419,49 @@ void prog_skills_new()
     // Set Position
     chassis.setPose(-56, -7, -90);
     // Turn towards mobile goal
-    chassis.turnToHeading(-30, 1000, {});
+    chassis.turnToHeading(-30, 750, {});
     tilt.set_value(true);
     clamp.set_value(true);
     chassis.waitUntilDone();
     // Move towards & clamp mobile goal
     chassis.moveToPoint(-50, -19, 750, {.forwards=false, .maxSpeed=60}, false);
-    chassis.moveToPoint(-48, -23, 1000, {.forwards=false}, false);
+    chassis.moveToPoint(-48, -23, 750, {.forwards=false}, false);
     pros::delay(250);
     clamp.set_value(false);
     pros::delay(500);
     tilt.set_value(false);
     setIntake(127); // score preload
     // Turn towards ring #2
-    chassis.turnToHeading(90, 1500, {.maxSpeed=75}, false);
+    chassis.turnToHeading(90, 750, {.maxSpeed=75}, false);
     // Move towards and intake ring #2
-    chassis.moveToPoint(-24, -23, 2500, {.maxSpeed=60}, false);
+    chassis.moveToPoint(-24, -23, 1250, {.maxSpeed=60}, false);
     // Turn towards ring #3
-    chassis.turnToHeading(180, 1500, {.maxSpeed=75}, false);
+    chassis.turnToHeading(180, 1000, {.maxSpeed=75}, false);
     // Move towards and intake ring #3
-    chassis.moveToPoint(-24, -46, 2500, {}, false);
+    chassis.moveToPoint(-24, -46, 1500, {}, false);
     // Turn towards ring #4
-    chassis.turnToHeading(-90, 1500, {.maxSpeed=75}, false);
+    chassis.turnToHeading(-90, 1200, {.maxSpeed=75}, false);
     // Move towards and intake ring #4
-    chassis.moveToPoint(-44, -46, 2000, {}, false);
+    chassis.moveToPoint(-44, -46, 1250, {}, false);
     // Move towards and intake ring #5
-    chassis.moveToPoint(-58, -46, 2000, {}, false);
+    chassis.moveToPoint(-58, -46, 1000, {}, false);
     // Turn towards ring #6
-    chassis.turnToHeading(-225, 1500, {.maxSpeed=75}, false);
+    chassis.turnToHeading(-225, 1000, {.maxSpeed=75}, false);
     // Move towards and intake  ring #6
     chassis.moveToPoint(-49, -55, 2000, {}, false);
     // Move to corner and drop Mobile Goal
-    chassis.turnToHeading(-292.5, 1000, {.maxSpeed=75}, false);
-    chassis.moveToPoint(-53, -56, 1000, {.forwards=false}, false);
+    chassis.turnToHeading(60, 1000, {.maxSpeed=75}, false);
+    chassis.moveToPoint(-53, -57, 1000, {.forwards=false}, false);
     tilt.set_value(true);
     clamp.set_value(true);
+    pros::delay(250);
 
     // PART 2
     // Go to mobile goal #2 and clamp it
-    chassis.moveToPoint(-47, -54.5, 1000, {}, false);
+    chassis.moveToPoint(-47, -54, 1000, {}, false);
     chassis.turnToHeading(180, 1000, {.maxSpeed=75}, false);
-    chassis.moveToPoint(-47, 19, 3000, {.forwards=false, .maxSpeed=60}, false);
+    chassis.moveToPoint(-47, 15, 3500, {.forwards=false, .maxSpeed=80}, false);
+    // chassis.moveToPoint(-47, 19, 1250, {.forwards=false, .maxSpeed=60}, false);
     chassis.moveToPoint(-47, 27, 1500, {.forwards=false}, false);
     pros::delay(250);
     clamp.set_value(false);
@@ -473,25 +476,25 @@ void prog_skills_new()
     // Turn to ring #2
     chassis.turnToHeading(0, 1000, {}, false);
     // Move to and intake ring #2
-    chassis.moveToPoint(-24, 47, 2000, {}, false);
+    chassis.moveToPoint(-24, 45, 2000, {}, false);
     // Turn to ring #3
     chassis.turnToHeading(60, 1000, {}, false);
     // Move to and intake ring #3
-    chassis.moveToPoint(-2, 58, 2000, {}, false);
+    chassis.moveToPoint(2, 58, 2000, {}, false);
     // Move to and intake ring #4
-    chassis.moveToPoint(-24, 47, 2000, {.forwards=false}, false);
+    chassis.moveToPoint(-28, 43, 2000, {.forwards=false}, false);
     chassis.turnToHeading(-90, 1000, {}, false);
-    chassis.moveToPoint(-44, 47, 2500, {}, false);
+    chassis.moveToPoint(-44, 43, 2500, {}, false);
     // Move to and intake ring #5
-    chassis.moveToPoint(-58, 47, 1500, {}, false);
+    chassis.moveToPoint(-58, 43, 1500, {}, false);
     // Turn to ring #6
     chassis.turnToHeading(45, 1000, {}, false);
     // Move to and intake ring #6
-    chassis.moveToPoint(-48, 57, 2000, {}, false);
+    chassis.moveToPoint(-44, 57, 2000, {}, false);
     // Turn to corner
-    chassis.turnToHeading(113, 1000, {}, false);
+    chassis.turnToHeading(107, 1000, {}, false);
     // Place mobile goal #2 in corner
-    chassis.moveToPoint(-52, 58, 1000, {.forwards=false}, false);
+    chassis.moveToPoint(-52, 59, 1000, {.forwards=false}, false);
     tilt.set_value(true);
     clamp.set_value(true);
     setIntake(0);
@@ -746,66 +749,73 @@ void qual3ringblue() {
 
 }
 
-void soloauton_AWP_Blue_Positive(){
-    chassis.setPose(-37,-31,240);
-    chassis.moveToPoint(-33.5,-29,1000, {}, false);
-    clamp.set_value(false);
-    pros::delay(500);
-    tilt.set_value(false);
-    chassis.turnToPoint(-48,-46,1000);
-    setIntake(115);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(-48,-46,1000, {}, false);
-    chassis.turnToPoint(-48,0,1000, {}, false);
-    chassis.moveToPoint(-48,0,1000, {}, false);
-    pros::delay(200);
-    chassis.moveToPoint(-48,20,500, {}, false);
-    setIntake(0);
-    clamp.set_value(true);
-    pros::delay(100);
-    tilt.set_value(true);
-    chassis.moveToPoint(-48,33.8,500, {}, false);
-    chassis.turnToHeading(300,500, {}, false);
-    chassis.moveToPoint(-24,24,500, {}, false);
-    clamp.set_value(false);
-    pros::delay(200);
-    tilt.set_value(false);
-    chassis.turnToPoint(-58,0, 1000, {}, false);
-    chassis.moveToPoint(-58,0, 2000, {}, false);
-    setIntake(115);
-    chassis.turnToHeading(90,500, {}, false);
-    chassis.moveToPoint(-29,0, 2000, {}, false);
-}
+// void soloauton_AWP_Blue_Positive(){
+//     chassis.setPose(-37,-31,240);
+//     chassis.moveToPoint(-33.5,-29,1000, {}, false);
+//     clamp.set_value(false);
+//     pros::delay(500);
+//     tilt.set_value(false);
+//     chassis.turnToPoint(-48,-46,1000);
+//     setIntake(115);
+//     chassis.waitUntilDone();
+//     chassis.moveToPoint(-48,-46,1000, {}, false);
+//     chassis.turnToPoint(-48,0,1000, {}, false);
+//     chassis.moveToPoint(-48,0,1000, {}, false);
+//     pros::delay(200);
+//     chassis.moveToPoint(-48,20,500, {}, false);
+//     setIntake(0);
+//     clamp.set_value(true);
+//     pros::delay(100);
+//     tilt.set_value(true);
+//     chassis.moveToPoint(-48,33.8,500, {}, false);
+//     chassis.turnToHeading(300,500, {}, false);
+//     chassis.moveToPoint(-24,24,500, {}, false);
+//     clamp.set_value(false);
+//     pros::delay(200);
+//     tilt.set_value(false);
+//     chassis.turnToPoint(-58,0, 1000, {}, false);
+//     chassis.moveToPoint(-58,0, 2000, {}, false);
+//     setIntake(115);
+//     chassis.turnToHeading(90,500, {}, false);
+//     chassis.moveToPoint(-29,0, 2000, {}, false);
+// }
 
 void soloauton_AWP_Blue_Negative(){
     chassis.setPose(49,24,90);
-    chassis.moveToPoint(24,24,1000, {.forwards=false}, false);
-    clamp.set_value(false);
-    pros::delay(500);
-    tilt.set_value(false);
-    chassis.turnToPoint(24,40,1000);
-    setIntake(115);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(24,40,1000, {}, false);
-    chassis.turnToPoint(45,-24,1000, {}, false);
-    setIntake(0);
-    chassis.moveToPose(45,-24,340,1000, {forwards=false}, false);
-    clamp.set_value(true);
-    pros::delay(200);
-    tilt.set_value(true);
-    //pros::delay(200);
-    chassis.moveToPose(24,-24,90,500, {}, false);
-    //setIntake(0);
+    chassis.moveToPoint(24,24,1000, {.forwards=false, .maxSpeed=60}, false);
+    //FULL SPEED INTO GOAL
+    pros::delay(250);
     clamp.set_value(false);
     pros::delay(100);
     tilt.set_value(false);
-    chassis.turnToHeading(180,500, {forwards=false}, false);
-    chassis.moveToPoint(24,-40,500, {forwards=false}, false);
+    pros::delay(200);
+    chassis.turnToPoint(24,40,1000);
+    setIntake(115);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(24,40,1000, {.maxSpeed=75}, false);
+    pros::delay(250);
+    //chassis.turnToPoint(45,-24,1000, {}, false);
+    chassis.turnToHeading(340,500, {}, false);
+    setIntake(0);
+    chassis.moveToPoint(45,-24,1000, {.forwards=false}, false);
+    clamp.set_value(true);
+    pros::delay(100);
+    tilt.set_value(true);
+    pros::delay(200);
+    chassis.turnToHeading(90,500, {}, false);
+    chassis.moveToPoint(24,-24,500, {.forwards=false, .maxSpeed=60}, false);
+    pros::delay(100);
+    clamp.set_value(false);
+    pros::delay(100);
+    tilt.set_value(false);
+    pros::delay(200);
+    chassis.turnToHeading(180,500, {}, false);
+    chassis.moveToPoint(24,-40,500, {.maxSpeed=75}, false);
     chassis.turnToHeading(0,500, {}, false);
     clamp.set_value(true);
     pros::delay(200);
     tilt.set_value(true);
-    chassis.moveToPoint(-24,-10,5000, {}, false);
+    chassis.moveToPoint(-24,-10,5000, {.maxSpeed=100}, false);
     // chassis.moveToPoint(-24,24,500, {}, false);
     // clamp.set_value(false);
     // pros::delay(200);
