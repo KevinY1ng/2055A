@@ -120,12 +120,12 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
-	// soloauton_AWP_Blue_Positive(); // SLOT 1
-	soloauton_AWP_Blue_Negative(); // SLOT 2
+	// soloauton_AWP_Blue_Negative(); // SLOT 2
+	// soloauton_AWP_Red_Negative(); // SLOT 1
 	// qual5ringRed(); // SLOT 3
-	// qual5ringBlue(); // SLOT 4
+	qual5ringBlue(); // SLOT 4
 	// elim5ringRed(); // SLOT 1
-	// auton_test(); // SLOT 1
+	// auton_test(); // SLOT 7
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
 	// elim5ringBlue(); //SLOT 2
