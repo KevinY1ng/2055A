@@ -136,55 +136,55 @@ void autonomous() {
 	
 	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// soloauton_AWP_Red_Negative(); // SLOT 1
-	// qual5ringRed(); // SLOT 3
-	// qual5ringBlue(); // SLOT 4
-	// elim5ringRed(); // SLOT 1
+	//qual5ringRed(); // SLOT 3 angle
+	qual5ringBlue(); // SLOT 4 straight
+	//elim5ringRed(); // SLOT 1
 	// auton_test(); // SLOT 7
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
-	// elim5ringBlue(); //SLOT 2
-	// qualredmogoside(); //slot 5 
-	// qualbluemogoside(); //slot 6
-	//  elimBlueMogoSide();//SLOT 8
+	//elim5ringBlue(); //SLOT 2
+	//qualredmogoside(); //slot 5 
+	//qualbluemogoside(); //slot 6
+	//elimBlueMogoSide();//SLOT 8
 	//  prog_skills_new(); // SLOT 8
 
-	Auton selector;
-    switch (selector::auton) {
-        case 1:
-			soloauton_AWP_Blue_Negative();
-            // Safe 5 Triball Auton
-            // offense_auton_safe();
-            break;
+// 	Auton selector;
+//     switch (selector::auton) {
+//         case 1:
+// 			soloauton_AWP_Blue_Negative();
+//             // Safe 5 Triball Auton
+//             // offense_auton_safe();
+//             break;
 
-        case 2:
-            // 
-            // offense_last_min();
-            // offense_auton_midrush_new();
-            break;
+//         case 2:
+//             // 
+//             // offense_last_min();
+//             // offense_auton_midrush_new();
+//             break;
 
-        case 3:
-            // offense_auton_6balls_v2();
-            break;
+//         case 3:
+//             // offense_auton_6balls_v2();
+//             break;
         
-        case -1:
-            // Safe
-            // defense_awp();
-            break;
+//         case -1:
+//             // Safe
+//             // defense_awp();
+//             break;
         
-        case -2:
-            // Midrush
-            // defense_last_min();
-            break;
+//         case -2:
+//             // Midrush
+//             // defense_last_min();
+//             break;
 
-        case -3:
-            // Max Potential
-            // defense_auton_max_potential();
-            break;
+//         case -3:
+//             // Max Potential
+//             // defense_auton_max_potential();
+//             break;
 
-        case 0:
-            prog_skills_new();
-            break;
-    } 
+//         case 0:
+//             prog_skills_new();
+//             break;
+//     } 
 }
 
 /**

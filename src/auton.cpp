@@ -218,6 +218,7 @@ void mogo_rushright()
     12,23,0(reach ladder)
     */
 
+// red negative elim
 void elim5ringRed() {
 // //Get Mobile Goal
     chassis.setPose(-47,36,295);
@@ -252,6 +253,7 @@ void elim5ringRed() {
     // chassis.moveToPoint(-29, 5, 2500, {.maxSpeed = 50}, false);
 }
 
+// blue negative elim
 void elim5ringBlue()
 {
     // //Get Mobile Goal
@@ -287,6 +289,7 @@ void elim5ringBlue()
     // chassis.moveToPoint(29, 5, 2500, {.maxSpeed=50}, false);
 }
 
+// red negative qual
 void qual5ringRed()
 {
     // //Get Mobile Goal
@@ -345,10 +348,10 @@ void qual5ringBlue() {
     chassis.moveToPoint(24, 53, 1500, {.maxSpeed=75}, false);
     pros::delay(300);
     chassis.turnToHeading(-90, 500, {.maxSpeed=65}, false);
-    chassis.moveToPoint(9, 53, 1500, {.maxSpeed=55}, false);
+    chassis.moveToPoint(12, 53, 1500, {.maxSpeed=55}, false);
     pros::delay(200);
-    chassis.turnToHeading(-140, 500, {.maxSpeed=65}, false);
-    chassis.moveToPose(5, 47, -140, 2000, {.maxSpeed=90}, false);
+    chassis.turnToHeading(-150, 500, {.maxSpeed=65}, false);
+    chassis.moveToPose(9, 50, -150, 2000, {.maxSpeed=90}, false);
     chassis.turnToHeading(-90, 500, {.maxSpeed=65}, false);
     chassis.moveToPoint(13, 47, 2000, {.forwards=false, .maxSpeed=80}, false);
     chassis.turnToHeading(-180, 500, {.maxSpeed=65}, false);
@@ -690,6 +693,7 @@ chassis.waitUntil(10);
     
 }
 
+// red positive qual
 void qualredmogoside() { 
     chassis.setPose(-48,-22,270);
     clamp.set_value(true);
@@ -721,6 +725,7 @@ void qualredmogoside() {
     setIntake(0);
 }
 
+// blue positive qual
 void qualbluemogoside() {
     chassis.setPose(48,-22,-270);
     clamp.set_value(true);
@@ -764,6 +769,7 @@ void qualbluemogoside() {
     setIntake(0);
 }
 
+// blue positive elim
 void elimBlueMogoSide()
 {  
     chassis.setPose(48,-22,-270);
@@ -802,6 +808,7 @@ void elimBlueMogoSide()
     setIntake(-127);
 }
 
+// ignore this one
 void qual3ringblue() {
 
     //Get 1st Mogo and Score 2 Rings
