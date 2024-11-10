@@ -36,6 +36,8 @@
 
 #include "api.h"
 #include "lemlib/api.hpp"
+#include "okapi/api.hpp"
+// #include "lvgl/lvgl.h"
 
 /**
  * You should add more #includes here
@@ -82,6 +84,7 @@ void my_task_fn(void);
 #include "tracking.hpp"
 #include "PID.hpp"
 #include "opcontrol.hpp"
+#include "selection.h"
 /**
  * You can add C++-only headers here
  */
