@@ -516,23 +516,23 @@ void prog_skills_new()
     chassis.turnToHeading(180, 1000, {.maxSpeed=75}, false);
     chassis.moveToPoint(-47, 13, 2000, {.forwards=false, .maxSpeed=80}, false);
     // chassis.moveToPoint(-47, 19, 1250, {.forwards=false, .maxSpeed=60}, false);
-    chassis.moveToPoint(-47, 27, 1500, {.forwards=false});
-    chassis.waitUntil(8);
+    chassis.moveToPoint(-47, 30, 1500, {.forwards=false});
+    chassis.waitUntil(14);
     // pros::delay(250);
     clamp.set_value(false);
-    pros::delay(500);
+    pros::delay(250);
     tilt.set_value(false);
     pros::delay(250);
     chassis.waitUntilDone();
     // Turn to ring #1
-    chassis.turnToHeading(90, 1000, {}, false);
+    chassis.turnToHeading(103, 1000, {}, false);
     // Move to and intake ring #1
     setIntake(127);
     chassis.moveToPoint(-24, 24, 1250, {}, false);
     // Turn to ring #2
     chassis.turnToHeading(0, 1000, {}, false);
     // Move to and intake ring #2
-    chassis.moveToPoint(-24, 45, 2000, {}, false);
+    chassis.moveToPoint(-24, 45, 1250, {}, false);
     // Turn to ring #3
     chassis.turnToHeading(60, 1000, {}, false);
     // Move to and intake ring #3
@@ -556,12 +556,14 @@ void prog_skills_new()
 
     // PART 3
     // Move to and intake ring #1
-    chassis.moveToPose(24, 47, 90, 3000, {}, false);
+    chassis.moveToPose(24, 47, 90, 3000, {});
+    chassis.waitUntil(28);
     setIntake(0);
+    chassis.waitUntilDone();
     // Move to and clamp mobile goal #3
     chassis.turnToHeading(-30, 1000, {}, false);
-    chassis.moveToPoint(42, 11, 1500, {.forwards=false, .maxSpeed=80}, false);
-    chassis.moveToPoint(48, -1, 1000, {.forwards=false});
+    chassis.moveToPoint(39, 13, 1500, {.forwards=false, .maxSpeed=75}, false);
+    chassis.moveToPoint(46, -1, 1000, {.forwards=false});
     chassis.waitUntil(8);
     clamp.set_value(false);
     pros::delay(250);
@@ -579,13 +581,13 @@ void prog_skills_new()
     // Turn to ring #4
     chassis.turnToHeading(90, 1000, {}, false);
     // Move to and intake ring #4
-    chassis.moveToPoint(46, -46, 1500, {}, false);
+    chassis.moveToPoint(50, -46, 1500, {}, false);
     // Move to and intake ring #5
     chassis.turnToHeading(190, 1000, {.maxSpeed=75}, false);
     chassis.moveToPoint(45, -57, 1250, {}, false);
     // Move to Corner #3
     chassis.turnToHeading(270, 1000, {.maxSpeed=75}, false);
-    chassis.moveToPose(56, -55, 315, 2500, {}, false);
+    chassis.moveToPose(56, -55, 315, 2500, {.forwards=false}, false);
     clamp.set_value(true);
     tilt.set_value(true);
     setDrive(12000, 12000);

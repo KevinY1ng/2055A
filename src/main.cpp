@@ -144,9 +144,9 @@ void autonomous() {
 	//mogo_rushright(); // SLOT 6
 	//elim5ringBlue(); //SLOT 2
 	// qualredmogoside(); //slot 5 
-	qualbluemogoside(); //slot 6
+	// qualbluemogoside(); //slot 6
 	//elimBlueMogoSide();//SLOT 8
-	//  prog_skills_new(); // SLOT 8
+	 prog_skills_new(); // SLOT 8
 
 // 	Auton selector;
 //     switch (selector::auton) {
