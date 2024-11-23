@@ -605,7 +605,7 @@ void prog_skills_new()
     pros::delay(250);
     chassis.moveToPose(43, -23, 0, 2000, {.minSpeed=115}, false); // x, y, angle, timeout
     chassis.moveToPose(53, 10, 20, 2000, {.minSpeed=115}, false); // x, y, angle, timeout
-    chassis.moveToPose(63, 80, 0, 2000, {.minSpeed=60}, false); // x, y, angle, timeout
+    chassis.moveToPose(61, 80, 0, 2000, {.minSpeed=60}, false); // x, y, angle, timeout
     setDrive(-12000, -12000);
     pros::delay(500);
     setDrive(0, 0);
