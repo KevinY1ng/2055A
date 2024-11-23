@@ -134,8 +134,8 @@ void competition_initialize() {}
  */
 void autonomous() {
 	
-	//soloauton_AWP_Blue_Negative(); // SLOT 2
-	//soloauton_AWP_Red_Negative(); // SLOT 1
+	// soloauton_AWP_Blue_Negative(); // SLOT 2
+	// soloauton_AWP_Red_Negative(); // SLOT 1
 	// qual5ringRed(); // SLOT 3 angle
 	// qual5ringBlue(); // SLOT 4 straight
 	//elim5ringRed(); // SLOT 1
