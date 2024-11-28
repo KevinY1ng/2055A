@@ -12,15 +12,15 @@
 #include "lemlib/api.hpp"
 #include <cstddef>
 
-int MOTOR_LB = -11; //-11
-int MOTOR_LM = -13; //-13
-int MOTOR_LF = -1; //-1
+int MOTOR_LB = -9; //-11
+int MOTOR_LM = -10; //-13
+int MOTOR_LF = -19; //-1
 
-int MOTOR_RB = 20; //20
-int MOTOR_RM = 12; //12
-int MOTOR_RF = 18; //18
+int MOTOR_RB = 18; //20
+int MOTOR_RM = 8; //12
+int MOTOR_RF = 6; //18
 
-int VERT_TRACKING = 14;
+int VERT_TRACKING = 4;
 int HOR_TRACKING = 16;
 
 int INERTIAL_PORT = 2;
@@ -30,10 +30,9 @@ char CLAMP_PORT = 'A';
 char TILT_PORT = 'C';
 char DOINKER_PORT = 'B';
 
-int MOTOR_INTAKE_1 = -4; // bottom intake
-int MOTOR_INTAKE_2 = -3; // top intake
-
-int OPTICAL_SENSOR = 10;
+int MOTOR_INTAKE_1= 7; // bottom intake
+int ARM_PORT = 1;
+// int MOTOR_INTAKE_2 = -3; // top intake
 
 
 //Drivetrain
@@ -46,11 +45,12 @@ pros::Motor drive_RM(MOTOR_RM, pros::v5::MotorGears::blue, pros::v5::MotorUnits:
 pros::Motor drive_RF(MOTOR_RF, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 pros::Motor intake1(MOTOR_INTAKE_1, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
-pros::Motor intake2(MOTOR_INTAKE_2, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
+pros::Motor arm(ARM_PORT, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
+// pros::Motor intake2(MOTOR_INTAKE_2, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 //MotorGroups
-pros::MotorGroup Left_Drive({-11, -13, -1}, pros::v5::MotorGears::blue);
-pros::MotorGroup Right_Drive({20, 12, 18}, pros::v5::MotorGears::blue);
+pros::MotorGroup Left_Drive({9, 10, 19}, pros::v5::MotorGears::blue);
+pros::MotorGroup Right_Drive({18, 8, 6}, pros::v5::MotorGears::blue);
 
 //Controller
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
@@ -64,9 +64,9 @@ pros::Rotation vert_encoder(VERT_TRACKING);
 pros::Rotation hort_encoder(HOR_TRACKING);
 
 //inertial
-pros::IMU imu(INERTIAL_PORT);
+// pros::IMU imu(INERTIAL_PORT);
 
-pros::Optical colorsensor(OPTICAL_SENSOR);
+// pros::Optical colorsensor(OPTICAL_SENSOR);
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.39);
@@ -75,8 +75,8 @@ lemlib::TrackingWheel hort_tracking(&hort_encoder, 1.95, -0.3);
 lemlib::Drivetrain drivetrain {
     &Left_Drive, // left motor group
     &Right_Drive, // right motor group
-    11.5, // 10 inch track width
-    2.75, // using new 4" omnis
+    11.5, // 10 inch track width -- VERIFY THIS
+    2.5, // using new 4" omnis
     450, // drivetrain rpm is 360
     2 // horizontal drift is 2 (for now)
 };
@@ -112,7 +112,7 @@ lemlib::OdomSensors sensors {
     nullptr, // vertical tracking wheel 2
     &hort_tracking, // horizontal tracking wheel 1
     nullptr, // horizontal tracking wheel 2
-    &imu // &Inertial // inertial sensor
+    nullptr // &Inertial // inertial sensor
 };
 
 // create the chassis
