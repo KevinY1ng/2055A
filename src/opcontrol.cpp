@@ -21,6 +21,7 @@ void my_opcontrol()
         // pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
         setDriveMotors(); // sets motors based on joystick inputs
         driveIntake(); // sets intake based on L1 input
+        driveClamp();
         // doink();
         // ClampTilt_Goal();
         driveArm();

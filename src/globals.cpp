@@ -20,15 +20,15 @@ int MOTOR_RB = 18; //20
 int MOTOR_RM = 8; //12
 int MOTOR_RF = 6; //18
 
-int VERT_TRACKING = 4;
-int HOR_TRACKING = 16;
+int VERT_TRACKING_PORT = 4;
+int HOR_TRACKING_PORT = 16;
 
 int INERTIAL_PORT = 2;
 
 // Pneumatics
 char CLAMP_PORT = 'A';
-char TILT_PORT = 'C';
-char DOINKER_PORT = 'B';
+// char TILT_PORT = 'C';
+// char DOINKER_PORT = 'B';
 
 int MOTOR_INTAKE_1= 7; // bottom intake
 int ARM_PORT = 1;
@@ -56,12 +56,12 @@ pros::MotorGroup Right_Drive({18, 8, 6}, pros::v5::MotorGears::blue);
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 //Pneumatics
-pros::adi::DigitalOut tilt('A', true);
-pros::adi::DigitalOut doinker('B', false);
-pros::adi::DigitalOut clamp('C', true);
+// pros::adi::DigitalOut tilt('A', true);
+// pros::adi::DigitalOut doinker('B', false);
+pros::adi::DigitalOut clamp('H', true);
 
-pros::Rotation vert_encoder(VERT_TRACKING);
-pros::Rotation hort_encoder(HOR_TRACKING);
+pros::Rotation vert_encoder(VERT_TRACKING_PORT);
+pros::Rotation hort_encoder(HOR_TRACKING_PORT);
 
 //inertial
 // pros::IMU imu(INERTIAL_PORT);
@@ -69,41 +69,41 @@ pros::Rotation hort_encoder(HOR_TRACKING);
 // pros::Optical colorsensor(OPTICAL_SENSOR);
 
 //Tracking Wheels
-lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.39);
-lemlib::TrackingWheel hort_tracking(&hort_encoder, 1.95, -0.3);
+lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.75); // 0.75 inches left of the tracking center
+lemlib::TrackingWheel hort_tracking(&hort_encoder, 1.95, 0.75); // 0.75 inches forward of tracking center
 
 lemlib::Drivetrain drivetrain {
     &Left_Drive, // left motor group
     &Right_Drive, // right motor group
-    11.5, // 10 inch track width -- VERIFY THIS
+    11.5, // 10 inch track width
     2.5, // using new 4" omnis
     450, // drivetrain rpm is 360
     2 // horizontal drift is 2 (for now)
 };
 
 lemlib::ControllerSettings linearController {
-    9, // kP    .// 990000     // 10 kP, 2 kD     // 9 kP, 0 kI, 3.5 kD | chassis.moveToPose(0, 48, 0, 5000, {.earlyExitRange = 2});  <-- these PID values with this function works really well
-    0, // KI
-    3.5, // kD //12900
-    0, // anti windup
-    0, // smallErrorRange // 0.3
-    0, // smallErrorTimeout // 300
-    0, // largeErrorRange // 3
-    0, // largeErrorTimeout // 600 
-    0 // slew rate  //5   //3
+    10, // proportional gain (kP)
+    0, // integral gain (kI)
+    3, // derivative gain (kD)
+    3, // anti windup
+    1, // small error range, in inches
+    100, // small error range timeout, in milliseconds
+    3, // large error range, in inches
+    500, // large error range timeout, in milliseconds
+    20 // maximum acceleration (slew)
 };
  
 // turning PID
 lemlib::ControllerSettings angularController {
-    6.5, // kP         // 4 kP, 16 kD <-- last values that worked       // 5 kP, 22.5 kD <-- last values that worked //     6.5 kP, 30.5 kD <-- last values that worked     // we could fine-tune kP and kD more, but haven't yet
-    0, // kI // 0.003
-    30.5, // kD
-    0, // anti windup // 3
-    0, // smallErrorRange // 1
-    0, // smallErrorTimeout // 100
-    0, // largeErrorRange // 3
-    0, // largeErrorTimeout // 500
-    0 // slew rate // 3
+    2, // proportional gain (kP)
+    0, // integral gain (kI)
+    10, // derivative gain (kD)
+    0, // anti windup
+    0, // small error range, in degrees
+    0, // small error range timeout, in milliseconds
+    0, // large error range, in degrees
+    0, // large error range timeout, in milliseconds
+    0 // maximum acceleration (slew)
 };
 
 // odometry struct

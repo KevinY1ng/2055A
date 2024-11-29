@@ -18,6 +18,16 @@
 //     }
 // }
 
+bool clampState = false;
+void driveClamp()
+{
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
+    {
+        clampState = !clampState;
+        clamp.set_value(clampState);
+    }
+}
+
 bool checkForJam = false;
 void setIntake(int power)
 {

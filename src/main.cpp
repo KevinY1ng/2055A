@@ -93,6 +93,8 @@ void initialize() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_HOLD);
     drive_RF.set_brake_mode(MOTOR_BRAKE_HOLD);
 
+	arm.set_brake_mode(MOTOR_BRAKE_HOLD);
+
 	pros::lcd::register_btn1_cb(on_center_button);
 
 	lvgl_init();
@@ -131,6 +133,10 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	// set position to x:0, y:0, heading:0
+    chassis.setPose(0, 0, 0);
+    // turn to face heading 90 with a very long timeout
+    chassis.turnToHeading(90, 100000);
 	
 	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// soloauton_AWP_Red_Negative(); // SLOT 1
