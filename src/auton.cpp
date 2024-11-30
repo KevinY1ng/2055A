@@ -1,4 +1,4 @@
-`#include "main.h"
+#include "main.h"
 #include "pros/adi.hpp"
 #include "pros/gps.h"
 #include "pros/imu.hpp"
@@ -30,20 +30,27 @@
 //     setIntake(0);
 // }
 
+// void PID_Test()
+// {
+//     chassis.setPose(0, 0, 0);
+//     chassis.moveToPose(0, 24, 0, 10000, {}, false);
 
-void PID_Test() {
+// }
+
+void PID_Test() 
+{
     chassis.setPose(0, 0, 0);
     // chassis.turnToHeading( , 10000, {}, false);
     chassis.moveToPose(0, 24, 0, 10000);
-    pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
-    pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-    pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
-
-        	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-            // delay to save resources    // turn(90, 100, 0.015, 0 , 3.8);
-    // pros::delay(100);
-    // turn(180, 100, 0.015, 0, 3.7);
+    // pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+    // pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+    // pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
 }
+//         	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+//             // delay to save resources    // turn(90, 100, 0.015, 0 , 3.8);
+//     // pros::delay(100);
+//     // turn(180, 100, 0.015, 0, 3.7);
+
 
 // void auton_test()
 // {

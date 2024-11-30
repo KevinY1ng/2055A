@@ -13,6 +13,7 @@
 #include "pros/rtos.h"
 #include "pros/rtos.hpp"
 #include "pros/vision.h"
+#include "auton.hpp"
 // #include "lvgl/lvgl.h"
 #include <string>
 
