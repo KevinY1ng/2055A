@@ -42,3 +42,6 @@ extern pros::Motor arm;
 
 extern pros::Optical colorsensor;
 
+extern pros::Rotation armsensor;
+extern pros::adi::DigitalOut claw;
+

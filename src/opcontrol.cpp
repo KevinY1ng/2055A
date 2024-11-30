@@ -1,4 +1,4 @@
-#include "main.h"
+ #include "main.h"
 #include "api.h"
 #include "pros/adi.hpp"
 #include "pros/gps.h"
@@ -19,12 +19,14 @@ void my_opcontrol()
         
         //pros::lcd::set_text(1, std::to_string(colorsensor.get_hue()));
         // pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
+        armsensor.reset_position();
         setDriveMotors(); // sets motors based on joystick inputs
-        driveIntake(); // sets intake based on L1 input
+        driveIntake(); // sets intake based on L1 input -- comment this when running colorsort task
         driveClamp();
         // doink();
         // ClampTilt_Goal();
         driveArm();
+        setarm();
         pros::delay(20);
     }
 }

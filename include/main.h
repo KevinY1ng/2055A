@@ -72,6 +72,7 @@ void opcontrol(void);
 void color_sort_red_team(void);
 void color_sort_blue_team(void);
 void my_task_fn(void);
+void rotationsensor(void);
 #ifdef __cplusplus
 }
 #endif

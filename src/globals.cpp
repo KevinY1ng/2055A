@@ -23,16 +23,21 @@ int MOTOR_RF = 6; //18
 int VERT_TRACKING_PORT = 4;
 int HOR_TRACKING_PORT = 16;
 
-int INERTIAL_PORT = 2;
+int INERTIAL_PORT = 12;
 
 // Pneumatics
-char CLAMP_PORT = 'A';
+char CLAMP_PORT = 'H';
 // char TILT_PORT = 'C';
 // char DOINKER_PORT = 'B';
 
+char CLAW_PORT = 'G';
+
 int MOTOR_INTAKE_1= 7; // bottom intake
 int ARM_PORT = 1;
+int arm_sensor = 11;
 // int MOTOR_INTAKE_2 = -3; // top intake
+
+int COLOR_SENSOR_PORT = 20; // 
 
 
 //Drivetrain
@@ -49,7 +54,7 @@ pros::Motor arm(ARM_PORT, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degr
 // pros::Motor intake2(MOTOR_INTAKE_2, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 //MotorGroups
-pros::MotorGroup Left_Drive({9, 10, 19}, pros::v5::MotorGears::blue);
+pros::MotorGroup Left_Drive({-9, -10, -19}, pros::v5::MotorGears::blue);
 pros::MotorGroup Right_Drive({18, 8, 6}, pros::v5::MotorGears::blue);
 
 //Controller
@@ -59,14 +64,18 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // pros::adi::DigitalOut tilt('A', true);
 // pros::adi::DigitalOut doinker('B', false);
 pros::adi::DigitalOut clamp('H', true);
+pros::adi::DigitalOut claw(CLAW_PORT, false);
+
 
 pros::Rotation vert_encoder(VERT_TRACKING_PORT);
 pros::Rotation hort_encoder(HOR_TRACKING_PORT);
+pros::Rotation armsensor(arm_sensor);
 
 //inertial
-// pros::IMU imu(INERTIAL_PORT);
+pros::IMU imu(INERTIAL_PORT);
 
 // pros::Optical colorsensor(OPTICAL_SENSOR);
+pros::Optical colorsensor(COLOR_SENSOR_PORT);
 
 //Tracking Wheels
 lemlib::TrackingWheel vert_tracking(&vert_encoder, 1.975, -0.75); // 0.75 inches left of the tracking center
@@ -82,22 +91,23 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    10, // proportional gain (kP)
+    8, // proportional gain (kP)
     0, // integral gain (kI)
-    3, // derivative gain (kD)
-    3, // anti windup
-    1, // small error range, in inches
-    100, // small error range timeout, in milliseconds
-    3, // large error range, in inches
-    500, // large error range timeout, in milliseconds
-    20 // maximum acceleration (slew)
+    0, // derivative gain (kD)
+    0, // anti windup
+    0, // small error range, in inches
+    0, // small error range timeout, in milliseconds
+    0, // large error range, in inches
+    0, // large error range timeout, in milliseconds
+    0 // maximum acceleration (slew)
 };
  
+ // 1, 0, 25 <-- last values that worked      // 1.25, 46, 0   // 1.5, 50, 0
 // turning PID
 lemlib::ControllerSettings angularController {
-    2, // proportional gain (kP)
+    1.25, // proportional gain (kP)
     0, // integral gain (kI)
-    10, // derivative gain (kD)
+    46, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds
@@ -106,14 +116,24 @@ lemlib::ControllerSettings angularController {
     0 // maximum acceleration (slew)
 };
 
+/*
+list:
+0.5, 0, 0
+*/
+
 // odometry struct
 lemlib::OdomSensors sensors {
     &vert_tracking, // vertical tracking wheel 1
     nullptr, // vertical tracking wheel 2
     &hort_tracking, // horizontal tracking wheel 1
     nullptr, // horizontal tracking wheel 2
-    nullptr // &Inertial // inertial sensor
+    &imu // &Inertial // inertial sensor
 };
 
 // create the chassis
-lemlib::Chassis chassis(drivetrain, linearController, angularController, sensors);
+lemlib::Chassis chassis(drivetrain, 
+                        linearController, 
+                        angularController, 
+                        sensors
+);
+

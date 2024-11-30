@@ -7,3 +7,5 @@ void driveDistance(const double targetdistance, double maxspeed, double kP, doub
 void swingleft(double radius, double angle, double maxspeed, float kP, float kI, float kD);
 
 void swingright(double radius, double angle, double maxspeed, float kP, float kI, float kD);
+
+void lbgetring(double kP, int maxspeed);

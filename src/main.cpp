@@ -39,12 +39,14 @@ void color_sort_red_team() {
 	while (true) {
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorvalue));
-		if (colorvalue >= 150 && colorvalue <= 200)
+		if (colorvalue >= 55 && colorvalue <= 70)
 		{
 			pros::lcd::set_text(4, "BLUE RING DETECTED! :(");
 			// pros::delay(5);
 			intake1.move(127);
-			pros::delay(600);
+			pros::delay(250);
+			intake1.move(0);
+			pros::delay(250);
 			//setIntake(0);
 		}
 
@@ -55,17 +57,37 @@ void color_sort_red_team() {
 	}
 }
 
+void rotationsensor() {
+	double rotation;
+	armsensor.reset_position();
+	while (true) {
+		double targetheading = 255;
+		double rotation = armsensor.get_angle() / 100.0;
+		double error = targetheading - (armsensor.get_angle() / 100);
+		pros::lcd::print(6, "ThetaLB: %i", (armsensor.get_angle())/ 100);
+		pros::lcd::print(3, "Error: %f", (error));
+		//pros::lcd::set_text(4, std::to_string(targetheading - rotation));
+		pros::delay(20);
+	}
+}
+
 void color_sort_blue_team() {
 	double colorvalue;
 	while (true) {
 		colorvalue = colorsensor.get_hue();
 		pros::lcd::set_text(3, std::to_string(colorvalue));
-		if (colorvalue >= 0 && colorvalue <= 20)
+		if (colorvalue >= 15 && colorvalue <= 35)
 		{
+			pros::lcd::set_text(5, "");
 			pros::lcd::set_text(4, "RED RING DETECTED! :(");
 			// pros::delay(5);
-			intake1.move(127);
-			pros::delay(600);
+			// intake1.move(127);
+			setIntake(127);
+			pros::delay(250);
+			setIntake(0);
+			pros::delay(500);
+			pros::lcd::set_text(5, "RING EJECTED! :)");
+			pros::lcd::set_text(4, "");
 			//setIntake(0);
 		}
 
@@ -87,7 +109,6 @@ void initialize() {
 
 	drive_LB.set_brake_mode(MOTOR_BRAKE_HOLD);
 	drive_LM.set_brake_mode(MOTOR_BRAKE_HOLD);
-    drive_LF.set_brake_mode(MOTOR_BRAKE_HOLD);
 
     drive_RB.set_brake_mode(MOTOR_BRAKE_HOLD);
 	drive_RM.set_brake_mode(MOTOR_BRAKE_HOLD);
@@ -97,11 +118,17 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
+	armsensor.set_position(0);
+	armsensor.reset_position();
+
+	pros::rtos::Task my_task(rotationsensor);
+
 	lvgl_init();
+}
 
 	// pros::Task my_task(my_task_fn);
 
-}
+
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -134,9 +161,7 @@ void competition_initialize() {}
  */
 void autonomous() {
 	// set position to x:0, y:0, heading:0
-    chassis.setPose(0, 0, 0);
-    // turn to face heading 90 with a very long timeout
-    chassis.turnToHeading(90, 100000);
+    PID_Test();
 	
 	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// soloauton_AWP_Red_Negative(); // SLOT 1
@@ -205,6 +230,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	armsensor.set_position(0);
 	pros::lcd::initialize();
 	pros::lcd::register_btn0_cb(on_center_button);
 	// while (true) {
@@ -217,6 +243,14 @@ void opcontrol() {
     drive_RB.set_brake_mode(MOTOR_BRAKE_COAST);
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
+
+	armsensor.set_position(0);
+
+	armsensor.reset_position();
+
+	pros::rtos::Task my_task(rotationsensor);
+
+	
 
 	// pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
 
@@ -233,6 +267,15 @@ void opcontrol() {
     //         pros::delay(20);
     //     }
     // });
+
+	while (true)
+	{
+		pros::lcd::set_text(1, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+		pros::lcd::set_text(2, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+		pros::lcd::set_text(5, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
+		pros::delay(20);
+	}
+
 
 	// pros::rtos::Task my_task(color_sort_blue_team);
 	// pros::rtos::Task my_task(color_sort_red_team);

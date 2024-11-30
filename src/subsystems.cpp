@@ -28,6 +28,13 @@ void driveClamp()
     }
 }
 
+void setarm() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
+    {
+        lbgetring(1, 5);
+    }
+}
+
 bool checkForJam = false;
 void setIntake(int power)
 {
@@ -97,3 +104,12 @@ void driveArm()
 }
     
   
+// bool clawState = false;
+// void driveClaw()
+// {
+//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+//     {
+//         clawState = !clawState;
+//         claw.set_value(clawState);
+//     }
+// }
