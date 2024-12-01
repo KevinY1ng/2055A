@@ -27,10 +27,9 @@ int INERTIAL_PORT = 12;
 
 // Pneumatics
 char CLAMP_PORT = 'H';
-// char TILT_PORT = 'C';
-// char DOINKER_PORT = 'B';
-
 char CLAW_PORT = 'G';
+char DOINKER_PORT = 'F';
+
 
 int MOTOR_INTAKE_1= 7; // bottom intake
 int ARM_PORT = 1;
@@ -65,6 +64,7 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // pros::adi::DigitalOut doinker('B', false);
 pros::adi::DigitalOut clamp('H', true);
 pros::adi::DigitalOut claw(CLAW_PORT, false);
+pros::adi::DigitalOut doinker('F', false);
 
 
 pros::Rotation vert_encoder(VERT_TRACKING_PORT);
@@ -91,7 +91,7 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    8, // proportional gain (kP)
+    2, // proportional gain (kP)
     0, // integral gain (kI)
     0, // derivative gain (kD)
     0, // anti windup

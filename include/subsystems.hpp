@@ -8,3 +8,4 @@ void doink();
 void driveArm();
 void setarm();
 void driveClaw();
+void setArmLoad();

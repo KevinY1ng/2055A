@@ -98,11 +98,82 @@ void color_sort_blue_team() {
 		pros::delay(20);
 	}
 }
+
+// // task
+int state = 0;
+// 3 states
+//  State 0: angle is zero, starting position
+//  State 1: loading position
+//  State 2: scoring position
+void setArmLoad()
+{
+	while (true)
+	{
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+    	{
+			if (state == 0)
+			{
+				while (armsensor.get_position() < 3600)
+				{
+					arm.move_velocity(400);
+					pros::delay(1);
+				}
+				state = 1;
+				arm.move_velocity(0);
+			}
+			else if (state == 1)
+			{
+				while (armsensor.get_position() < 13500)
+				{
+					arm.move_velocity(400);
+					pros::delay(1);
+				}
+				state = 2;
+				arm.move_velocity(0);
+			}
+		// arm.move_velocity(0);
+		}
+
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2))
+		{
+			if (state == 2)
+			{
+				while (armsensor.get_position() > 4000)
+				{
+					arm.move_velocity(-400);
+					pros::delay(1);
+				}
+				state = 1;
+				arm.move_velocity(0);
+			}
+			else if (state == 1)
+			{
+				while (armsensor.get_position() > 0)
+				{
+					arm.move_velocity(-400);
+					pros::delay(1);
+				}
+				state = 0;
+				arm.move_velocity(0);
+
+			}
+		}
+	}
+}
+
+
 /**
- * Runs initialization code. This occurs as soon as the program is started.
+ * Runs initialization code. This occurs as soon as the	 program is started.
  *
- * All other competition modes are blocked by initialize; it is recommended
- * to keep execution time for this mode under a few seconds.
+ * All other competition	 modes are blo	cked by initialize; it is recommende	d
+ * to keep execution t	i
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2))
+    {
+			while (armsensor.get_position() < 3300)
+			{
+				arm.move_velocity(-400);
+				pros::delay(1);
+			}me for this mode under a few seconds.
  */
 void initialize() {
 	chassis.calibrate();
@@ -122,7 +193,7 @@ void initialize() {
 	armsensor.set_position(0);
 	armsensor.reset_position();
 
-	pros::rtos::Task my_task(rotationsensor);
+	// pros::rtos::Task my_task(rotationsensor);
 
 	lvgl_init();
 }
@@ -161,9 +232,21 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	// pros::Task screen_task([&]() {
+    //     while (true) {
+    //         // print robot location to the brain screen
+	// 		pros::lcd::set_text(5, "Y: "  +  std::to_string(chassis.getPose().y)); // print the x position
+    //         pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+    //     	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+    //         // delay to save resources
+    //         pros::delay(20);
+    //     }
+    // });
 	// set position to x:0, y:0, heading:0
-    PID_Test();
+    // PID_Test();
 	
+	// brampton_Auton_Red_Positive();
+	brampton_Auton_Blue_Positive();
 	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// soloauton_AWP_Red_Negative(); // SLOT 1
 	// qual5ringRed(); // SLOT 3 angle
@@ -231,7 +314,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	armsensor.set_position(0);
+	// armsensor.set_position(0);
 	pros::lcd::initialize();
 	pros::lcd::register_btn0_cb(on_center_button);
 	// while (true) {
@@ -245,37 +328,26 @@ void opcontrol() {
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
 
-	armsensor.set_position(0);
+	// armsensor.set_position(0);
 
-	armsensor.reset_position();
+	// armsensor.reset_position();
 
-	pros::rtos::Task my_task(rotationsensor);
+	// pros::rtos::Task my_task(rotationsensor);
 
 	
 
 	// pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
 
 	// pros::rtos::Task my_task(color_sort_red);
+	pros::rtos::Task my_task_2(setArmLoad);
 
-
-	// pros::Task screen_task([&]() {
-    //     while (true) {
-    //         // print robot location to the brain screen
-	// 		pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
-    //         pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-    //     	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-    //         // delay to save resources
-    //         pros::delay(20);
-    //     }
-    // });
-
-	while (true)
-	{
-		pros::lcd::set_text(1, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
-		pros::lcd::set_text(2, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-		pros::lcd::set_text(5, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
-		pros::delay(20);
-	}
+	// while (true)
+	// {
+	// 	pros::lcd::set_text(1, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
+	// 	pros::lcd::set_text(2, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+	// 	pros::lcd::set_text(5, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
+	// 	pros::delay(20);
+	// }
 
 
 	// pros::rtos::Task my_task(color_sort_blue_team);

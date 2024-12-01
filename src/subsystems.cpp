@@ -28,12 +28,38 @@ void driveClamp()
     }
 }
 
-void setarm() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
+// void setarm() {
+//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
+//     {
+//         lbgetring(1, 5);
+//     }
+// }
+
+void setarm()
+{
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
     {
-        lbgetring(1, 5);
+        while (armsensor.get_position() < 12000)
+        {
+            arm.move_velocity(100);
+            pros::delay(20);
+        }
+        arm.move_velocity(0);
     }
 }
+
+// void setArmLoad()
+// {
+//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+//     {
+//         while (armsensor.get_position() < 3300)
+//         {
+//             arm.move_velocity(400);
+//             pros::delay(1);
+//         }
+//     arm.move_velocity(0);
+//     }
+// }
 
 bool checkForJam = false;
 void setIntake(int power)
@@ -90,26 +116,32 @@ void antiJamTask()
 }
 
 bool doink_status = false;
-// void doink() {
-//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-//         doink_status = !doink_status;
-//         doinker.set_value(doink_status);
-//     }
-// }
+void doink() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
+        doink_status = !doink_status;
+        doinker.set_value(doink_status);
+    }
+}
 
 void driveArm()
 {
     int arm_power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    if (armsensor.get_position() > 13000)
+    {
+        if (arm_power > 0)
+        {
+            arm_power = 0;
+        }
+    }
     arm.move(arm_power);
 }
     
-  
-// bool clawState = false;
-// void driveClaw()
-// {
-//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-//     {
-//         clawState = !clawState;
-//         claw.set_value(clawState);
-//     }
-// }
+bool clawState = false;
+void driveClaw()
+{
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
+    {
+        clawState = !clawState;
+        claw.set_value(clawState);
+    }
+}
