@@ -178,6 +178,8 @@ void setArmLoad()
 void initialize() {
 	chassis.calibrate();
 	pros::lcd::initialize();
+	// imu.reset();
+	
 
 	drive_LB.set_brake_mode(MOTOR_BRAKE_HOLD);
 	drive_LM.set_brake_mode(MOTOR_BRAKE_HOLD);
@@ -232,21 +234,22 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	// pros::Task screen_task([&]() {
-    //     while (true) {
-    //         // print robot location to the brain screen
-	// 		pros::lcd::set_text(5, "Y: "  +  std::to_string(chassis.getPose().y)); // print the x position
-    //         pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
-    //     	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-    //         // delay to save resources
-    //         pros::delay(20);
-    //     }
-    // });
+	pros::Task screen_task([&]() {
+        while (true) {
+            // print robot location to the brain screen
+			pros::lcd::set_text(5, "Y: "  +  std::to_string(chassis.getPose().y)); // print the x position
+            pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
+        	pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
+			pros::lcd::set_text(1, "Angle 2: " + std::to_string(imu.get_heading()));
+            // delay to save resources
+            pros::delay(20);
+        }
+    });
 	// set position to x:0, y:0, heading:0
-    // PID_Test();
+    PID_Test();
 	
 	// brampton_Auton_Red_Positive();
-	brampton_Auton_Blue_Positive();
+	// brampton_Auton_Blue_Positive();
 	// soloauton_AWP_Blue_Negative(); // SLOT 2
 	// soloauton_AWP_Red_Negative(); // SLOT 1
 	// qual5ringRed(); // SLOT 3 angle

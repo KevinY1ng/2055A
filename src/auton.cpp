@@ -102,83 +102,83 @@ void brampton_Auton_Red_Negative(){
 
 }
 
-void brampton_Auton_Skills(){
-    chassis.setPose(0,0,90)
-    setIntake(1000);
-    pros::delay(1500);
-    setIntake(0);
-    chassis.turnToHeading(340, 1000);
-    setDrive(-6000,-6000);
-    pros::delay(500);
-    setDrive(-2000,-2000);
-    pros::delay(150);
-    clamp.set_value(false);
-    pros::delay(250);
-    chassis.turnToHeading(90,2000);
-    pros::delay(250);
-    setIntake(1000);
-    setDrive(6000,6000);
-    pros::delay(1000);
-    chassis.turnToHeading(180, 2000);
-    pros::delay(250);
-    setDrive(6000,6000);
-    pros::delay(1000);
-    chassis.turnToHeading(270,2000);
-    pros::delay(250);
-    setDrive(6000,6000);
-    pros::delay(500);
-    setDrive(2500,2500);
-    pros::delay(750);
-    setDrive(-2500,-2500);
-    pros::delay(150);
-    chassis.turnToHeading(180,2000);
-    pros::delay(250);
-    setDrive(2500,2500);
-    pros::delay(1000);
-    setIntake(0);
-    chassis.turnToHeading(60,2500);
-    setDrive(-1500,-1500);
-    clamp.set_value(true);
-    pros::delay(500);
-    setDrive(1500,1500);
-    pros::delay(250);
-    chassis.turnToHeading(180,2500);
-    setDrive(-19000,-19000); //check
-    pros::delay(500);
-    setDrive(-2000,-2000);
-    pros::delay(150);
-    clamp.set_value(false);
-    pros::delay(250);
-    chassis.turnToHeading(90, 3000);
-    setIntake(1000);
-    setDrive(6000,6000);
-    pros::delay(1000)
-    chassis.turnToHeading(0, 2000);
-    setDrive(6000,6000);
-    pros::delay(1000)
-    chassis.turnToHeading(270, 2000);
-    setDrive(6000,6000);
-    pros::delay(500)
-    setDrive(2000,2000);
-    pros::delay(1000);
-    chassis.turnToHeading(160,3000);
-    pros::delay(500)
-    //setIntake(0);
-    setDrive(-3000,-3000);
-    pros::delay(150);
-    clamp.set_value(true);
-    pros::delay(500);
-    setDrive(1000,1000);
-    pro::delay(150);
-    chassis.turnToHeading(110,2000);
+// void brampton_Auton_Skills(){
+//     chassis.setPose(0,0,90);
+//     setIntake(1000);
+//     pros::delay(1500);
+//     setIntake(0);
+//     chassis.turnToHeading(340, 1000);
+//     setDrive(-6000,-6000);
+//     pros::delay(500);
+//     setDrive(-2000,-2000);
+//     pros::delay(150);
+//     clamp.set_value(false);
+//     pros::delay(250);
+//     chassis.turnToHeading(90,2000);
+//     pros::delay(250);
+//     setIntake(1000);
+//     setDrive(6000,6000);
+//     pros::delay(1000);
+//     chassis.turnToHeading(180, 2000);
+//     pros::delay(250);
+//     setDrive(6000,6000);
+//     pros::delay(1000);
+//     chassis.turnToHeading(270,2000);
+//     pros::delay(250);
+//     setDrive(6000,6000);
+//     pros::delay(500);
+//     setDrive(2500,2500);
+//     pros::delay(750);
+//     setDrive(-2500,-2500);
+//     pros::delay(150);
+//     chassis.turnToHeading(180,2000);
+//     pros::delay(250);
+//     setDrive(2500,2500);
+//     pros::delay(1000);
+//     setIntake(0);
+//     chassis.turnToHeading(60,2500);
+//     setDrive(-1500,-1500);
+//     clamp.set_value(true);
+//     pros::delay(500);
+//     setDrive(1500,1500);
+//     pros::delay(250);
+//     chassis.turnToHeading(180,2500);
+//     setDrive(-19000,-19000); //check
+//     pros::delay(500);
+//     setDrive(-2000,-2000);
+//     pros::delay(150);
+//     clamp.set_value(false);
+//     pros::delay(250);
+//     chassis.turnToHeading(90, 3000);
+//     setIntake(1000);
+//     setDrive(6000,6000);
+//     pros::delay(1000)
+//     chassis.turnToHeading(0, 2000);
+//     setDrive(6000,6000);
+//     pros::delay(1000)
+//     chassis.turnToHeading(270, 2000);
+//     setDrive(6000,6000);
+//     pros::delay(500)
+//     setDrive(2000,2000);
+//     pros::delay(1000);
+//     chassis.turnToHeading(160,3000);
+//     pros::delay(500)
+//     //setIntake(0);
+//     setDrive(-3000,-3000);
+//     pros::delay(150);
+//     clamp.set_value(true);
+//     pros::delay(500);
+//     setDrive(1000,1000);
+//     pro::delay(150);
+//     chassis.turnToHeading(110,2000);
 
-}
+// }
 
 void PID_Test() 
 {
     chassis.setPose(0, 0, 0);
-    // chassis.turnToHeading( , 10000, {}, false);
-    chassis.moveToPoint(0, 24, 10000, {}, false);
+    chassis.turnToHeading(90, 10000, {}, false);
+    // chassis.moveToPoint(0, 24, 10000, {}, false);
     // pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
     // pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
     // pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
