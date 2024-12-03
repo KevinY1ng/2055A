@@ -123,9 +123,11 @@ void doink() {
     }
 }
 
+double armkP =  0.05;
+int current_velocity_2;
 void driveArm()
 {
-    int arm_power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    int arm_power = 60 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
     if (armsensor.get_position() > 13000)
     {
         if (arm_power > 0)
@@ -133,6 +135,26 @@ void driveArm()
             arm_power = 0;
         }
     }
+    if (armsensor.get_position() < 0)
+    {
+        if (arm_power < 0)
+        {
+            arm_power = 0;
+        }
+    }
+
+    if (arm_power == 0)
+    {
+        current_velocity_2 = armsensor.get_velocity();
+        if (current_velocity_2 > 200 || current_velocity_2 < 200)
+        {
+            arm.move_velocity(current_velocity_2 * armkP * -1);
+        }
+    }
+    // if (arm_power = 0)
+    // {
+        
+    // }
     arm.move(arm_power);
 }
     

@@ -58,17 +58,17 @@ void color_sort_red_team() {
 	}
 }
 
-void rotationsensor() {
-	double rotation;
-	armsensor.reset_position();
+int currentAngle;
+int error;
+const double kP = 0.01;
+void moveArm(int target) {
+	currentAngle = armsensor.get_angle();
 	while (true) {
-		double targetheading = 255;
-		double rotation = armsensor.get_angle() / 100.0;
-		double error = targetheading - (armsensor.get_angle() / 100);
-		pros::lcd::print(6, "ThetaLB: %i", (armsensor.get_angle())/ 100);
-		pros::lcd::print(3, "Error: %f", (error));
+		int error = target - currentAngle;
+		pros::lcd::set_text(3, std::to_string(error));
+		arm.move_velocity(error * kP);
 		//pros::lcd::set_text(4, std::to_string(targetheading - rotation));
-		pros::delay(20);
+		pros::delay(1);
 	}
 }
 
@@ -105,58 +105,98 @@ int state = 0;
 //  State 0: angle is zero, starting position
 //  State 1: loading position
 //  State 2: scoring position
+// void setArmLoad()
+// {
+// 	while (true)
+// 	{
+// 		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
+//     	{
+// 			if (state == 0)
+// 			{
+// 				while (armsensor.get_position() < 3600)
+// 				{
+// 					arm.move_velocity(400);
+// 					pros::delay(1);
+// 				}
+// 				state = 1;
+// 				arm.move_velocity(0);
+// 			}
+// 			else if (state == 1)
+// 			{
+// 				while (armsensor.get_position() < 13500)
+// 				{
+// 					arm.move_velocity(400);
+// 					pros::delay(1);
+// 				}
+// 				state = 2;
+// 				arm.move_velocity(0);
+// 			}
+// 		// arm.move_velocity(0);
+// 		}
+
+// 		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2))
+// 		{
+// 			if (state == 2)
+// 			{
+// 				while (armsensor.get_position() > 4000)
+// 				{
+// 					arm.move_velocity(-400);
+// 					pros::delay(1);
+// 				}
+// 				state = 1;
+// 				arm.move_velocity(0);
+// 			}
+// 			else if (state == 1)
+// 			{
+// 				while (armsensor.get_position() > 0)
+// 				{
+// 					arm.move_velocity(-400);
+// 					pros::delay(1);
+// 				}
+// 				state = 0;
+// 				arm.move_velocity(0);
+
+// 			}
+// 		}
+// 	}
+// }
+
+bool raised = false;
+int current_velocity = 0;
+double armP = 0.05;
 void setArmLoad()
 {
 	while (true)
 	{
-		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-    	{
-			if (state == 0)
-			{
-				while (armsensor.get_position() < 3600)
-				{
-					arm.move_velocity(400);
-					pros::delay(1);
-				}
-				state = 1;
-				arm.move_velocity(0);
-			}
-			else if (state == 1)
-			{
-				while (armsensor.get_position() < 13500)
-				{
-					arm.move_velocity(400);
-					pros::delay(1);
-				}
-				state = 2;
-				arm.move_velocity(0);
-			}
-		// arm.move_velocity(0);
-		}
-
-		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2))
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) && !raised)
 		{
-			if (state == 2)
+			while(armsensor.get_position() < 13500)
 			{
-				while (armsensor.get_position() > 4000)
-				{
-					arm.move_velocity(-400);
-					pros::delay(1);
-				}
-				state = 1;
-				arm.move_velocity(0);
+				arm.move_velocity(600);
+				pros::delay(1);
 			}
-			else if (state == 1)
+			arm.move_velocity(0);
+			raised = true;
+		}
+		else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2) && raised)
+		{
+			while (armsensor.get_position() > 400)
 			{
-				while (armsensor.get_position() > 0)
-				{
-					arm.move_velocity(-400);
-					pros::delay(1);
-				}
-				state = 0;
-				arm.move_velocity(0);
-
+				arm.move_velocity(-600);
+				pros::delay(1);
 			}
+			arm.move_velocity(0);
+			raised = false;
+		}
+		else
+		{
+			// makeshift hold function (probably pretty bad)
+			current_velocity = armsensor.get_velocity();
+			if (current_velocity > 200 || current_velocity < 200)
+			{
+				arm.move_velocity(current_velocity * armP * -1);
+			}
+			pros::delay(1);
 		}
 	}
 }
@@ -330,6 +370,10 @@ void opcontrol() {
     drive_RB.set_brake_mode(MOTOR_BRAKE_COAST);
 	drive_RM.set_brake_mode(MOTOR_BRAKE_COAST);
     drive_RF.set_brake_mode(MOTOR_BRAKE_COAST);
+	
+	arm.set_brake_mode(MOTOR_BRAKE_HOLD);
+
+	
 
 	// armsensor.set_position(0);
 
@@ -342,7 +386,7 @@ void opcontrol() {
 	// pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
 
 	// pros::rtos::Task my_task(color_sort_red);
-	pros::rtos::Task my_task_2(setArmLoad);
+	// pros::rtos::Task my_task_2(setArmLoad);
 
 	// while (true)
 	// {
