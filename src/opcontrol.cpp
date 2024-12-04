@@ -19,14 +19,26 @@ void my_opcontrol()
         
         //pros::lcd::set_text(1, std::to_string(colorsensor.get_hue()));
         // pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
-        armsensor.reset_position();
+        // armsensor.reset_position();
+        // setarm();
         setDriveMotors(); // sets motors based on joystick inputs
         driveIntake(); // sets intake based on L1 input -- comment this when running colorsort task
         driveClamp();
-        // doink();
+        // setArmLoad();
+        driveClaw();
+        doink();
         // ClampTilt_Goal();
         driveArm();
+<<<<<<< HEAD
         setarm();
+        claw_clamp();
         pros::delay(20);
+=======
+        armtest();
+        // setarm();
+        pros::lcd::set_text(1, std::to_string(armsensor.get_position()));
+        pros::delay(1);
+>>>>>>> dfaf1bea67eb6050610e53acba92fcb63eeefe4c
     }
 }
+

@@ -20,17 +20,16 @@ int MOTOR_RB = 18; //20
 int MOTOR_RM = 8; //12
 int MOTOR_RF = 6; //18
 
-int VERT_TRACKING_PORT = 4;
+int VERT_TRACKING_PORT = -4;
 int HOR_TRACKING_PORT = 16;
 
-int INERTIAL_PORT = 12;
+int INERTIAL_PORT = 17;
 
 // Pneumatics
 char CLAMP_PORT = 'H';
-// char TILT_PORT = 'C';
-// char DOINKER_PORT = 'B';
-
 char CLAW_PORT = 'G';
+char DOINKER_PORT = 'F';
+
 
 int MOTOR_INTAKE_1= 7; // bottom intake
 int ARM_PORT = 1;
@@ -65,6 +64,7 @@ pros::Controller controller(pros::E_CONTROLLER_MASTER);
 // pros::adi::DigitalOut doinker('B', false);
 pros::adi::DigitalOut clamp('H', true);
 pros::adi::DigitalOut claw(CLAW_PORT, false);
+pros::adi::DigitalOut doinker('F', false);
 
 
 pros::Rotation vert_encoder(VERT_TRACKING_PORT);
@@ -91,7 +91,7 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    8, // proportional gain (kP)
+    7.5, // proportional gain (kP)
     0, // integral gain (kI)
     0, // derivative gain (kD)
     0, // anti windup
@@ -102,12 +102,12 @@ lemlib::ControllerSettings linearController {
     0 // maximum acceleration (slew)
 };
  
- // 1, 0, 25 <-- last values that worked      // 1.25, 46, 0   // 1.5, 50, 0
-// turning PID
+
+// turning PID    // 1.5, 0, 7  <-- last values that worked
 lemlib::ControllerSettings angularController {
-    1.25, // proportional gain (kP)
+    1.5, // proportional gain (kP)
     0, // integral gain (kI)
-    46, // derivative gain (kD)
+    7, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds

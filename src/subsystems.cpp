@@ -28,12 +28,97 @@ void driveClamp()
     }
 }
 
+<<<<<<< HEAD
 void setarm() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
     {
-        lbgetring(1, 5);
+        arm.move(100);
+        pros::delay(220);
+        // double rotation = armsensor.get_angle()/100;
+        // while (rotation<255) {
+        //     double rotation = armsensor.get_angle()/100;
+        //     arm.move(50);
+        //     pros::delay(10);
+        // }
+        // arm.move(0);
     }
 }
+
+bool claw_state = false;
+void claw_clamp() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
+    {
+        claw_state = !claw_state;
+        claw.set_value(claw_state);
+=======
+// void setarm() {
+//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
+//     {
+//         lbgetring(1, 5);
+//     }
+// }
+
+bool raised = false;
+int current_velocity = 0;
+double armP = 0.05;
+void setArmLoad()
+{
+	while (true)
+	{
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) && !raised)
+		{
+			while(armsensor.get_position() < 13500)
+			{
+				arm.move_velocity(600);
+				pros::delay(1);
+			}
+			arm.move_velocity(0);
+			raised = true; 
+		}
+		else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2) && raised)
+		{
+			while (armsensor.get_position() > 400)
+			{
+				arm.move_velocity(-600);
+				pros::delay(1);
+			}
+			arm.move_velocity(0);
+			raised = false;
+		}
+		else
+		{
+			// makeshift hold function (probably pretty bad)
+			current_velocity = armsensor.get_velocity();
+			if (current_velocity > 200 || current_velocity < 200)
+			{
+				arm.move_velocity(current_velocity * armP * -1);
+			}
+			pros::delay(1);
+		}
+	}
+}
+bool armraise = false;
+void armtest() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+            if (armraise = false) {
+                while (armsensor.get_angle() < 4500) {
+                    arm.move(120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            if (armraise = true) {
+                while (armsensor.get_angle() > 200) {
+                    arm.move(-120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            }
+            
+>>>>>>> dfaf1bea67eb6050610e53acba92fcb63eeefe4c
+    }
+}
+}
+
 
 bool checkForJam = false;
 void setIntake(int power)
@@ -90,26 +175,55 @@ void antiJamTask()
 }
 
 bool doink_status = false;
-// void doink() {
-//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2)) {
-//         doink_status = !doink_status;
-//         doinker.set_value(doink_status);
-//     }
-// }
+void doink() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_UP)) {
+        doink_status = !doink_status;
+        doinker.set_value(doink_status);
+    }
+}
 
+// double armkP =  0.05;
+// int current_velocity_2;
+// THIS FUNCTION IS FOR TESTING. HOLDING L1 RAISES THE ARM, HOLDING L2 LOWERS THE ARM UNTIL YOU LET GO.
 void driveArm()
 {
-    int arm_power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    int arm_power = 60 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    if (armsensor.get_position() > 13000)
+    {
+        if (arm_power > 0)
+        {
+            arm_power = 0;
+        }
+    }
+    if (armsensor.get_position() < 0)
+    {
+        if (arm_power < 0)
+        {
+            arm_power = 0;
+        }
+    }
+
+    // if (arm_power == 0)
+    // {
+    //     current_velocity_2 = armsensor.get_velocity();
+    //     if (current_velocity_2 > 200 || current_velocity_2 < 200)
+    //     {
+    //         arm.move_velocity(current_velocity_2 * armkP * -1);
+    //     }
+    // }
+    // if (arm_power = 0)
+    // {
+        
+    // }
     arm.move(arm_power);
 }
     
-  
-// bool clawState = false;
-// void driveClaw()
-// {
-//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-//     {
-//         clawState = !clawState;
-//         claw.set_value(clawState);
-//     }
-// }
+bool clawState = false;
+void driveClaw()
+{
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
+    {
+        clawState = !clawState;
+        claw.set_value(clawState);
+    }
+}
