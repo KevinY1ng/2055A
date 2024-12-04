@@ -62,9 +62,9 @@ int currentAngle;
 int error;
 const double kP = 0.01;
 void moveArm(int target) {
-	currentAngle = armsensor.get_angle();
-	while (true) {
-		int error = target - currentAngle;
+	currentAngle = armsensor.get_angle()/100;
+	while (error>2) {
+		error = target - currentAngle;
 		pros::lcd::set_text(3, std::to_string(error));
 		arm.move_velocity(error * kP);
 		//pros::lcd::set_text(4, std::to_string(targetheading - rotation));
@@ -161,45 +161,7 @@ int state = 0;
 // 	}
 // }
 
-bool raised = false;
-int current_velocity = 0;
-double armP = 0.05;
-void setArmLoad()
-{
-	while (true)
-	{
-		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) && !raised)
-		{
-			while(armsensor.get_position() < 13500)
-			{
-				arm.move_velocity(600);
-				pros::delay(1);
-			}
-			arm.move_velocity(0);
-			raised = true;
-		}
-		else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2) && raised)
-		{
-			while (armsensor.get_position() > 400)
-			{
-				arm.move_velocity(-600);
-				pros::delay(1);
-			}
-			arm.move_velocity(0);
-			raised = false;
-		}
-		else
-		{
-			// makeshift hold function (probably pretty bad)
-			current_velocity = armsensor.get_velocity();
-			if (current_velocity > 200 || current_velocity < 200)
-			{
-				arm.move_velocity(current_velocity * armP * -1);
-			}
-			pros::delay(1);
-		}
-	}
-}
+
 
 
 /**

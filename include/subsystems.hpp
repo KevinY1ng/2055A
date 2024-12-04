@@ -9,3 +9,4 @@ void driveArm();
 void setarm();
 void driveClaw();
 void setArmLoad();
+void armtest();

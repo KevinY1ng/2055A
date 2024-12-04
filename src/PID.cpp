@@ -359,18 +359,20 @@ void swingright(double radius, double angle, double maxspeed, double kP, double 
 
 void lbgetring(double kP, int maxspeed) {
     double currentrotation = armsensor.get_angle()/100;
-    double targetheading = 255;
+    double targetheading = 45;
     double error = targetheading - currentrotation;
     double preverror;
 
     while (error>1) {
         double currentroation = armsensor.get_angle()/100;
-        double targetheading = 255;
+        double targetheading = 45;
         double error = targetheading - currentrotation;
 
         double porportional = error * kP;
 
         arm.move(porportional);
+
+        pros::delay(10);
 
     }
 

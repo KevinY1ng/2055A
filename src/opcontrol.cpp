@@ -29,6 +29,7 @@ void my_opcontrol()
         doink();
         // ClampTilt_Goal();
         driveArm();
+        armtest();
         // setarm();
         pros::lcd::set_text(1, std::to_string(armsensor.get_position()));
         pros::delay(1);

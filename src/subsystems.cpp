@@ -35,31 +35,66 @@ void driveClamp()
 //     }
 // }
 
-void setarm()
+bool raised = false;
+int current_velocity = 0;
+double armP = 0.05;
+void setArmLoad()
 {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
-    {
-        while (armsensor.get_position() < 12000)
-        {
-            arm.move_velocity(100);
-            pros::delay(20);
-        }
-        arm.move_velocity(0);
+	while (true)
+	{
+		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) && !raised)
+		{
+			while(armsensor.get_position() < 13500)
+			{
+				arm.move_velocity(600);
+				pros::delay(1);
+			}
+			arm.move_velocity(0);
+			raised = true; 
+		}
+		else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2) && raised)
+		{
+			while (armsensor.get_position() > 400)
+			{
+				arm.move_velocity(-600);
+				pros::delay(1);
+			}
+			arm.move_velocity(0);
+			raised = false;
+		}
+		else
+		{
+			// makeshift hold function (probably pretty bad)
+			current_velocity = armsensor.get_velocity();
+			if (current_velocity > 200 || current_velocity < 200)
+			{
+				arm.move_velocity(current_velocity * armP * -1);
+			}
+			pros::delay(1);
+		}
+	}
+}
+bool armraise = false;
+void armtest() {
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+            if (armraise = false) {
+                while (armsensor.get_angle() < 4500) {
+                    arm.move(120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            if (armraise = true) {
+                while (armsensor.get_angle() > 200) {
+                    arm.move(-120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            }
+            
     }
 }
+}
 
-// void setArmLoad()
-// {
-//     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1))
-//     {
-//         while (armsensor.get_position() < 3300)
-//         {
-//             arm.move_velocity(400);
-//             pros::delay(1);
-//         }
-//     arm.move_velocity(0);
-//     }
-// }
 
 bool checkForJam = false;
 void setIntake(int power)
@@ -123,8 +158,9 @@ void doink() {
     }
 }
 
-double armkP =  0.05;
-int current_velocity_2;
+// double armkP =  0.05;
+// int current_velocity_2;
+// THIS FUNCTION IS FOR TESTING. HOLDING L1 RAISES THE ARM, HOLDING L2 LOWERS THE ARM UNTIL YOU LET GO.
 void driveArm()
 {
     int arm_power = 60 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
@@ -143,14 +179,14 @@ void driveArm()
         }
     }
 
-    if (arm_power == 0)
-    {
-        current_velocity_2 = armsensor.get_velocity();
-        if (current_velocity_2 > 200 || current_velocity_2 < 200)
-        {
-            arm.move_velocity(current_velocity_2 * armkP * -1);
-        }
-    }
+    // if (arm_power == 0)
+    // {
+    //     current_velocity_2 = armsensor.get_velocity();
+    //     if (current_velocity_2 > 200 || current_velocity_2 < 200)
+    //     {
+    //         arm.move_velocity(current_velocity_2 * armkP * -1);
+    //     }
+    // }
     // if (arm_power = 0)
     // {
         

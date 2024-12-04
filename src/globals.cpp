@@ -23,7 +23,7 @@ int MOTOR_RF = 6; //18
 int VERT_TRACKING_PORT = -4;
 int HOR_TRACKING_PORT = 16;
 
-int INERTIAL_PORT = 12;
+int INERTIAL_PORT = 17;
 
 // Pneumatics
 char CLAMP_PORT = 'H';
@@ -91,7 +91,7 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    0, // proportional gain (kP)
+    7.5, // proportional gain (kP)
     0, // integral gain (kI)
     0, // derivative gain (kD)
     0, // anti windup
@@ -102,12 +102,12 @@ lemlib::ControllerSettings linearController {
     0 // maximum acceleration (slew)
 };
  
- // 1, 0, 25 <-- last values that worked      // 1.25, 46, 0   // 1.5, 50, 0
-// turning PID
+
+// turning PID    // 1.5, 0, 7  <-- last values that worked
 lemlib::ControllerSettings angularController {
-    0.6, // proportional gain (kP)
+    1.5, // proportional gain (kP)
     0, // integral gain (kI)
-    1.5, // derivative gain (kD)
+    7, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds
