@@ -10,3 +10,5 @@ void setarm();
 void driveClaw();
 void claw_clamp();
 void armtest();
+void setArmLoad();
+void armtest();

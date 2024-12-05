@@ -94,6 +94,7 @@ lemlib::Drivetrain drivetrain {
 
 lemlib::ControllerSettings linearController {
     13, // proportional gain (kP) 13
+    7.5, // proportional gain (kP)
     0, // integral gain (kI)
     60, // derivative gain (kD) 42
     0, // anti windup
@@ -110,6 +111,9 @@ lemlib::ControllerSettings angularController {
     2.2,//1.5, // proportional gain (kP)
     0, // integral gain (kI)
     16,//7, // derivative gain (kD)
+    1.5, // proportional gain (kP)
+    0, // integral gain (kI)
+    7, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds

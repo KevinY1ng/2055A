@@ -95,6 +95,23 @@ void armtest() {
     }
 }
 // }
+            if (armraise = false) {
+                while (armsensor.get_angle() < 4500) {
+                    arm.move(120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            if (armraise = true) {
+                while (armsensor.get_angle() > 200) {
+                    arm.move(-120);
+                    pros::delay(1);
+                    armraise != armraise;
+                }
+            }
+            
+    }
+}
+}
 
 
 bool checkForJam = false;

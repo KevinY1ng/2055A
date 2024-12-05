@@ -185,6 +185,9 @@ void PID_Test()
     pros::delay(100);
     setIntake(127);
     chassis.moveToPoint(-24,-50, 1000,{});
+    chassis.setPose(0, 0, 0);
+    // chassis.turnToHeading(90, 10000, {}, false);
+    chassis.moveToPoint(0, 24, 10000, {}, false);
     // chassis.moveToPoint(0, 24, 10000, {}, false);
     // pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
     // pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
