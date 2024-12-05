@@ -39,6 +39,7 @@ extern pros::IMU imu;
 
 extern pros::Motor intake1;
 extern pros::Motor arm;
+extern pros::Motor intake2;
 
 extern pros::Optical colorsensor;
 

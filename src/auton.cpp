@@ -176,9 +176,15 @@ void brampton_Auton_Red_Negative(){
 
 void PID_Test() 
 {
-    chassis.setPose(0, 0, 0);
-    // chassis.turnToHeading(90, 10000, {}, false);
-    chassis.moveToPoint(0, 24, 10000, {}, false);
+    chassis.setPose(-50, -23, 270);
+    chassis.moveToPoint(-24, -23, 1000, {.forwards = false});
+    pros::delay(2000);
+    clamp.set_value(false);
+    pros::delay(1000);
+    chassis.turnToHeading(180,1000);
+    pros::delay(100);
+    setIntake(127);
+    chassis.moveToPoint(-24,-50, 1000,{});
     // chassis.moveToPoint(0, 24, 10000, {}, false);
     // pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
     // pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position

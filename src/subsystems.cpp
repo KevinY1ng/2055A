@@ -28,29 +28,6 @@ void driveClamp()
     }
 }
 
-<<<<<<< HEAD
-void setarm() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
-    {
-        arm.move(100);
-        pros::delay(220);
-        // double rotation = armsensor.get_angle()/100;
-        // while (rotation<255) {
-        //     double rotation = armsensor.get_angle()/100;
-        //     arm.move(50);
-        //     pros::delay(10);
-        // }
-        // arm.move(0);
-    }
-}
-
-bool claw_state = false;
-void claw_clamp() {
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
-    {
-        claw_state = !claw_state;
-        claw.set_value(claw_state);
-=======
 // void setarm() {
 //     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
 //     {
@@ -100,30 +77,31 @@ void setArmLoad()
 bool armraise = false;
 void armtest() {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-            if (armraise = false) {
-                while (armsensor.get_angle() < 4500) {
+            // if (armraise = false) {
+                while (armsensor.get_angle() > 100) {
                     arm.move(120);
                     pros::delay(1);
                     armraise != armraise;
-                }
-            if (armraise = true) {
-                while (armsensor.get_angle() > 200) {
-                    arm.move(-120);
-                    pros::delay(1);
-                    armraise != armraise;
-                }
-            }
+               }
+            arm.brake();
+            // if (armraise = true) {
+            //     while (armsensor.get_angle() > 200) {
+            //         arm.move(-120);
+            //         pros::delay(1);
+            //         armraise != armraise;
+            //     }
+            // }
             
->>>>>>> dfaf1bea67eb6050610e53acba92fcb63eeefe4c
     }
 }
-}
+// }
 
 
 bool checkForJam = false;
 void setIntake(int power)
 {
     intake1.move(power);
+    intake2.move(power);
     // intake2.move(power);
 }
 
@@ -131,7 +109,8 @@ void setIntake(int power)
 void driveIntake() 
 {
     int power = 127 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)); // power = 127 if L1 is being pressed, otherwise power = 0
-    intake1.move(power); // sets intake power to "power"
+    intake1.move(power);
+    intake2.move(power); // sets intake power to "power"
     // int power2 = 110 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2));
     // intake2.move(power2);
 }

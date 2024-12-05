@@ -33,6 +33,7 @@ char DOINKER_PORT = 'F';
 
 int MOTOR_INTAKE_1= 7; // bottom intake
 int ARM_PORT = 1;
+int INTAKE2_PORT = 5;
 int arm_sensor = 11;
 // int MOTOR_INTAKE_2 = -3; // top intake
 
@@ -50,6 +51,7 @@ pros::Motor drive_RF(MOTOR_RF, pros::v5::MotorGears::blue, pros::v5::MotorUnits:
 
 pros::Motor intake1(MOTOR_INTAKE_1, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 pros::Motor arm(ARM_PORT, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
+pros::Motor intake2(INTAKE2_PORT, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 // pros::Motor intake2(MOTOR_INTAKE_2, pros::v5::MotorGears::blue, pros::v5::MotorUnits::degrees);
 
 //MotorGroups
@@ -91,9 +93,9 @@ lemlib::Drivetrain drivetrain {
 };
 
 lemlib::ControllerSettings linearController {
-    7.5, // proportional gain (kP)
+    13, // proportional gain (kP) 13
     0, // integral gain (kI)
-    0, // derivative gain (kD)
+    60, // derivative gain (kD) 42
     0, // anti windup
     0, // small error range, in inches
     0, // small error range timeout, in milliseconds
@@ -105,9 +107,9 @@ lemlib::ControllerSettings linearController {
 
 // turning PID    // 1.5, 0, 7  <-- last values that worked
 lemlib::ControllerSettings angularController {
-    1.5, // proportional gain (kP)
+    2.2,//1.5, // proportional gain (kP)
     0, // integral gain (kI)
-    7, // derivative gain (kD)
+    16,//7, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds

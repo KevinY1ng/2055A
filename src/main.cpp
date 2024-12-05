@@ -350,7 +350,6 @@ void opcontrol() {
 	// pros::rtos::Task my_task(color_sort_red);
 	// pros::rtos::Task my_task_2(setArmLoad);
 
-<<<<<<< HEAD
 
 	// pros::Task screen_task([&]() {
     //     while (true) {
@@ -363,8 +362,6 @@ void opcontrol() {
     //     }
     // });
 
-=======
->>>>>>> dfaf1bea67eb6050610e53acba92fcb63eeefe4c
 	// while (true)
 	// {
 	// 	pros::lcd::set_text(1, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
