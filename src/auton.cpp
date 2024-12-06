@@ -10,170 +10,6 @@
 #include "pros/vision.hpp"
 #include "lemlib/api.hpp"
 
-// void sortRed(int power,int timeout) {
-//     double startTime = pros::millis();
-//     while ((pros::millis() - startTime) < timeout) {
-//         double colorvalue = colorsensor.get_hue();
-//         if (colorvalue >= 7 && colorvalue <= 19)
-//             {
-//                 pros::lcd::set_text(4, "RED RING DETECTED! :(");
-//                 // pros::delay(5);
-//                 intake1.move(127);
-//                 intake2.move(-127);
-//                 pros::delay(600);
-//                 //setIntake(0);
-//             }
-//         else {
-//             setIntake(power);
-//         }
-//     }
-//     setIntake(0);
-// }
-
-// void PID_Test()
-// {
-//     chassis.setPose(0, 0, 0);
-//     chassis.moveToPose(0, 24, 0, 10000, {}, false);
-
-// }
-
-void brampton_Auton_Red_Positive()
-{
-    chassis.setPose(0, 0, -90);
-    setDrive(-8000, -8000);
-    pros::delay(600);
-    setDrive(-2000, -2000);
-    pros::delay(150);
-    clamp.set_value(false);
-    pros::delay(150);
-    setDrive(0, 0);
-    pros::delay(1000);
-    setIntake(1000);
-    pros::delay(500);
-    chassis.turnToHeading(180, 2000, {}, false);
-    setDrive(6000, 6000);
-    pros::delay(750);
-    setDrive(0, 0);
-    pros::delay(1000);
-    chassis.turnToHeading(10, 2000, {}, false);
-    arm.move(60);
-    pros::delay(1000);
-    arm.move(0);
-    setDrive(5000, 5000);
-    pros::delay(1600);
-    setDrive(0, 0);
-    setIntake(0);
-    //chassis.turnToHeading(3, 2000, {}, false);
-    // setDrive(5000, 5000);
-    // pros::delay(2500);
-    // setDrive(0, 0);
-    // setIntake(0);
-}
-
-void brampton_Auton_Blue_Positive()
-{
-    chassis.setPose(0, 0, 90);
-    setDrive(-8000, -8000);
-    pros::delay(600);
-    setDrive(-2000, -2000);
-    pros::delay(150);
-    clamp.set_value(false);
-    pros::delay(150);
-    setDrive(0, 0);
-    pros::delay(1000);
-    setIntake(1000);
-    pros::delay(500);
-    chassis.turnToHeading(180, 3300, {}, false);
-    setDrive(6000, 6000);
-    pros::delay(750);
-    setDrive(0, 0);
-    pros::delay(1000);
-    chassis.turnToHeading(-10, 2000, {}, false);
-    arm.move(60);
-    pros::delay(1000);
-    arm.move(0);
-    setDrive(5000, 5000);
-    pros::delay(1600);
-    setDrive(0, 0);
-    setIntake(0);
-}
-
-void brampton_Auton_Red_Negative(){
-
-}
-
-// void brampton_Auton_Skills(){
-//     chassis.setPose(0,0,90);
-//     setIntake(1000);
-//     pros::delay(1500);
-//     setIntake(0);
-//     chassis.turnToHeading(340, 1000);
-//     setDrive(-6000,-6000);
-//     pros::delay(500);
-//     setDrive(-2000,-2000);
-//     pros::delay(150);
-//     clamp.set_value(false);
-//     pros::delay(250);
-//     chassis.turnToHeading(90,2000);
-//     pros::delay(250);
-//     setIntake(1000);
-//     setDrive(6000,6000);
-//     pros::delay(1000);
-//     chassis.turnToHeading(180, 2000);
-//     pros::delay(250);
-//     setDrive(6000,6000);
-//     pros::delay(1000);
-//     chassis.turnToHeading(270,2000);
-//     pros::delay(250);
-//     setDrive(6000,6000);
-//     pros::delay(500);
-//     setDrive(2500,2500);
-//     pros::delay(750);
-//     setDrive(-2500,-2500);
-//     pros::delay(150);
-//     chassis.turnToHeading(180,2000);
-//     pros::delay(250);
-//     setDrive(2500,2500);
-//     pros::delay(1000);
-//     setIntake(0);
-//     chassis.turnToHeading(60,2500);
-//     setDrive(-1500,-1500);
-//     clamp.set_value(true);
-//     pros::delay(500);
-//     setDrive(1500,1500);
-//     pros::delay(250);
-//     chassis.turnToHeading(180,2500);
-//     setDrive(-19000,-19000); //check
-//     pros::delay(500);
-//     setDrive(-2000,-2000);
-//     pros::delay(150);
-//     clamp.set_value(false);
-//     pros::delay(250);
-//     chassis.turnToHeading(90, 3000);
-//     setIntake(1000);
-//     setDrive(6000,6000);
-//     pros::delay(1000)
-//     chassis.turnToHeading(0, 2000);
-//     setDrive(6000,6000);
-//     pros::delay(1000)
-//     chassis.turnToHeading(270, 2000);
-//     setDrive(6000,6000);
-//     pros::delay(500)
-//     setDrive(2000,2000);
-//     pros::delay(1000);
-//     chassis.turnToHeading(160,3000);
-//     pros::delay(500)
-//     //setIntake(0);
-//     setDrive(-3000,-3000);
-//     pros::delay(150);
-//     clamp.set_value(true);
-//     pros::delay(500);
-//     setDrive(1000,1000);
-//     pro::delay(150);
-//     chassis.turnToHeading(110,2000);
-
-// }
-
 void PID_Test() 
 {
     chassis.setPose(-50, -23, 270);
@@ -185,18 +21,11 @@ void PID_Test()
     pros::delay(100);
     setIntake(127);
     chassis.moveToPoint(-24,-50, 1000,{});
-    chassis.setPose(0, 0, 0);
-    // chassis.turnToHeading(90, 10000, {}, false);
-    chassis.moveToPoint(0, 24, 10000, {}, false);
     // chassis.moveToPoint(0, 24, 10000, {}, false);
     // pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
     // pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
     // pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the y position
 }
-//         	//pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-//             // delay to save resources    // turn(90, 100, 0.015, 0 , 3.8);
-//     // pros::delay(100);
-//     // turn(180, 100, 0.015, 0, 3.7);
 
 
 // void auton_test()
@@ -248,6 +77,78 @@ void PID_Test()
 // C - high
 
 // */
+
+// // red positive qual
+void qualredmogoside() { 
+    chassis.setPose(-48,-22,270);
+    clamp.set_value(false);
+    chassis.moveToPose(-20, -21, 270, 1850, {.forwards = false, .maxSpeed = 65}, false);
+    pros::delay(1000);
+    clamp.set_value(true);
+    pros::delay(500);
+    setIntake(115);
+    pros::delay(500);
+    chassis.turnToHeading(180,1000);
+    pros::delay(500);
+    chassis.moveToPoint(-24,-46,1000,{},false);
+    chassis.turnToHeading(0,1000);
+    pros::delay(2000);
+    for (int i = 0; i < 2; i++)
+    {
+        setDrive(6000,6000);
+        pros::delay(200);
+        setDrive(-6000, -6000);
+        pros::delay(200);
+    }
+    setDrive(0, 0);
+    pros::delay(1000);
+    chassis.moveToPoint(-24,10,2000, {.maxSpeed = 50}, false);
+    // clamp.set_value(true);
+    pros::delay(3000);
+    setIntake(0);
+}
+
+// // blue positive qual
+void qualbluemogoside() {
+    chassis.setPose(48,-22,-270);
+    clamp.set_value(false);
+    chassis.moveToPose(20, -21, -270, 1850, {.forwards = false, .maxSpeed = 65}, false);
+    pros::delay(1000);
+    clamp.set_value(true);
+    pros::delay(500);
+    setIntake(115);
+    pros::delay(500);
+    // for (int i = 0; i < 2; i++)
+    // {
+    //     setDrive(8000, 8000);
+    //     pros::delay(200);
+    //     setDrive(-8000, -8000);
+    //     pros::delay(200);
+    // }
+    // setDrive(0, 0);
+    // pros::delay(500);
+    chassis.turnToHeading(180,1000);
+    pros::delay(500);
+    chassis.moveToPoint(24,-46,1000,{},false);
+    // pros::delay(2000);
+    chassis.turnToHeading(0,1000, {.maxSpeed=60}, false);
+    pros::delay(2000);
+    for (int i = 0; i < 2; i++)
+    {
+        setDrive(6000,6000);
+        pros::delay(200);
+        setDrive(-6000, -6000);
+        pros::delay(200);
+    }
+    setDrive(0, 0);
+    pros::delay(1000);
+    chassis.moveToPoint(24,10,2000, {.maxSpeed = 50}, false);
+    // clamp.set_value(true);
+    // setIntake(0);
+    // chassis.waitUntilDone();
+    pros::delay(3000);
+    setIntake(0);
+}
 
 // /*
 // when you first start the code:
@@ -879,81 +780,7 @@ void PID_Test()
     
 // }
 
-// // red positive qual
-// void qualredmogoside() { 
-//     chassis.setPose(-48,-22,270);
-//     clamp.set_value(true);
-//     tilt.set_value(true);
-//     chassis.moveToPose(-20, -21, 270, 1850, {.forwards = false, .maxSpeed = 65}, false);
-//     pros::delay(1000);
-//     clamp.set_value(false);
-//     tilt.set_value(false);
-//     pros::delay(500);
-//     setIntake(115);
-//     pros::delay(500);
-//     chassis.turnToHeading(180,1000);
-//     pros::delay(500);
-//     chassis.moveToPoint(-24,-46,1000,{},false);
-//     chassis.turnToHeading(0,1000);
-//     pros::delay(2000);
-//     for (int i = 0; i < 2; i++)
-//     {
-//         setDrive(6000,6000);
-//         pros::delay(200);
-//         setDrive(-6000, -6000);
-//         pros::delay(200);
-//     }
-//     setDrive(0, 0);
-//     pros::delay(1000);
-//     chassis.moveToPoint(-24,10,2000, {.maxSpeed = 50}, false);
-//     // clamp.set_value(true);
-//     pros::delay(3000);
-//     setIntake(0);
-// }
 
-// // blue positive qual
-// void qualbluemogoside() {
-//     chassis.setPose(48,-22,-270);
-//     clamp.set_value(true);
-//     tilt.set_value(true);
-//     chassis.moveToPose(20, -21, -270, 1850, {.forwards = false, .maxSpeed = 65}, false);
-//     pros::delay(1000);
-//     clamp.set_value(false);
-//     tilt.set_value(false);
-//     pros::delay(500);
-//     setIntake(115);
-//     pros::delay(500);
-//     // for (int i = 0; i < 2; i++)
-//     // {
-//     //     setDrive(8000, 8000);
-//     //     pros::delay(200);
-//     //     setDrive(-8000, -8000);
-//     //     pros::delay(200);
-//     // }
-//     // setDrive(0, 0);
-//     // pros::delay(500);
-//     chassis.turnToHeading(180,1000);
-//     pros::delay(500);
-//     chassis.moveToPoint(24,-46,1000,{},false);
-//     // pros::delay(2000);
-//     chassis.turnToHeading(0,1000, {.maxSpeed=60}, false);
-//     pros::delay(2000);
-//     for (int i = 0; i < 2; i++)
-//     {
-//         setDrive(6000,6000);
-//         pros::delay(200);
-//         setDrive(-6000, -6000);
-//         pros::delay(200);
-//     }
-//     setDrive(0, 0);
-//     pros::delay(1000);
-//     chassis.moveToPoint(24,10,2000, {.maxSpeed = 50}, false);
-//     // clamp.set_value(true);
-//     // setIntake(0);
-//     // chassis.waitUntilDone();
-//     pros::delay(3000);
-//     setIntake(0);
-// }
 
 // // blue positive elim
 // void elimBlueMogoSide()

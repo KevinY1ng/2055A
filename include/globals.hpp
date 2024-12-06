@@ -27,8 +27,8 @@ extern pros::adi::DigitalOut clamp;
 extern pros::adi::DigitalOut doinker;
 
 extern lemlib::Drivetrain drivetrain;
-extern lemlib::ControllerSettings linearController;
-extern lemlib::ControllerSettings angularController;
+extern lemlib::ControllerSettings linear_controller;
+extern lemlib::ControllerSettings angular_controller;
 extern lemlib::OdomSensors sensors;
 extern lemlib::Chassis chassis;
 

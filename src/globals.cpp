@@ -31,11 +31,11 @@ char CLAW_PORT = 'G';
 char DOINKER_PORT = 'F';
 
 
-int MOTOR_INTAKE_1= 7; // bottom intake
+int MOTOR_INTAKE_1= 7; // top intake
 int ARM_PORT = 1;
-int INTAKE2_PORT = 5;
+int INTAKE2_PORT = 5; // bottom intake
 int arm_sensor = 11;
-// int MOTOR_INTAKE_2 = -3; // top intake
+
 
 int COLOR_SENSOR_PORT = 20; // 
 
@@ -92,9 +92,8 @@ lemlib::Drivetrain drivetrain {
     2 // horizontal drift is 2 (for now)
 };
 
-lemlib::ControllerSettings linearController {
+lemlib::ControllerSettings linear_controller {
     13, // proportional gain (kP) 13
-    7.5, // proportional gain (kP)
     0, // integral gain (kI)
     60, // derivative gain (kD) 42
     0, // anti windup
@@ -107,13 +106,10 @@ lemlib::ControllerSettings linearController {
  
 
 // turning PID    // 1.5, 0, 7  <-- last values that worked
-lemlib::ControllerSettings angularController {
+lemlib::ControllerSettings angular_controller {
     2.2,//1.5, // proportional gain (kP)
     0, // integral gain (kI)
     16,//7, // derivative gain (kD)
-    1.5, // proportional gain (kP)
-    0, // integral gain (kI)
-    7, // derivative gain (kD)
     0, // anti windup
     0, // small error range, in degrees
     0, // small error range timeout, in milliseconds
@@ -138,8 +134,8 @@ lemlib::OdomSensors sensors {
 
 // create the chassis
 lemlib::Chassis chassis(drivetrain, 
-                        linearController, 
-                        angularController, 
+                        linear_controller, 
+                        angular_controller, 
                         sensors
 );
 

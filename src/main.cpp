@@ -58,19 +58,19 @@ void color_sort_red_team() {
 	}
 }
 
-int currentAngle;
-int error;
-const double kP = 0.01;
-void moveArm(int target) {
-	currentAngle = armsensor.get_angle()/100;
-	while (error>2) {
-		error = target - currentAngle;
-		pros::lcd::set_text(3, std::to_string(error));
-		arm.move_velocity(error * kP);
-		//pros::lcd::set_text(4, std::to_string(targetheading - rotation));
-		pros::delay(1);
-	}
-}
+// int currentAngle;
+// int error;
+// const double kP = 0.01;
+// void moveArm(int target) {
+// 	currentAngle = armsensor.get_angle()/100;
+// 	while (error>2) {
+// 		error = target - currentAngle;
+// 		pros::lcd::set_text(3, std::to_string(error));
+// 		arm.move_velocity(error * kP);
+// 		//pros::lcd::set_text(4, std::to_string(targetheading - rotation));
+// 		pros::delay(1);
+// 	}
+// }
 
 void color_sort_blue_team() {
 	double colorvalue;
@@ -348,7 +348,7 @@ void opcontrol() {
 	// pros::lcd::set_text(3, std::to_string(colorsensor.get_hue()));
 
 	// pros::rtos::Task my_task(color_sort_red);
-	// pros::rtos::Task my_task_2(setArmLoad);
+	pros::rtos::Task my_task_2(setArmLoadNew);
 
 
 	// pros::Task screen_task([&]() {
