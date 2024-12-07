@@ -255,8 +255,8 @@ void autonomous() {
 	
 	// brampton_Auton_Red_Positive();
 	// brampton_Auton_Blue_Positive();
-	soloauton_AWP_Blue_Negative(); // SLOT 6
-	// soloauton_AWP_Red_Negative(); // SLOT 5
+	//soloauton_AWP_Blue_Negative(); // SLOT 6
+	soloauton_AWP_Red_Negative(); // SLOT 5
 	// qual5ringRed(); // SLOT 3 angle
 	// qual5ringBlue(); // SLOT 4 straight
 	//elim5ringRed(); // SLOT 1
