@@ -39,24 +39,37 @@ void driveClamp()
 
 int currentAngle;
 int error = 1064;
-const double kP = 0.025;
+const double kP = 0.035;
 const int deadband = 150;
 const int targetAngle = 730;
 void setArmLoadNew()
 {
     while (true)
     {
-        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT))
+        if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
         {
+            currentAngle = armsensor.get_angle();
+            if (30000 <= currentAngle && currentAngle <= 36000) 
+            {
+                currentAngle = 0 - (36000 - currentAngle);
+            }
+            error = targetAngle - currentAngle;
             while (abs(error) > deadband)
             {
                 currentAngle = armsensor.get_angle();
+                if (30000 <= currentAngle && currentAngle <= 36000) 
+                {
+                    currentAngle = 0 - (36000 - currentAngle);
+                }
                 error = targetAngle - currentAngle;
                 arm.move_velocity(error * kP);
-                pros::lcd::set_text(3, std::to_string(error * kP));
+                pros::lcd::set_text(3, "Speed: " + std::to_string(error * kP));
+                pros::lcd::set_text(4, "Current Angle: " + std::to_string(currentAngle));
+                pros::lcd::set_text(5, "Error: " + std::to_string(error));
                 pros::delay(1);
             }
-            error = 1000;
+
+            arm.move(0);
           
 
             // if (armsensor.get_position() < 964)
@@ -236,20 +249,20 @@ void doink() {
 void driveArm()
 {
     int arm_power = 60 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
-    if (armsensor.get_position() > 13000)
-    {
-        if (arm_power > 0)
-        {
-            arm_power = 0;
-        }
-    }
-    if (armsensor.get_position() < 0)
-    {
-        if (arm_power < 0)
-        {
-            arm_power = 0;
-        }
-    }
+    // if (armsensor.get_position() > 13000)
+    // {
+    //     if (arm_power > 0)
+    //     {
+    //         arm_power = 0;
+    //     }
+    // }
+    // if (armsensor.get_position() < 0)
+    // {
+    //     if (arm_power < 0)
+    //     {
+    //         arm_power = 0;
+    //     }
+    // }
 
     // if (arm_power == 0)
     // {

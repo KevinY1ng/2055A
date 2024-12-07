@@ -248,7 +248,10 @@ void autonomous() {
         }
     });
 	// set position to x:0, y:0, heading:0
-    PID_Test();
+    // qual5ringBlue();
+	qual5ringRed(); //slot 2
+	// qualredmogoside(); //slot 5 
+	// qualbluemogoside(); //slot 6
 	
 	// brampton_Auton_Red_Positive();
 	// brampton_Auton_Blue_Positive();
@@ -261,8 +264,8 @@ void autonomous() {
 	// mogo_rush(); // SLOT 3
 	//mogo_rushright(); // SLOT 6
 	//elim5ringBlue(); //SLOT 2
-	// qualredmogoside(); //slot 5 
-	// qualbluemogoside(); //slot 6
+	// qualredmogoside(); //slot 5  <--
+	// qualbluemogoside(); //slot 6 <--
 	// elimBlueMogoSide();//SLOT 8
 	// prog_skills_new(); // SLOT 8
 
