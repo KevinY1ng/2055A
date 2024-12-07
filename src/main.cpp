@@ -249,14 +249,14 @@ void autonomous() {
     });
 	// set position to x:0, y:0, heading:0
     // qual5ringBlue();
-	qual5ringRed(); //slot 2
+	// qual5ringRed(); //slot 2
 	// qualredmogoside(); //slot 5 
 	// qualbluemogoside(); //slot 6
 	
 	// brampton_Auton_Red_Positive();
 	// brampton_Auton_Blue_Positive();
-	// soloauton_AWP_Blue_Negative(); // SLOT 2
-	// soloauton_AWP_Red_Negative(); // SLOT 1
+	soloauton_AWP_Blue_Negative(); // SLOT 6
+	// soloauton_AWP_Red_Negative(); // SLOT 5
 	// qual5ringRed(); // SLOT 3 angle
 	// qual5ringBlue(); // SLOT 4 straight
 	//elim5ringRed(); // SLOT 1

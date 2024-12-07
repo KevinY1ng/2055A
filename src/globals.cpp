@@ -18,7 +18,7 @@ int MOTOR_LF = -19; //-1
 
 int MOTOR_RB = 18; //20
 int MOTOR_RM = 8; //12
-int MOTOR_RF = 6; //18
+int MOTOR_RF = 5; //18
 
 int VERT_TRACKING_PORT = -4;
 int HOR_TRACKING_PORT = 16;
@@ -33,7 +33,7 @@ char DOINKER_PORT = 'F';
 
 int MOTOR_INTAKE_1= 7; // top intake
 int ARM_PORT = 1;
-int INTAKE2_PORT = 5; // bottom intake
+int INTAKE2_PORT = 6; // bottom intake
 int arm_sensor = 11;
 
 
@@ -56,7 +56,7 @@ pros::Motor intake2(INTAKE2_PORT, pros::v5::MotorGears::green, pros::v5::MotorUn
 
 //MotorGroups
 pros::MotorGroup Left_Drive({-9, -10, -19}, pros::v5::MotorGears::blue);
-pros::MotorGroup Right_Drive({18, 8, 6}, pros::v5::MotorGears::blue);
+pros::MotorGroup Right_Drive({18, 8, 5}, pros::v5::MotorGears::blue);
 
 //Controller
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
