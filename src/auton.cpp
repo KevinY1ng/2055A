@@ -712,6 +712,10 @@ void prog_skills_new()
 // //     chassis.moveToPoint(-29,0, 2000, {}, false);
 // // }
 
+// void soloauton_AWP_Blue_Negative_S(){
+//     chassis.setPose(49,26,90);
+// }
+
 // /*
 // 49, 24, 90
 // 36, 24, 90
@@ -723,7 +727,7 @@ void prog_skills_new()
 // 24, -44, 180
 // 24, -10, 0
 // */
-void soloauton_AWP_Blue_Negative(){
+void soloauton_AWP_Blue_Negative_L(){
     chassis.setPose(49,26,90);
     // //chassis.moveToPoint(36,24,1000, {.forwards=false, .maxSpeed=60}, false);
     // //pros::delay(100);
@@ -809,7 +813,7 @@ void soloauton_AWP_Blue_Negative(){
 // -24, -44, 180
 // -24, -10, 0
 // */
-void soloauton_AWP_Red_Negative(){
+void soloauton_AWP_Red_Negative_L(){
     chassis.setPose(-49,26,270);
 
     chassis.moveToPoint(-24, 24, 2000, {.forwards=false, .maxSpeed=65}, true);
@@ -914,4 +918,25 @@ void soloauton_AWP_Red_Negative(){
     // //pros::delay(200);
     // //tilt.set_value(true);
     // chassis.moveToPoint(-24,-10,2000, {.maxSpeed=90}, false);
+}
+
+void mogorushred() {
+    chassis.setPose(-46, -57, 90);
+    chassis.moveToPoint(-17, -57, 1000, {.minSpeed = 127}, false);
+    chassis.turnToHeading(20,800, {}, false);
+    doinker.set_value(true);
+    pros::delay(280);
+    chassis.moveToPose(-44,-56,90,2000, {.forwards=false, .minSpeed = 70}, false);
+    pros::delay(100);
+    doinker.set_value(false);
+    pros::delay(500);
+    chassis.turnToHeading(295,1000);
+    pros::delay(500);
+    chassis.moveToPoint(-18,-60,1000, {.forwards = false},false);
+    clamp.set_value(false);
+    pros::delay(1000);
+
+    chassis.turnToHeading(315,800, {}, false);
+    setIntake(127);
+    chassis.moveToPoint(-24,-46, 1000);
 }

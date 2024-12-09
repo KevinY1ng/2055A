@@ -48,6 +48,7 @@ void setArmLoadNew()
     {
         if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
         {
+            arm.set_brake_mode(MOTOR_BRAKE_HOLD);
             currentAngle = armsensor.get_angle();
             if (30000 <= currentAngle && currentAngle <= 36000) 
             {
@@ -68,8 +69,9 @@ void setArmLoadNew()
                 pros::lcd::set_text(5, "Error: " + std::to_string(error));
                 pros::delay(1);
             }
-
-            arm.move(0);
+            arm.move_velocity(0);
+            arm.set_brake_mode(MOTOR_BRAKE_HOLD);
+            arm.move_velocity(0);
           
 
             // if (armsensor.get_position() < 964)
@@ -248,7 +250,7 @@ void doink() {
 // THIS FUNCTION IS FOR TESTING. HOLDING L1 RAISES THE ARM, HOLDING L2 LOWERS THE ARM UNTIL YOU LET GO.
 void driveArm()
 {
-    int arm_power = 60 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    int arm_power = 100 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
     // if (armsensor.get_position() > 13000)
     // {
     //     if (arm_power > 0)

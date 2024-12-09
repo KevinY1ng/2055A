@@ -255,8 +255,9 @@ void autonomous() {
 	
 	// brampton_Auton_Red_Positive();
 	// brampton_Auton_Blue_Positive();
-	//soloauton_AWP_Blue_Negative(); // SLOT 6
-	soloauton_AWP_Red_Negative(); // SLOT 5
+	//soloauton_AWP_Blue_Negative_L(); // SLOT 6
+	//soloauton_AWP_Red_Negative_L(); // SLOT 5
+	mogorushred();
 	// qual5ringRed(); // SLOT 3 angle
 	// qual5ringBlue(); // SLOT 4 straight
 	//elim5ringRed(); // SLOT 1
@@ -323,6 +324,7 @@ void autonomous() {
  */
 void opcontrol() {
 	// armsensor.set_position(0);
+	while (true) {
 	pros::lcd::initialize();
 	pros::lcd::register_btn0_cb(on_center_button);
 	// while (true) {
@@ -377,5 +379,5 @@ void opcontrol() {
 	// pros::rtos::Task my_task(color_sort_blue_team);
 	// pros::rtos::Task my_task(color_sort_red_team);
 	my_opcontrol();
-
+	}
 }
