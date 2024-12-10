@@ -25,7 +25,7 @@ void my_opcontrol()
         driveIntake(); // sets intake based on L1 input -- comment this when running colorsort task
         driveClamp();
         // setArmLoad();
-        driveClaw();
+        // driveClaw();
         doink();
         // ClampTilt_Goal();
         // driveArm();

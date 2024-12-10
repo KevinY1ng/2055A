@@ -42,6 +42,7 @@ int error = 1064;
 const double kP = 0.035;
 const int deadband = 150;
 const int targetAngle = 730;
+bool hold;
 void setArmLoadNew()
 {
     while (true)
@@ -70,79 +71,24 @@ void setArmLoadNew()
                 pros::delay(1);
             }
             arm.move_velocity(0);
-            arm.set_brake_mode(MOTOR_BRAKE_HOLD);
-            arm.move_velocity(0);
-          
-
-            // if (armsensor.get_position() < 964)
-            // {
-            //     while (armsensor.get_position() < 964)
-            //     {
-            //         arm.move_velocity(100);
-            //         pros::delay(1);
-            //     }
-            //     arm.move_velocity(0);
-            // }
-
-            // else if (armsensor.get_position() > 1564)
-            // {
-            //     while (armsensor.get_position() > 1564)
-            //     {
-            //         arm.move_velocity(-300);
-            //         pros::delay(1);
-            //     }
+            // arm.set_brake_mode(MOTOR_BRAKE_HOLD);
             // arm.move_velocity(0);
-            // }
         }
         else
         {
+            // hold arm in place if in loading position
+            // if (hold)
+            // {
+            //     // 100 too fast, 40 too fast, 20 too fast, 10 too fast, 5 too fast, 2 too fast
+            //     // this is the velocity at which the arm will move upwards to hold
+            //     arm.move_velocity(0);
+            // }
             driveArm();
             pros::delay(1);
         }
     }
 }
 
-
-
-bool raised = false;
-int current_velocity = 0;
-double armP = 0.05;
-void setArmLoad()
-{
-	while (true)
-	{
-		if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L1) && !raised)
-		{
-			while(armsensor.get_position() < 13500)
-			{
-				arm.move_velocity(600);
-				pros::delay(1);
-			}
-			arm.move_velocity(0);
-			raised = true; 
-		}
-		else if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_L2) && raised)
-		{
-			while (armsensor.get_position() > 400)
-			{
-				arm.move_velocity(-600);
-				pros::delay(1);
-			}
-			arm.move_velocity(0);
-			raised = false;
-		}
-		else
-		{
-			// makeshift hold function (probably pretty bad)
-			current_velocity = armsensor.get_velocity();
-			if (current_velocity > 200 || current_velocity < 200)
-			{
-				arm.move_velocity(current_velocity * armP * -1);
-			}
-			pros::delay(1);
-		}
-	}
-}
 bool armraise = false;
 // void armtest() {
 //     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
@@ -245,12 +191,17 @@ void doink() {
     }
 }
 
-// double armkP =  0.05;
-// int current_velocity_2;
-// THIS FUNCTION IS FOR TESTING. HOLDING L1 RAISES THE ARM, HOLDING L2 LOWERS THE ARM UNTIL YOU LET GO.
+// HOLDING L1 RAISES THE ARM, HOLDING L2 LOWERS THE ARM UNTIL YOU LET GO.
 void driveArm()
 {
-    int arm_power = 100 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    int arm_power = 400 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+    arm.move_velocity(arm_power);
+    // if the arm isn't holding, or if the driver clicks L1 or L2, the arm will move. Otherwise, if the driver does not click L1/L2 and the arm is holding, the arm will not move.
+    // if (arm_power != 0 || (arm_power == 0 && hold == false))
+    // {
+    //     hold = false;
+    //     arm.move(arm_power);
+    // }
     // if (armsensor.get_position() > 13000)
     // {
     //     if (arm_power > 0)
@@ -278,7 +229,6 @@ void driveArm()
     // {
         
     // }
-    arm.move(arm_power);
 }
     
 bool clawState = false;

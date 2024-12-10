@@ -397,6 +397,17 @@ void qual5ringRed()
 }
 
 void qual5ringBlue() {   
+    chassis.setPose(57.375, 15, 0);
+    chassis.moveToPoint(57.375, -1, 2000, {.forwards=false, .maxSpeed=60}, false);
+    chassis.turnToHeading(90, 1500, {.maxSpeed=40}, false);
+    setDrive(3000, 3000);
+    pros::delay(400);
+    setDrive(0, 0);
+    // can reset here
+    // score on alliance wall stake
+    scoreAllianceStake();
+    pros::delay(15000);
+
     chassis.setPose(51, 24, 90);
 
 //Get Mobile Goal

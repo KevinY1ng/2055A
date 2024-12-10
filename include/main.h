@@ -86,6 +86,7 @@ void setArmLoad();
 #include "tracking.hpp"
 #include "PID.hpp"
 #include "opcontrol.hpp"
+#include "helper.hpp"
 // #include "selection.h"
 /**
  * You can add C++-only headers here
