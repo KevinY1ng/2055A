@@ -11,3 +11,4 @@ void soloauton_AWP_Blue_Negative_L();
 void soloauton_AWP_Red_Negative_L();
 void prog_skills_new();
 void mogorushred();
+void newskillsprog();
