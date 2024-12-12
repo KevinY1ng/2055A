@@ -239,26 +239,30 @@ void autonomous() {
 	pros::Task screen_task([&]() {
         while (true) {
             // print robot location to the brain screen
-			pros::lcd::set_text(5, "Y: "  +  std::to_string(chassis.getPose().y)); // print the x position
+			pros::lcd::set_text(5, "X: "  +  std::to_string(chassis.getPose().x)); // print the x position
             pros::lcd::set_text(6, "Y: " + std::to_string(chassis.getPose().y)); // print the y position
         	pros::lcd::set_text(7, "Angle: " + std::to_string(chassis.getPose().theta)); // print the heading
-			pros::lcd::set_text(1, "Angle 2: " + std::to_string(imu.get_heading()));
+			// pros::lcd::set_text(1, "Angle 2: " + std::to_string(imu.get_heading()));
             // delay to save resources
             pros::delay(20);
         }
     });
 	// set position to x:0, y:0, heading:0
-    //qual5ringBlue(); // slot 3
+	qual5ringBlue(); // slot 3
 	// qual5ringRed(); //slot 4
-	// qualredmogoside(); //slot 5 
-	// qualbluemogoside(); //slot 6
+	// qualredmogoside(); //slot 2
+	// qualbluemogoside(); //slot 4
+	// newskillsprog(); // slot 8
+	// soloauton_AWP_Blue_Negative_Sig();
+	// mogorushblue(); // slot 5
+	// mogorushblue();
 	
 	// brampton_Auton_Red_Positive();
 	// brampton_Auton_Blue_Positive();
 	//soloauton_AWP_Blue_Negative_L(); // SLOT 6
 	//soloauton_AWP_Red_Negative_L(); // SLOT 5
 	//mogorushred();
-	newskillsprog();
+	// newskillsprog();
 	// qual5ringRed(); // SLOT 3 angle
 	// qual5ringBlue(); // SLOT 4 straight
 	//elim5ringRed(); // SLOT 1
@@ -270,6 +274,7 @@ void autonomous() {
 	// qualbluemogoside(); //slot 6 <--
 	// elimBlueMogoSide();//SLOT 8
 	// prog_skills_new(); // SLOT 8
+	
 
 // 	Auton selector;
 //     switch (selector::auton) {
@@ -325,7 +330,6 @@ void autonomous() {
  */
 void opcontrol() {
 	// armsensor.set_position(0);
-	while (true) {
 	pros::lcd::initialize();
 	pros::lcd::register_btn0_cb(on_center_button);
 	// while (true) {
@@ -380,5 +384,4 @@ void opcontrol() {
 	// pros::rtos::Task my_task(color_sort_blue_team);
 	// pros::rtos::Task my_task(color_sort_red_team);
 	my_opcontrol();
-	}
 }

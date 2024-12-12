@@ -18,7 +18,7 @@
 //     }
 // }
 
-bool clampState = false;
+bool clampState = true;
 void driveClamp()
 {
     if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A))
@@ -88,6 +88,29 @@ void setArmLoadNew()
         }
     }
 }
+
+void setarm() {
+    arm.set_brake_mode(MOTOR_BRAKE_HOLD);
+            currentAngle = armsensor.get_angle();
+            if (30000 <= currentAngle && currentAngle <= 36000) 
+            {
+                currentAngle = 0 - (36000 - currentAngle);
+            }
+            error = targetAngle - currentAngle;
+            while (abs(error) > deadband)
+            {
+                currentAngle = armsensor.get_angle();
+                if (30000 <= currentAngle && currentAngle <= 36000) 
+                {
+                    currentAngle = 0 - (36000 - currentAngle);
+                }
+                error = targetAngle - currentAngle;
+                arm.move_velocity(error * kP);
+                pros::delay(1);
+            }
+            arm.move_velocity(0);
+    }
+
 
 bool armraise = false;
 // void armtest() {
@@ -196,6 +219,7 @@ void driveArm()
 {
     int arm_power = 400 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
     arm.move_velocity(arm_power);
+    
     // if the arm isn't holding, or if the driver clicks L1 or L2, the arm will move. Otherwise, if the driver does not click L1/L2 and the arm is holding, the arm will not move.
     // if (arm_power != 0 || (arm_power == 0 && hold == false))
     // {

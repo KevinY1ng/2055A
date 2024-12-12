@@ -13,4 +13,5 @@ void armtest();
 void setArmLoad();
 void setArmLoadNew();
 void armtest();
+void setarm();
 
