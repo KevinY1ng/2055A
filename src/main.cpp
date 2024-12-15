@@ -248,13 +248,14 @@ void autonomous() {
         }
     });
 	// set position to x:0, y:0, heading:0
-	qual5ringBlue(); // slot 3
-	// qual5ringRed(); //slot 4
-	// qualredmogoside(); //slot 2
-	// qualbluemogoside(); //slot 4
+	qual5ringBlue(); // slot 4
+	// qual5ringRed(); //slot 3
+	// qualredmogoside(); //slot 1
+	// qualbluemogoside(); //slot 2
 	// newskillsprog(); // slot 8
 	// soloauton_AWP_Blue_Negative_Sig();
-	// mogorushblue(); // slot 5
+	// mogorushred(); // slot 5
+	// mogorushblue(); // slot 6
 	// mogorushblue();
 	
 	// brampton_Auton_Red_Positive();

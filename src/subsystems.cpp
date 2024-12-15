@@ -218,7 +218,17 @@ void doink() {
 void driveArm()
 {
     int arm_power = 400 * (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1) - controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2));
+
+    if (armsensor.get_position() > 11650)
+    {
+        if (arm_power > 0)
+        {
+            arm_power = 0;
+        }
+    }
+
     arm.move_velocity(arm_power);
+
     
     // if the arm isn't holding, or if the driver clicks L1 or L2, the arm will move. Otherwise, if the driver does not click L1/L2 and the arm is holding, the arm will not move.
     // if (arm_power != 0 || (arm_power == 0 && hold == false))
