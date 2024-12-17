@@ -27,7 +27,7 @@ void my_opcontrol()
         // setArmLoad();
         // driveClaw();
         doink();
-        // ClampTilt_Goal();
+// ClampTilt                                                                                                                                                                                    _Goal();
         // driveArm();
         //setarm();
         //claw_clamp();
